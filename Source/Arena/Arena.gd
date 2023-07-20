@@ -1,10 +1,14 @@
 @tool
 extends Polygon2D
 
+### TODO =>
+#______________________#
+## faire une "class vertexVector avec la pos et la dir
+
 @export var posArena : Vector2
 @export var colorArena : Color
 @export var colorWall : Color
-## make a slider and listen the signal to auto update the border's Arena
+## make a BETTER slider and listen the signal to auto update the border's Arena
 @export_range(0, 1000) var thicknessBorder : float = 500
 
 var polygonBorder : PackedVector2Array
@@ -19,61 +23,102 @@ func _ready():
 func _process(delta):
 	if Engine.is_editor_hint():
 		if Input.is_action_pressed("refreshEditor") && Input.is_key_pressed(KEY_CTRL):
-			place_border()
+			algo()
 		if Input.is_action_just_pressed("refreshEditor") && Input.is_key_pressed(KEY_ALT):
-			MyUtils.delete_children($Border)
+			MyUtils.delete_children(self)
 
 ## add the collisionShape as child to the scene Border of the Arena
 func place_border():
 	MyUtils.delete_children(self)
 	print("place border")
-	for edgeId in range(0, self.polygon.size()):
-		var bufferLastEdgeProjection: Vector2
-		## if next_edge_concave == true
+	for VertexId in range(0, self.polygon.size()):
+		var bufferLastVertexProjection: Vector2
+		## if next_Vertex_concave == true
 		## add the point to 
 		
-		var currentEdge = self.polygon[edgeId]
-		var nextEdge = self.polygon[edgeId + 1 if edgeId < self.polygon.size() - 1 else 0]
-		var normalEdgeToNextEdge = Vector2(nextEdge.x - currentEdge.x, nextEdge.y - currentEdge.y)
+		var currentVertex = self.polygon[VertexId]
+		var nextVertex = self.polygon[VertexId + 1 if VertexId < self.polygon.size() - 1 else 0]
+		var normalVertexToNextVertex = Vector2(nextVertex.x - currentVertex.x, nextVertex.y - currentVertex.y)
 		var debugLine = Line2D.new()
-		debugLine.add_point(self.polygon[edgeId])
-		debugLine.add_point(normalEdgeToNextEdge)
+		debugLine.add_point(self.polygon[VertexId])
+		debugLine.add_point(normalVertexToNextVertex)
 		debugLine.default_color = Color(255, 0, 0, 0.75)
 		self.add_child(debugLine)
-		var debugEdgeLine = Line2D.new()
-		debugEdgeLine.add_point(currentEdge)
-		debugEdgeLine.add_point(nextEdge)
-		debugEdgeLine.default_color = Color(0, 0, 255, 0.75)
-		self.add_child(debugEdgeLine)
+		var debugVertexLine = Line2D.new()
+		debugVertexLine.add_point(currentVertex)
+		debugVertexLine.add_point(nextVertex)
+		debugVertexLine.default_color = Color(0, 0, 255, 0.75)
+		self.add_child(debugVertexLine)
 	pass
 
-## check the four cardinal stating to a edge direction lenght thicknnesBorder collider with polygon's Arena and return
-## a offset for the projection of the edge 
-## taking the current edge id of polygon's Arena
+## check the four cardinal stating to a Vertex direction lenght thicknnesBorder collider with polygon's Arena and return
+## a offset for the projection of the Vertex 
+## taking the current Vertex id of polygon's Arena
 ## return Vector2(-1,-1) for error
-func line_overlap_polygon(currentEdgeId: int) -> Vector2:
-	if (currentEdgeId < 0):
+func line_overlap_polygon(currentVertexId: int) -> Vector2:
+	if (currentVertexId < 0):
 		return Vector2(-1, -1)
-	var currentEdge = self.polygon[currentEdgeId]
-	var nextEdge = self.polygon[currentEdgeId + 1 if currentEdgeId < self.polygon.size() - 1 else 0]
+	var currentVertex = self.polygon[currentVertexId]
+	var nextVertex = self.polygon[currentVertexId + 1 if currentVertexId < self.polygon.size() - 1 else 0]
 	return Vector2()
 
 # add all collisionShape (Polygon2d) at the border's Arena
 func algo(): 
 	# on parse un à un tout les sommet du polygon de l'Arena
-	##for edgeId in range(0, self.polygon.size()):
+	for vertexId in range(0, self.polygon.size()):
 	# d'abord on chope les deux sommets pour avoir le vecteur coté
-	#	var currentEdge = self.polygon[edgeId]
-	#	var nextEdge = self.polygon[edgeId + 1 if edgeId < self.polygon.size() - 1 else 0]
+		var currentVertex = self.polygon[vertexId]
+		var dirCurrent = currentVertex.normalized()
+		var nextVertex = self.polygon[vertexId + 1 if vertexId < self.polygon.size() - 1 else 0]
+		var dirNext = nextVertex.normalized() 
+		var vectorEgde = Vector2(nextVertex.x - currentVertex.x, nextVertex.y - currentVertex.y)
+		var dirEdge = vectorEgde.normalized()
 	## ensuite chopé la normale du vecteur coté dans les deux sens (pour check où est l'exterieur du polygon) 
-	##
+		var normal1 = Vector2(dirEdge.y, - dirEdge.x) * thicknessBorder
+		var normal2 = Vector2(-dirEdge.y, dirEdge.x) * thicknessBorder
+		
+		var normalVertexToNextVertex = Vector2(nextVertex.x - currentVertex.x, nextVertex.y - currentVertex.y)
+		var debugLine = Line2D.new()
+		debugLine.add_point(currentVertex)
+		debugLine.add_point(normal1 + currentVertex)
+		debugLine.default_color = Color(255, 127, 0, 0.75)
+		self.add_child(debugLine)
+		var debugLine2 = Line2D.new()
+		debugLine2.add_point(currentVertex)
+		debugLine2.add_point(normal2 + currentVertex)
+		debugLine2.default_color = Color(255, 0, 127, 0.75)
+		self.add_child(debugLine2)
+		var debugLineNext = Line2D.new()
+		debugLineNext.add_point(nextVertex)
+		debugLineNext.add_point(normal1 + nextVertex)
+		debugLineNext.default_color = Color(255, 127, 0, 0.75)
+		self.add_child(debugLineNext)
+		var debugLine2Next = Line2D.new()
+		debugLine2Next.add_point(nextVertex)
+		debugLine2Next.add_point(normal2 + nextVertex)
+		debugLine2Next.default_color = Color(255, 0, 127, 0.75)
+		self.add_child(debugLine2Next)
+		var debugLine1Poly = Line2D.new()
+		debugLine1Poly.add_point(normal1 + currentVertex)
+		debugLine1Poly.add_point(normal1 + nextVertex)
+		debugLine2Next.default_color = Color(255, 0, 255, 0.75)
+		var debugLine2Poly = Line2D.new()
+		debugLine2Next.add_point(normal2 + currentVertex)
+		debugLine2Next.add_point(normal2 + nextVertex)
+		debugLine2Next.default_color = Color(255, 0, 255, 0.75)
+		self.add_child(debugLine2Next)
+		var debugVertexLine = Line2D.new()
+		debugVertexLine.add_point(currentVertex)
+		debugVertexLine.add_point(nextVertex)
+		debugVertexLine.default_color = Color(0, 0, 255, 0.75)
+		self.add_child(debugVertexLine)
 	## là utilsé la normale pour projecter une ligne depuis les deux sommets
 	## avec cette lignes faire un test de collision entre cette line et le polygon de l'Arena
-	## si la fonction ne renvoie pas de points de collision juste ajouter un collider à quatre coté (currentEdge, projectCurrentEdge, projectionNextEdge, nextEdge)
-	## sinon faire un collider en partant de currentEdge et relie nextEdge en passant par tout les points de collision
+	## si la fonction ne renvoie pas de points de collision juste ajouter un collider à quatre coté (currentVertex, projectCurrentVertex, projectionNextVertex, nextVertex)
+	## sinon faire un collider en partant de currentVertex et relie nextVertex en passant par tout les points de collision
 	##
 	##
-	## garder un buffer des deux points du coté former par les coordonées de NextEdge et sa projection (pour lier au poylgon de collision suivant )
+	## garder un buffer des deux points du coté former par les coordonées de NextVertex et sa projection (pour lier au poylgon de collision suivant )
 	##
 	#
 	pass
