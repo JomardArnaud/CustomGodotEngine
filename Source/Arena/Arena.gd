@@ -31,12 +31,20 @@ func place_border():
 		var bufferLastEdgeProjection: Vector2
 		## if next_edge_concave == true
 		## add the point to 
+		
+		var currentEdge = self.polygon[edgeId]
+		var nextEdge = self.polygon[edgeId + 1 if edgeId < self.polygon.size() - 1 else 0]
+		var normalEdgeToNextEdge = Vector2(nextEdge.x - currentEdge.x, nextEdge.y - currentEdge.y)
 		var debugLine = Line2D.new()
 		debugLine.add_point(self.polygon[edgeId])
-		debugLine.add_point(line_overlap_polygon(edgeId) + self.polygon[edgeId])
+		debugLine.add_point(normalEdgeToNextEdge)
 		debugLine.default_color = Color(255, 0, 0, 0.75)
 		self.add_child(debugLine)
-		print("uwu")
+		var debugEdgeLine = Line2D.new()
+		debugEdgeLine.add_point(currentEdge)
+		debugEdgeLine.add_point(nextEdge)
+		debugEdgeLine.default_color = Color(0, 0, 255, 0.75)
+		self.add_child(debugEdgeLine)
 	pass
 
 ## check the four cardinal stating to a edge direction lenght thicknnesBorder collider with polygon's Arena and return
@@ -47,13 +55,25 @@ func line_overlap_polygon(currentEdgeId: int) -> Vector2:
 	if (currentEdgeId < 0):
 		return Vector2(-1, -1)
 	var currentEdge = self.polygon[currentEdgeId]
-	var prevEdge = self.polygon[currentEdgeId - 1 if currentEdgeId > 0 else self.polygon.size() - 1]
 	var nextEdge = self.polygon[currentEdgeId + 1 if currentEdgeId < self.polygon.size() - 1 else 0]
-	var left = Geometry2D.intersect_polyline_with_polygon([currentEdge, Vector2(currentEdge.x - thicknessBorder, currentEdge.y)], self.polygon).size()
-	var right = Geometry2D.intersect_polyline_with_polygon([currentEdge, Vector2(currentEdge.x + thicknessBorder, currentEdge.y)], self.polygon).size()
-	var up = Geometry2D.intersect_polyline_with_polygon([currentEdge, Vector2(currentEdge.x, currentEdge.y + thicknessBorder)], self.polygon).size()
-	var down = Geometry2D.intersect_polyline_with_polygon([currentEdge, Vector2(currentEdge.x, currentEdge.y - thicknessBorder)], self.polygon).size()
-	return Vector2(((int(left > 0) - int(right > 0)) * thicknessBorder), ((int(down > 0) - int(up > 0)) * thicknessBorder))
-
-func next_edge_concave(currentEdgeId: int) -> Vector2:
 	return Vector2()
+
+# add all collisionShape (Polygon2d) at the border's Arena
+func algo(): 
+	# on parse un à un tout les sommet du polygon de l'Arena
+	##for edgeId in range(0, self.polygon.size()):
+	# d'abord on chope les deux sommets pour avoir le vecteur coté
+	#	var currentEdge = self.polygon[edgeId]
+	#	var nextEdge = self.polygon[edgeId + 1 if edgeId < self.polygon.size() - 1 else 0]
+	## ensuite chopé la normale du vecteur coté dans les deux sens (pour check où est l'exterieur du polygon) 
+	##
+	## là utilsé la normale pour projecter une ligne depuis les deux sommets
+	## avec cette lignes faire un test de collision entre cette line et le polygon de l'Arena
+	## si la fonction ne renvoie pas de points de collision juste ajouter un collider à quatre coté (currentEdge, projectCurrentEdge, projectionNextEdge, nextEdge)
+	## sinon faire un collider en partant de currentEdge et relie nextEdge en passant par tout les points de collision
+	##
+	##
+	## garder un buffer des deux points du coté former par les coordonées de NextEdge et sa projection (pour lier au poylgon de collision suivant )
+	##
+	#
+	pass
