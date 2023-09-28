@@ -17,5 +17,5 @@ inertia = 0.05
 zoom = Vector2(10, 10)
 
 [node name="Arena" parent="." instance=ExtResource("3_78mhr")]
-position = Vector2(90, 4)
-polygon = PackedVector2Array(390, 181, 270, 273, 297, 377, 362, 380, 317, 283, 370, 270, 326, 292, 467, 240, 381, 361, 322, 291, 377.471, 369.32, 341, 422, 455, 324, 531, 240)
+position = Vector2(4, -12)
+polygon = PackedVector2Array(374, 293, 431, 301, 443, 257, 380, 245, 372, 288, 390, 279)
