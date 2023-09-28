@@ -4,5 +4,3 @@
 
 [node name="Block" type="Polygon2D"]
 script = ExtResource("1_bw5hv")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]

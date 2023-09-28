@@ -20,4 +20,4 @@ func reset_velocity() -> void:
 	self.velocity = Vector2(0, 0)
 
 func update_velocity(delta: float):
-	self.velocity = lerp(self.dir * self.speed, self.velocity, pow(self.inertia, delta));
+	self.velocity = lerp(self.dir * self.speed, self.velocity, pow(self.inertia / 10, delta));

@@ -14,12 +14,11 @@ config/name="CustomGodotEngine"
 run/main_scene="res://Main.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
 
 [autoload]
 
 InputManager="*res://Singleton/InputManager.gd"
-CustomeUtils="*res://Global/CustomeUtils.gd"
+CustomUtils="*res://Global/CustomUtils.gd"
 
 [input]
 

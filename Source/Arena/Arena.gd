@@ -3,83 +3,110 @@ extends Polygon2D
 
 ### TODO =>
 #______________________#
-## faire une "class vertexVector avec la pos et la dir
 
 @export var posArena : Vector2
 @export var colorArena : Color
 @export var colorWall : Color
 ## make a BETTER slider and listen the signal to auto update the border's Arena
-@export_range(1, 250, 0.5) var thicknessBorder = 50
+@export_range(0.1, 5, 0.1) var thicknessBorder = 0.5
 
 # Ok alors faire un algo qui permet de prendre le polygon, et faire un prolongement en partant du centrre du polygon
 # vers chaque vertice pour scale le polygon d'origin et produire celui qui sera le border
 
+static var DictStateEdge = {
+	current = Vector2(),
+	next = Vector2(),
+	edgeProjected = Vector4(),
+	edgeProlonged = Vector4(),
+	dirEdge = Vector2(),
+	sweetSpot = Vector2()
+}
+
 func _ready():
 	if !Engine.is_editor_hint():
 		pass
+	# to avoid crash when the Arena is masked on scene
+	if self.visible != false:
+		algo(self.polygon.size())
 	
 func _process(delta):
 	if Engine.is_editor_hint():
 		if Input.is_action_pressed("refreshEditor") && Input.is_key_pressed(KEY_CTRL):
 			MyUtils.delete_children(self)
-			algo()
+			# to avoid crash when the Arena is masked on scene
+			if self.visible != false:
+				algo(self.polygon.size())
 		if Input.is_action_just_pressed("refreshEditor") && Input.is_key_pressed(KEY_ALT):
 			MyUtils.delete_children(self)
 
-## check the four cardinal stating to a Vertex direction lenght thicknnesBorder collider with polygon's Arena and return
-## a offset for the projection of the Vertex 
-## taking the current Vertex id of polygon's Arena
-## return Vector2(-1,-1) for error
-func line_overlap_polygon(currentVertexId: int) -> Vector2:
-	if (currentVertexId < 0):
-		return Vector2(-1, -1)
-	var currentVertex = self.polygon[currentVertexId]
-	var nextVertex = self.polygon[currentVertexId + 1 if currentVertexId < self.polygon.size() - 1 else 0]
-	return Vector2()
-
 # add all collisionShape (Polygon2d) at the border's Arena
-func algo(): 
+func algo(nbVertexPoly):
+	var firstSweetSpot: Vector2
+	
+	var pointsExtBorder: PackedVector2Array
+	var bufferDict = DictStateEdge.duplicate()
+	var stateVertex = DictStateEdge.duplicate()
+	
+	bufferDict["current"] = self.polygon[nbVertexPoly - 1]
+	bufferDict["next"] = self.polygon[0]
+	
+	## on passe en param la normal ext
+	##on projette et pronlonge, par les deux bouts, le segment formé par les deux sommets
+	prolongEdge(bufferDict, getNormalExt(bufferDict))
 	# on parse un à un tout les sommet du polygon de l'Arena
-	for vertexId in range(0, self.polygon.size()):
-	# d'abord on chope les deux sommets pour avoir le vecteur coté
-		var currentVertex = self.polygon[vertexId]
-		var dirCurrent = currentVertex.normalized()
-		var nextVertex = self.polygon[vertexId + 1 if vertexId < self.polygon.size() - 1 else 0]
-		var dirNext = nextVertex.normalized() 
-		var vectorEgde = Vector2(nextVertex.x - currentVertex.x, nextVertex.y - currentVertex.y)
-		var dirEdge = vectorEgde.normalized()
-	## ensuite chopé la normale du vecteur coté dans les deux sens (pour check où est l'exterieur du polygon) 
-		var normal1 = Vector2(dirEdge.y, - dirEdge.x)
-		var normal2 = Vector2(-dirEdge.y, dirEdge.x)
-		# to handle the case polgon is concave, the project need to be from the middle of the edge
-		var middleEdge = (currentVertex + nextVertex) / 2 
-	# là on chercher la normale qui va vers l'exterrieur du polygon
-		var normal1Collision = Geometry2D.intersect_polyline_with_polygon([middleEdge, middleEdge + normal1], self.polygon)
-		var extNormal = normal2 if normal1Collision.size() > 0 else normal1	
-#	## là utilsé les deux sommets avec la noramle extérieur
-		var projCurrent = currentVertex + extNormal * thicknessBorder
-		var projNext = nextVertex + extNormal * thicknessBorder
-	## là on check les collisions entre les sommets et leurs projection et aussi la ligne formé par les projections
-		if get_angle_at_point(vertexId) < 180:
-			print("hello", vertexId, "  |   ", get_angle_at_point(vertexId))
-		var projCurrentCollision = Geometry2D.intersect_polyline_with_polygon([currentVertex, projCurrent], self.polygon)
-		var projCollidedCurrent = projCurrent if projCurrentCollision.size() == 0 else projCurrentCollision[0][0]
-		MyUtils.addDebugLine(self, [currentVertex, projCollidedCurrent], Color(255, 0, 0, 1))
-		var projNextCollision = Geometry2D.intersect_polyline_with_polygon([nextVertex, projNext], self.polygon)
-		var projCollidedNext = projNext if projNextCollision.size() == 0 else projNextCollision[0][0]
-		MyUtils.addDebugLine(self, [nextVertex, projCollidedNext], Color(0, 0, 255, 1))
-	## si la fonction ne renvoie pas de points de collision juste ajouter un collider à quatre coté (currentVertex, projectCurrentVertex, projectionNextVertex, nextVertex)
-	## sinon faire un collider en partant de currentVertex et relie nextVertex en passant par tout les points de collision
-	##
-	##
-	## garder un buffer des deux points du coté former par les coordonées de NextVertex et sa projection (pour lier au poylgon de collision suivant en mode triangle)
-	##
-	#
-	pass
+	for vertexId in range(0, nbVertexPoly):
+		# d'abord on chope les deux sommets pour avoir le vecteur coté
+		stateVertex["current"] = self.polygon[vertexId]
+		stateVertex["next"] = self.polygon[(vertexId + 1) * int(vertexId + 1 < nbVertexPoly)]
+		
+		## on passe en param la normal ext
+		## on projette et pronlonge, par les deux bouts, le segment formé par les deux sommets
+		prolongEdge(stateVertex, getNormalExt(stateVertex))
+		## on trouve le sweetspot avec la collision des deux prolongement	
+		setSweetSpot(stateVertex, bufferDict)
+		if (vertexId == 0):
+			firstSweetSpot = stateVertex["sweetSpot"]
+		#on ajoute les points pour la bordure extérieure
+		pointsExtBorder.append(stateVertex["sweetSpot"])
+#		# on set les buffer
+		bufferDict["current"] = stateVertex["current"]
+		bufferDict["next"] = stateVertex["next"]
+		bufferDict["edgeProjected"] = stateVertex["edgeProjected"]
+		bufferDict["edgeProlonged"] = stateVertex["edgeProlonged"]
+	# just adding all the polygon's vertex to finish the first block
+	for vertexId in range(nbVertexPoly - 1, -1, -1):
+		pointsExtBorder.append(self.polygon[vertexId])
+	var blockBorder = Block2D.new()
+	blockBorder.polygon = pointsExtBorder
+	blockBorder.set_poly(blockBorder)
+	self.add_child(blockBorder)
+	var blockDoor = Block2D.new()
+	blockDoor.polygon = [firstSweetSpot, stateVertex["next"], stateVertex["current"], stateVertex["sweetSpot"]]
+	blockDoor.set_poly(blockDoor)
+	self.add_child(blockDoor)
 
-# A proper Arena must have at least 3 point
-func get_angle_at_point(index: int) -> float:
-	var prevVertex = self.polygon[index - 1] if index > 0 else self.polygon[self.polygon.size() - 1]
-	var currentVertex = self.polygon[index]
-	var nextVertex = self.polygon[index + 1] if index < self.polygon.size() - 1 else self.polygon[0]
-	return rad_to_deg(Vector2(currentVertex.x - prevVertex.x, currentVertex.y - prevVertex.y).angle_to_point(nextVertex))
+func getNormalExt(state: Dictionary) -> Vector2:
+	state["dirEdge"] = Vector2(state["next"].x - state["current"].x,state["next"].y - state["current"].y).normalized()
+		
+	# ensuite chopé la normale du vecteur coté dans les deux sens (pour check où est l'exterieur du polygon) 
+	var normal1 = Vector2(state["dirEdge"].y, -state["dirEdge"].x)
+	var normal2 = Vector2(-state["dirEdge"].y, state["dirEdge"].x)
+
+	# là on chercher la normale qui va vers l'exterrieur du polygon
+		#on prend le milieu pour éviter que les deux normales collider avec le polygone
+	var middleEdge = (state["current"] + state["next"]) / 2
+	var normal1Collision = Geometry2D.intersect_polyline_with_polygon([middleEdge, middleEdge + normal1], self.polygon)
+	return(normal2 if normal1Collision.size() > 0 else normal1)
+
+func prolongEdge(state: Dictionary, normalExt: Vector2) -> void:
+	state["edgeProjected"] = Vector4(state["current"].x + normalExt.x * thicknessBorder, state["current"].y + normalExt.y * thicknessBorder,
+		state["next"].x + normalExt.x * thicknessBorder, state["next"].y + normalExt.y * thicknessBorder)
+	# on prolonge le coté par les deux bouts direct pour que l'autre bout servent pour le buffer
+	state["edgeProlonged"] = Vector4(state["edgeProjected"].x - state["dirEdge"].x * 100, state["edgeProjected"].y - state["dirEdge"].y * 100,
+		state["edgeProjected"].z + state["dirEdge"].x * 100, state["edgeProjected"].w + state["dirEdge"].y * 100)
+
+func setSweetSpot(currentState: Dictionary, bufferState: Dictionary) -> void:
+	currentState["sweetSpot"] = Geometry2D.segment_intersects_segment(Vector2(currentState["edgeProlonged"].x, currentState["edgeProlonged"].y),
+		Vector2(currentState["edgeProlonged"].z, currentState["edgeProlonged"].w),
+		Vector2(bufferState["edgeProlonged"].x, bufferState["edgeProlonged"].y),
+		Vector2(bufferState["edgeProlonged"].z, bufferState["edgeProlonged"].w))

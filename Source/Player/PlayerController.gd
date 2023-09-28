@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var speed = 500
-@export var inertia = .0035
+@export var speed = 100
+@export var inertia = .8
  
 @onready var movement : MovementManager
 
@@ -22,7 +22,3 @@ func get_dir():
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
 	self.movement.set_direction(Vector2(horizontalDirection, verticalDirection))
 
-# là tu vas faire les armes 
-## idée arme = une armes qui génère un bouclier court mais
-## une attaque entre dans le shield  donne une charge de 
-## super dash et du temps d'invicibilité

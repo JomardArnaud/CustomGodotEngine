@@ -6,15 +6,16 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_evtoq")
+metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 
 [node name="PlayerController" parent="." instance=ExtResource("1_50kq8")]
 position = Vector2(398, 271)
-speed = 1000
-inertia = 0.005
+scale = Vector2(0.1, 0.1)
+inertia = 0.05
 
 [node name="Camera2D" type="Camera2D" parent="PlayerController"]
+zoom = Vector2(10, 10)
 
 [node name="Arena" parent="." instance=ExtResource("3_78mhr")]
-position = Vector2(272, -123)
-polygon = PackedVector2Array(2143, -375, 1639, 749, 2929, 482, 3358, -612, 2934, -1035, 3071, -450, 2785, -1108, 2950, -395, 2667, -884)
-thicknessBorder = 207
+position = Vector2(90, 4)
+polygon = PackedVector2Array(390, 181, 270, 273, 297, 377, 362, 380, 317, 283, 370, 270, 326, 292, 467, 240, 381, 361, 322, 291, 377.471, 369.32, 341, 422, 455, 324, 531, 240)
