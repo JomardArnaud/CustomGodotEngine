@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://v2nw0nk5k3gm"]
+[gd_scene load_steps=6 format=3 uid="uid://v2nw0nk5k3gm"]
 
 [ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="1_50kq8"]
 [ext_resource type="Script" path="res://Main.gd" id="1_evtoq"]
 [ext_resource type="PackedScene" uid="uid://cpb41bc8texpg" path="res://Source/Arena/Arena.tscn" id="3_78mhr"]
+[ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="4_vxf71"]
+[ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="5_2wdmp"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_evtoq")
@@ -11,10 +13,13 @@ metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 [node name="PlayerController" parent="." instance=ExtResource("1_50kq8")]
 position = Vector2(398, 271)
 scale = Vector2(0.1, 0.1)
+speed = 75
 inertia = 0.05
 
-[node name="Camera2D" type="Camera2D" parent="PlayerController"]
-zoom = Vector2(10, 10)
-
 [node name="Arena" parent="." instance=ExtResource("3_78mhr")]
-polygon = PackedVector2Array(366, 251, 371, 268, 406, 215, 443, 260, 425, 297, 460, 294, 448, 312, 454, 321, 414, 315, 412, 290, 405, 312, 350, 291, 313, 223, 368, 267)
+polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 359, 641, 500, 538, 621, 645, 758, 266, 728, 174, 502, 244, 434, 254)
+
+[node name="DebugHud" parent="." instance=ExtResource("4_vxf71")]
+metadata/_edit_group_ = true
+
+[node name="Camera" parent="." instance=ExtResource("5_2wdmp")]

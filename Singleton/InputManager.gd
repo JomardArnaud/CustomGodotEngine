@@ -9,7 +9,9 @@ var input_to_add = {
 	"quitGame": KEY_ESCAPE,
 	# editor part
 	"refreshEditor": KEY_G,
-	"clearDebug": KEY_D
+	"clearDebug": KEY_D,
+	# game part
+	"focusOnPlayer": KEY_Y
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():

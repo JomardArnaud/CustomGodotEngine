@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cinlw8kwv0p2"]
+
+[ext_resource type="Script" path="res://Source/Camera/Camera.gd" id="1_vpx8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ert2m"]
+
+[node name="Camera" type="Camera2D"]
+script = ExtResource("1_vpx8b")
+
+[node name="AreaMouse" type="Area2D" parent="."]
+
+[node name="RectLimit" type="CollisionShape2D" parent="AreaMouse"]
+shape = SubResource("RectangleShape2D_ert2m")
