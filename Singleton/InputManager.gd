@@ -8,7 +8,8 @@ extends Node2D
 var input_to_add = {
 	"quitGame": KEY_ESCAPE,
 	# editor part
-	"refreshEditor": KEY_G
+	"refreshEditor": KEY_G,
+	"clearDebug": KEY_D
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():

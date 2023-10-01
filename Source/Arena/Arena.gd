@@ -120,6 +120,8 @@ func checkBorderVertexHimselfCollission(extBorder: PackedVector2Array) -> void:
 			var collisionBorder = Geometry2D.segment_intersects_segment(Vector2(currentSegment.x, currentSegment.y), Vector2(currentSegment.z, currentSegment.w),
 				Vector2(tmpSegment.x, tmpSegment.y), Vector2(tmpSegment.z, tmpSegment.w))
 			if collisionBorder != null:
-				printerr("The border's pollygon collide on himself")
-				return
+				if collisionBorder != extBorder[i]:
+					printerr("The border's pollygon collide on himself")
+					MyUtils.addDebugSquare(self, collisionBorder, 0.02)
+					return
 			i = (i + 1) * int(i < maxIdPointBorder)
