@@ -19,7 +19,12 @@ inertia = 0.05
 [node name="Arena" parent="." instance=ExtResource("3_78mhr")]
 polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 359, 641, 500, 538, 621, 645, 758, 266, 728, 174, 502, 244, 434, 254)
 
-[node name="DebugHud" parent="." instance=ExtResource("4_vxf71")]
-metadata/_edit_group_ = true
+[node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
+focusEntity = NodePath("../PlayerController")
 
-[node name="Camera" parent="." instance=ExtResource("5_2wdmp")]
+[node name="DebugHud" parent="Camera" instance=ExtResource("4_vxf71")]
+offset_left = -548.0
+offset_top = -258.0
+offset_right = -548.0
+offset_bottom = -258.0
+metadata/_edit_group_ = true
