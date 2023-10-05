@@ -6,33 +6,29 @@ extends Camera2D
 @export var offsetLimitViewport := 20
 
 @onready var focusOnEntityDoubleTap = 0
-@onready var limitMouse: Vector4
 
-func _ready() -> void:
-	print("Camera ready")
-	var viewportSize := get_viewport_rect().size
-#Vector2(rectViewport.position.x + viewportSize.x * offsetLimitViewport / 200,
-#		rectViewport.position.y + viewportSize.y * offsetLimitViewport / 200),
-	limitMouse = Vector4(viewportSize.x * offsetLimitViewport / 200,
-		viewportSize.y * offsetLimitViewport / 200,
-		viewportSize.x - viewportSize.x * offsetLimitViewport / 200,
-		viewportSize.y - viewportSize.y * offsetLimitViewport / 200)
+const smooth_lean := 10.0
+const scale_lean  := 0.2
+
+func lean_camera_towards_mouse_(delta:float) -> void:
+	var mouse_position := get_global_mouse_position()
 	
-func _process(delta: float) -> void:
-	pass
+	#var direction_to_mouse := (mouse_position - position).normalized()
+	#var distance_to_mouse :=  mouse_position.distance_to(position)
+	#var lean := direction_to_mouse * distance_to_mouse * scale_lean
+	var lean := (mouse_position - position) * scale_lean
+	# offset = lean <--- this would work fine but we lerp it to make it smoother
+	offset = lerp(offset, lean, delta * smooth_lean)
+	
+func match_player_position_() -> void:
+	position = get_node("../player").position
+
+func _process(delta) -> void:
+	lean_camera_towards_mouse_(delta)
 	self.position = focusEntity.position
-#	MyUtils.addDebugLines(self, [Vector2(self.position.x, self.position.y),
-#	Vector2(self.position.x + limitMouse.shape.size.x, self.position.y),
-#	Vector2(self.position.x + limitMouse.shape.size.x, self.position.y + limitMouse.shape.size.y),
-#	Vector2(self.position.x, self.position.y + limitMouse.shape.size.y)])
-#	print([Vector2(self.position.x, self.position.y),
-#	Vector2(self.position.x + limitMouse.shape.size.x, self.position.y),
-#	Vector2(self.position.x + limitMouse.shape.size.x, self.position.y + limitMouse.shape.size.y),
-#	Vector2(self.position.x, self.position.y + limitMouse.shape.size.y)])
-#	if Geometry2D.(get_viewport().get_mouse_position(), limitMouse.shape.polygon) != true:
-#		print("outside")
 	
 func _input(event: InputEvent) -> void:
+	#doucleTap for re focus on player
 	if event.is_action_pressed("focusOnPlayer"):
 		pass
 
