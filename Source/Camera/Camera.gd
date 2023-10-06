@@ -21,11 +21,11 @@ func lean_camera_towards_mouse_(delta:float) -> void:
 	offset = lerp(offset, lean, delta * smooth_lean)
 	
 func match_player_position_() -> void:
-	position = get_node("../player").position
+	position = get_node("../PlayerController").position
 
-func _process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	lean_camera_towards_mouse_(delta)
-	self.position = focusEntity.position
+	match_player_position_()
 	
 func _input(event: InputEvent) -> void:
 	#doucleTap for re focus on player
