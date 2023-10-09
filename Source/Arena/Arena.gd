@@ -23,12 +23,9 @@ func _ready():
 func _process(delta):
 	if Engine.is_editor_hint():
 		if Input.is_action_pressed("refreshEditor") && Input.is_key_pressed(KEY_CTRL):
-			MyUtils.delete_children(self)
 			# to avoid crash when the Arena is masked on scene
 			if self.visible != false:
 				algo(self.polygon.size())
-		if Input.is_action_just_pressed("refreshEditor") && Input.is_key_pressed(KEY_ALT):
-			MyUtils.delete_children(self)
 
 # add all collisionShape (Polygon2d) at the border's Arena
 func algo(nbVertexPoly):
@@ -72,12 +69,10 @@ func algo(nbVertexPoly):
 	# check if the border's pollygon collide on himself
 #	checkBorderVertexHimselfCollission(pointsExtBorder)
 	var blockBorder = Block2D.new()
-	blockBorder.polygon = pointsExtBorder
-	blockBorder.set_poly(blockBorder)
+	blockBorder.set_poly(pointsExtBorder)
 	self.add_child(blockBorder)
 	var blockDoor = Block2D.new()
-	blockDoor.polygon = [firstSweetSpot, stateVertex["next"], stateVertex["current"], stateVertex["sweetSpot"]]
-	blockDoor.set_poly(blockDoor)
+	blockDoor.set_poly([firstSweetSpot, stateVertex["next"], stateVertex["current"], stateVertex["sweetSpot"]])
 	self.add_child(blockDoor)
 
 func getNormalExt(state: Dictionary) -> Vector2:

@@ -3,12 +3,12 @@ extends Node
 
 const debugPath = "Debug"
 const debugTexture = preload("res://Source/Assets/debugSquare.png")
+
 # delete all children of given node
 static func delete_children(node):
 	for n in node.get_children():
 		node.remove_child(n)
 		n.queue_free()
-
 
 ### VISUAL DEBUG PART ###
 
@@ -22,7 +22,7 @@ static func clearDebugChildren(node: Node2D) -> void:
 	if debugNode != null:
 		delete_children(debugNode)
 	
-	# add a Line2d to the children of the node passed in param
+# add a Line2d to the children of the node passed in param
 static func addDebugLine(node: Node2D, line: Vector4, color: Color = Color(255,255, 255, 1), thickness: float = 0.5) -> void:
 	var debugLine = Line2D.new()
 	debugLine.add_point(Vector2(line.x, line.y))
@@ -63,4 +63,3 @@ static func addDebugSquare(node: Node2D, pos: Vector2, thickness: float = 1) -> 
 		debugNode.name = debugPath
 		node.add_child(debugNode)
 	debugNode.add_child(debugSquare)
-		

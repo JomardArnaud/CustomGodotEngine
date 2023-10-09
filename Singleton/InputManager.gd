@@ -11,7 +11,8 @@ var input_to_add = {
 	"refreshEditor": KEY_G,
 	"clearDebug": KEY_D,
 	# game part
-	"focusOnPlayer": KEY_Y
+	"focusOnPlayer": KEY_Y,
+	"showDebugHud": KEY_A
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,3 +28,4 @@ func _input(event):
 	if not Engine.is_editor_hint():
 		if (event.is_action_pressed("quitGame")):
 			get_tree().quit()
+			

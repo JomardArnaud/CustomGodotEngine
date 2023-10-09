@@ -1,33 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://v2nw0nk5k3gm"]
+[gd_scene load_steps=7 format=3 uid="uid://v2nw0nk5k3gm"]
 
 [ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="1_50kq8"]
 [ext_resource type="Script" path="res://Main.gd" id="1_evtoq"]
+[ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="2_tgfjs"]
 [ext_resource type="PackedScene" uid="uid://cpb41bc8texpg" path="res://Source/Arena/Arena.tscn" id="3_78mhr"]
-[ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="4_vxf71"]
 [ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="5_2wdmp"]
+[ext_resource type="PackedScene" uid="uid://cfjq7mdcvooxw" path="res://Source/Block/Block.tscn" id="5_uasw7"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_evtoq")
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
+metadata/_edit_group_ = true
+
+[node name="CanvasDebugHud" type="CanvasLayer" parent="."]
+
+[node name="RootDebugHud" parent="CanvasDebugHud" instance=ExtResource("2_tgfjs")]
 
 [node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
 zoom = Vector2(5, 5)
 focusEntity = NodePath("../PlayerController")
 
-[node name="DebugHud" parent="Camera" instance=ExtResource("4_vxf71")]
-z_index = 100
-offset_left = -105.0
-offset_top = -54.0
-offset_right = -105.0
-offset_bottom = -54.0
-metadata/_edit_group_ = true
-
-[node name="PlayerController" parent="." instance=ExtResource("1_50kq8")]
+[node name="PlayerController" parent="." node_paths=PackedStringArray("sliderSpeed", "sliderInertia") instance=ExtResource("1_50kq8")]
 z_index = 50
-position = Vector2(398, 271)
+position = Vector2(369, -71)
 scale = Vector2(0.2, 0.2)
 disable_mode = 1
 inertia = 0.05
+sliderSpeed = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerSpeed")
+sliderInertia = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerInertia")
+metadata/_edit_group_ = true
 
 [node name="Arena" parent="." instance=ExtResource("3_78mhr")]
-polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 359, 641, 500, 538, 621, 645, 758, 266, 728, 174, 502, 244, 434, 254)
+position = Vector2(-290, -407)
+polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 359, 641, 500, 538, 621, 645, 520, 381, 1053, 405, 728, 174, 569, 312, 502, 244, 434, 254)
+
+[node name="Block" parent="Arena" instance=ExtResource("5_uasw7")]
+polygon = PackedVector2Array(397, 331, 389, 450, 462, 348)
+metadata/_edit_group_ = true
+
+[editable path="CanvasDebugHud/RootDebugHud"]
+[editable path="Arena"]

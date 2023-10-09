@@ -2,6 +2,11 @@ extends CharacterBody2D
 
 @export var speed = 100
 @export var inertia = .8
+
+## TPM SLIDER MOUV MANAGER ##
+@export var sliderSpeed: HSlider
+@export var sliderInertia: HSlider
+
 @onready var movement : MovementManager
 
 func _ready():
@@ -9,7 +14,8 @@ func _ready():
 	self.movement = MovementManager.new()
 	self.movement.speed = speed
 	self.movement.inertia = inertia
-
+	tmp_set_slider()
+	
 func _physics_process(delta):
 	get_dir()
 	movement.update_velocity(delta)
@@ -23,3 +29,14 @@ func get_dir():
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
 	self.movement.set_direction(Vector2(horizontalDirection, verticalDirection))
 
+func tmp_set_slider() -> void:
+	sliderSpeed.min_value = 25
+	sliderSpeed.max_value = 300
+	sliderSpeed.step = 1
+	sliderSpeed.value = speed
+	sliderSpeed.value_changed.connect(func(value): self.movement.speed = value)
+	sliderInertia.min_value = 0
+	sliderInertia.max_value = 1
+	sliderInertia.step = .025
+	sliderInertia.value = inertia
+	sliderInertia.value_changed.connect(func(nInertia): self.movement.inertia = nInertia)
