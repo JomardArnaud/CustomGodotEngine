@@ -1,5 +1,5 @@
 class_name MovementManager
-extends Node
+extends Node2D
 
 @export var inertia : float
 @export var speed : float # distance per second

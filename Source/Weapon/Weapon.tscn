@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://bqhaoaptmt00p"]
+[gd_scene load_steps=2 format=3 uid="uid://c62c25ef8d2g2"]
 
-[node name="Weapon" type="Node2D"]
+[ext_resource type="Script" path="res://Source/Weapon/Weapon.gd" id="1_50jj8"]
+
+[node name="Weapon" type="Polygon2D"]
+scale = Vector2(0.189783, 0.189601)
+color = Color(0, 0.8, 0.956863, 1)
+polygon = PackedVector2Array(24, 20, 24, 125, 132, 125, 132, 20)
+script = ExtResource("1_50jj8")
