@@ -15,6 +15,7 @@ func _ready():
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
 	weapon.set("offsetEntity", 50)
+	weapon.fireRate(0.5)
 	tmp_set_slider()
 	
 func _physics_process(delta):

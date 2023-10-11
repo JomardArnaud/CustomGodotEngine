@@ -16,19 +16,16 @@ metadata/_edit_group_ = true
 
 [node name="RootDebugHud" parent="CanvasDebugHud" instance=ExtResource("2_tgfjs")]
 
-[node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
-zoom = Vector2(5, 5)
-focusEntity = NodePath("../PlayerController")
-
-[node name="PlayerController" parent="." node_paths=PackedStringArray("sliderSpeed", "sliderInertia") instance=ExtResource("1_50kq8")]
-z_index = 50
-position = Vector2(369, -71)
-scale = Vector2(0.2, 0.2)
-disable_mode = 1
-inertia = 0.05
+[node name="PlayerNode" parent="." node_paths=PackedStringArray("sliderSpeed", "sliderInertia") instance=ExtResource("1_50kq8")]
+z_index = 60
+inertia = 0.08
 sliderSpeed = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerSpeed")
 sliderInertia = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerInertia")
-metadata/_edit_group_ = true
+
+[node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
+z_index = 70
+zoom = Vector2(5, 5)
+focusEntity = NodePath("../PlayerNode")
 
 [node name="Arena" parent="." instance=ExtResource("3_78mhr")]
 position = Vector2(-290, -407)

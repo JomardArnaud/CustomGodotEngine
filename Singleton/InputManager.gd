@@ -14,6 +14,8 @@ var input_to_add = {
 	"focusOnPlayer": KEY_Y,
 	"showDebugHud": KEY_A
 }
+#### bon ça fonctionne pas avec le mouse button 
+#	"shot": MOUSE_BUTTON_LEFT
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for keyEvent in input_to_add:

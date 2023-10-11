@@ -21,7 +21,7 @@ func lean_camera_towards_mouse_(delta:float) -> void:
 	offset = lerp(offset, lean, delta * smooth_lean)
 	
 func match_player_position_() -> void:
-	position = get_node("../PlayerController").position
+	position = focusEntity.position
 
 func _physics_process(delta: float) -> void:
 	lean_camera_towards_mouse_(delta)
