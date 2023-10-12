@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Source/Weapon/Bullet/Bullet.gd" id="1_75bo2"]
 
 [node name="Bullet" type="Node2D"]
+scale = Vector2(0.05, 0.05)
 script = ExtResource("1_75bo2")
 
 [node name="ColorRect" type="ColorRect" parent="."]

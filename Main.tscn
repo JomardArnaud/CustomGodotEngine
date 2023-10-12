@@ -18,7 +18,6 @@ metadata/_edit_group_ = true
 
 [node name="PlayerNode" parent="." node_paths=PackedStringArray("sliderSpeed", "sliderInertia") instance=ExtResource("1_50kq8")]
 z_index = 60
-inertia = 0.08
 sliderSpeed = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerSpeed")
 sliderInertia = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerInertia")
 

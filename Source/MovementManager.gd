@@ -7,12 +7,6 @@ extends Node2D
 @onready var dir : Vector2
 @onready var velocity : Vector2
 
-func get_direction() -> Vector2:
-	return self.dir
-	
-func get_velocity() -> Vector2:
-	return self.velocity
-
 func set_direction(nDir: Vector2) -> void:
 	self.dir = nDir
 

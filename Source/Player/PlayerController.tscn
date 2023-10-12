@@ -7,7 +7,7 @@ size = Vector2(40, 40)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-10, -10)
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.18, 0.18)
 script = ExtResource("1_4rfjw")
 
 [node name="hitbox" type="CollisionShape2D" parent="."]

@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 @export var speed = 100
-@export var inertia = .8
+@export var inertia = .3
+@export var distanceWeapon = 40
 
 @onready var movement : MovementManager
 @onready var weaponScene := preload("res://Source/Weapon/Weapon.tscn")
@@ -14,14 +15,13 @@ func _ready():
 	self.movement.inertia = inertia
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
-	weapon.set("offsetEntity", 50)
-	weapon.fireRate(0.5)
+	weapon.distanceEntity(distanceWeapon).fireRate(0.5)
 	tmp_set_slider()
 	
 func _physics_process(delta):
 	get_dir()
 	movement.update_velocity(delta)
-	self.set_velocity(movement.get_velocity())
+	self.set_velocity(movement.velocity)
 	self.move_and_slide()
 	weapon.update(self)
 #	mainCamera.position = self.position

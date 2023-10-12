@@ -1,20 +1,25 @@
 extends Node2D
 
-var BulletInfo = {
-	posOrigin = Vector2(),
-	dir = Vector2(),
-	speed = Vector2()
-}
-
 @onready var movement : MovementManager
 
-# Called when the node enters the scene tree for the first time.
-func _spawn(infoSpawn: Dictionary) -> void:
+func _ready() -> void:
 	self.movement = MovementManager.new()
-	self.movement.speed = infoSpawn["speed"]
-	self.movement.dir = infoSpawn["dir"]
-	self.position = infoSpawn["posOrigin"]
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	self.movement.inertia = 0
+	z_index = 30
+	
 func _process(delta: float) -> void:
+	self.movement.update_velocity(delta)
+	self.global_position += self.movement.velocity
 	pass
+
+func posOrigin(nPos: Vector2):
+	self.global_position = nPos
+	return self
+
+func dir(nDir: Vector2):
+	self.movement.set_direction(nDir)
+	return self
+
+func speed(nSpeed: float):
+	self.movement.speed = nSpeed
+	return self
