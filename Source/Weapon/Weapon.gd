@@ -2,7 +2,6 @@ class_name Weapon
 extends Node2D
 
 @onready var _distanceEntity : float
-@onready var _fireRate : float
 @onready var bulletScene := preload("res://Source/Weapon/Bullet/Bullet.tscn")
 @onready var fireTimer = $fireTimer
 @onready var rootNode := get_tree().root.get_child(0)
@@ -27,5 +26,5 @@ func distanceEntity(nDistance: float):
 	return self
 
 func fireRate(nFireRate: float):
-	_fireRate = nFireRate
+	fireTimer.wait_time = nFireRate
 	return self

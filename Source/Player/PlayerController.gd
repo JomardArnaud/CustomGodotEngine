@@ -11,17 +11,16 @@ extends CharacterBody2D
 func _ready():
 	print("player ready")
 	self.movement = MovementManager.new()
-	self.movement.speed = speed
-	self.movement.inertia = inertia
+	self.movement.setSpeed(speed).setInertia(inertia)
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
-	weapon.distanceEntity(distanceWeapon).fireRate(0.5)
+	weapon.distanceEntity(distanceWeapon).fireRate(0.15)
 	tmp_set_slider()
 	
 func _physics_process(delta):
 	get_dir()
 	movement.update_velocity(delta)
-	self.set_velocity(movement.velocity)
+	self.set_velocity(movement.getVelocity())
 	self.move_and_slide()
 	weapon.update(self)
 #	mainCamera.position = self.position

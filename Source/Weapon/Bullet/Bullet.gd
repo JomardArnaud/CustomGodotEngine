@@ -4,12 +4,12 @@ extends Node2D
 
 func _ready() -> void:
 	self.movement = MovementManager.new()
-	self.movement.inertia = 0
+	self.movement.setInertia(0)
 	z_index = 30
 	
 func _process(delta: float) -> void:
 	self.movement.update_velocity(delta)
-	self.global_position += self.movement.velocity
+	self.global_position += self.movement.getVelocity()
 	pass
 
 func posOrigin(nPos: Vector2):
@@ -21,5 +21,5 @@ func dir(nDir: Vector2):
 	return self
 
 func speed(nSpeed: float):
-	self.movement.speed = nSpeed
+	self.movement.setSpeed(nSpeed)
 	return self
