@@ -17,9 +17,13 @@ func posOrigin(nPos: Vector2):
 	return self
 
 func dir(nDir: Vector2):
-	self.movement.set_direction(nDir)
+	self.movement.setDir(nDir)
 	return self
 
 func speed(nSpeed: float):
 	self.movement.setSpeed(nSpeed)
 	return self
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	self.queue_free()

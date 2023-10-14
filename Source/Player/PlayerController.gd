@@ -28,7 +28,7 @@ func _physics_process(delta):
 func get_dir():
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
-	self.movement.set_direction(Vector2(horizontalDirection, verticalDirection))
+	self.movement.setDir(Vector2(horizontalDirection, verticalDirection))
 
 
 ## TPM SLIDER MOUV MANAGER ##

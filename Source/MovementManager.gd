@@ -14,31 +14,31 @@ func update_velocity(delta: float):
 
 ### all getter | setter ###
 func setInertia(nInertia: float):
-	self.inertia = nInertia
+	inertia = nInertia
 	return self
 	
 func getInertia() -> float:
-	return self.inertia
+	return inertia
 	
 func setSpeed(nSpeed: float):
-	self.speed = nSpeed
+	speed = nSpeed
 	return self
 	
 func getSpeed() -> float:
-	return self.speed
+	return speed
 
 func setDir(nDir: Vector2):
-	self.dir = nDir
+	dir = nDir
 	return self
 	
 func getDir() -> Vector2:
-	return self.dir
+	return dir
 
 func setVelocity(nVelocity: Vector2):
-	self.velocity = nVelocity
+	velocity = nVelocity
 	return self
 	
 func getVelocity() -> Vector2:
-	return self.velocity
+	return velocity
 	
 	
