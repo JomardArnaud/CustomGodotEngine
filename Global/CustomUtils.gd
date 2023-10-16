@@ -2,7 +2,6 @@ class_name MyUtils
 extends Node
 
 const debugPath = "Debug"
-const debugTexture = preload("res://Source/Assets/debugSquare.png")
 
 # delete all children of given node
 static func delete_children(node):
@@ -50,13 +49,13 @@ static func addDebugLines(node: Node2D, points: Array[Vector2], color: Color = C
 		node.add_child(debugNode)
 	debugNode.add_child(debugLine)
 	
-static func addDebugSquare(node: Node2D, pos: Vector2, thickness: float = 1) -> void:
-	var debugSquare = Sprite2D.new()
-	debugSquare.set_texture(debugTexture)
-	debugSquare.position = pos
+static func addDebugSquare(node: Node2D, pos: Vector2, size: Vector2 = Vector2(50,50), color: Color = Color(255, 255, 255, 1)) -> void:
+	var debugSquare = ColorRect.new()
+	debugSquare.color = color
+	debugSquare.global_position = pos
 	debugSquare.z_index = 100
 	debugSquare.z_as_relative = true
-	debugSquare.scale = Vector2(thickness, thickness)
+	debugSquare.size = size
 	var	debugNode = findDebugNode(node)
 	if debugNode == null:
 		debugNode = Node2D.new()
