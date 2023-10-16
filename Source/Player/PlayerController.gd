@@ -32,17 +32,29 @@ func get_dir():
 
 
 ## TPM SLIDER MOUV MANAGER ##
-@export var sliderSpeed: HSlider
-@export var sliderInertia: HSlider
+@export var canvasHud: CanvasLayer
+@onready var sliderSpeed: HSlider
+@onready var textSpeed: Label
+@onready var sliderInertia: HSlider
+@onready var textInertia: Label
 
 func tmp_set_slider() -> void:
+	canvasHud.visible = true
+	sliderSpeed = canvasHud.find_child("PlayerSpeed")
+	textSpeed = canvasHud.find_child("SpeedText")
 	sliderSpeed.min_value = 25
 	sliderSpeed.max_value = 300
 	sliderSpeed.step = 1
 	sliderSpeed.value = speed
-	sliderSpeed.value_changed.connect(func(value): self.movement.speed = value)
+	sliderSpeed.value_changed.connect(func(value): 
+		self.movement.speed = value
+		textSpeed.text = str("Speed = ", value))
+	sliderInertia = canvasHud.find_child("PlayerInertia")
+	textInertia = canvasHud.find_child("InertiaText")
 	sliderInertia.min_value = 0
 	sliderInertia.max_value = 1
 	sliderInertia.step = .025
 	sliderInertia.value = inertia
-	sliderInertia.value_changed.connect(func(nInertia): self.movement.inertia = nInertia)
+	sliderInertia.value_changed.connect(func(nInertia): 
+		self.movement.inertia = nInertia
+		textInertia.text = str("Inertia = ", nInertia))

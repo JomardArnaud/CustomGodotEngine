@@ -15,15 +15,34 @@ offset_top = 45.0
 offset_right = 248.0
 offset_bottom = 159.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainContainer"]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
 
-[node name="PlayerSpeed" type="HSlider" parent="MainContainer/VBoxContainer"]
+[node name="PlayerSpeed" type="HSlider" parent="MainContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 ticks_on_borders = true
 
-[node name="PlayerInertia" type="HSlider" parent="MainContainer/VBoxContainer"]
+[node name="SpeedText" type="Label" parent="MainContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
-ticks_on_borders = true
+text = "Speed = "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+tooltip_text = "tthttthth"
+
+[node name="PlayerInertia" type="HSlider" parent="MainContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+value = 50.0
+
+[node name="InertiaText" type="Label" parent="MainContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+text = "Inertia = 
+"

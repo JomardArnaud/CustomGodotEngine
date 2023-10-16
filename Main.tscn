@@ -13,13 +13,13 @@ metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
 
 [node name="CanvasDebugHud" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="RootDebugHud" parent="CanvasDebugHud" instance=ExtResource("2_tgfjs")]
 
-[node name="PlayerNode" parent="." node_paths=PackedStringArray("sliderSpeed", "sliderInertia") instance=ExtResource("1_50kq8")]
+[node name="PlayerNode" parent="." node_paths=PackedStringArray("canvasHud") instance=ExtResource("1_50kq8")]
 z_index = 60
-sliderSpeed = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerSpeed")
-sliderInertia = NodePath("../CanvasDebugHud/RootDebugHud/MainContainer/VBoxContainer/PlayerInertia")
+canvasHud = NodePath("../CanvasDebugHud")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
 z_index = 70
