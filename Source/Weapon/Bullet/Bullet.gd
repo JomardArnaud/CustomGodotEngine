@@ -26,4 +26,5 @@ func speed(nSpeed: float):
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	self.queue_free()
+	if !(body is Weapon || body is PlayerController):
+		self.queue_free()
