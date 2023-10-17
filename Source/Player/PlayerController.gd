@@ -42,7 +42,6 @@ func get_dir():
 
 func tmp_set_slider() -> void:
 	canvasHud.visible = true
-	CustomUtils.addDebugSquare(get_tree().root.get_child(0), self.position, Vector2(5, 5), Color(255, 0, 0, 1))
 	sliderSpeed = canvasHud.find_child("PlayerSpeed")
 	textSpeed = canvasHud.find_child("SpeedText")
 	sliderSpeed.min_value = 25
