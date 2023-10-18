@@ -1,10 +1,10 @@
 class_name MovementManager
-extends Node2D
+extends Object
 
 @export var inertia : float : set = setInertia, get = getInertia
 @export var speed : float : set = setSpeed, get = getSpeed # distance per second
-@onready var dir : Vector2 : set = setDir, get = getDir 
-@onready var velocity : Vector2 : set = setVelocity, get = getVelocity
+var dir : Vector2 : set = setDir, get = getDir 
+var velocity : Vector2 : set = setVelocity, get = getVelocity
 
 func reset_velocity() -> void:
 	self.velocity = Vector2(0, 0)
@@ -40,5 +40,3 @@ func setVelocity(nVelocity: Vector2):
 	
 func getVelocity() -> Vector2:
 	return velocity
-	
-	

@@ -15,7 +15,7 @@ func _ready():
 	self.movement.setSpeed(speed).setInertia(inertia)
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
-	weapon.distanceEntity(distanceWeapon).fireRate(0.15)
+	weapon.setDistanceEntity(distanceWeapon).fireRate(0.15)
 	tmp_set_slider()
 	
 func _physics_process(delta):
