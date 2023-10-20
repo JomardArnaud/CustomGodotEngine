@@ -19,6 +19,8 @@ func _process(delta: float) -> void:
 func onHealthChanged(nHP: int) -> void:
 	print(nHP)
 
+func getHP() -> HealthManager:
+	return self.hpdz
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("tiens teins teins")
