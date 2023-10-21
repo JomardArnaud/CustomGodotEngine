@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://1cwvyoyv30rn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwg8t"]
+draw_center = false
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0.223529, 0.866667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20wxl"]
+bg_color = Color(0, 0.882353, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[resource]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_lwg8t")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_20wxl")

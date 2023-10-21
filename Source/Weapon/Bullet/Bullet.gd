@@ -1,6 +1,10 @@
+class_name Bullet
 extends Node2D
 
 @onready var movement : MovementManager
+
+### tmp until dmgObject
+@onready var dmg : int = 5
 
 func _ready() -> void:
 	self.movement = MovementManager.new()
@@ -26,13 +30,10 @@ func speed(nSpeed: float):
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print(body)
 	if !(body is Weapon || body is PlayerController):
-		if "HealthManager" in body:
-			body.takeDamage(25)
 		self.queue_free()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	area.get_parent().hp.takeDamage(25)
+	area.get_parent().hp.takeDamage(dmg)
 	pass

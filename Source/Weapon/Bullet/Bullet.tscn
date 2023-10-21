@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dryi1pal5ildw"]
+[gd_scene load_steps=3 format=3 uid="uid://d1axdf5vdp07x"]
 
-[ext_resource type="Script" path="res://Source/Weapon/Bullet/Bullet.gd" id="1_75bo2"]
+[ext_resource type="Script" path="res://Source/Weapon/Bullet/Bullet.gd" id="1_n7wqe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_elb34"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hl5dl"]
 size = Vector2(40, 40)
 
 [node name="Bullet" type="Node2D"]
-scale = Vector2(0.05, 0.05)
-script = ExtResource("1_75bo2")
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_n7wqe")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -21,13 +21,12 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0.34902, 0, 1)
+color = Color(1, 0.305882, 0.0627451, 1)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-6.55651e-07, -6.55651e-07)
-shape = SubResource("RectangleShape2D_elb34")
+shape = SubResource("RectangleShape2D_hl5dl")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
