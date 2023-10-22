@@ -12,10 +12,11 @@ extends CharacterBody2D
 func _ready():
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
-	
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
 	weapon.setDistanceEntity(distanceWeapon).fireRate(0.15)
+	setDashInfo()
+	print(timerDash.time_left)
 	tmp_set_slider()
 	
 func _physics_process(delta):
@@ -26,7 +27,7 @@ func _physics_process(delta):
 	weapon.update(self)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("dash"):
+	if event.is_action_pressed("dash") && timerDash.time_left == 0:
 		dash(movement.getDir())
 	pass
 
@@ -43,12 +44,22 @@ var dashInfo = {
 	baseSpeed = 0
 }
 
+@export_category("Abilities")
+@export var dashCD : float
+@export var dashDuration : float
+@onready var timerDash := $DashCdTimer
+@onready var timerDashing := $DashingTimer
+
 func setDashInfo() -> void:
 	dashInfo["baseSpeed"] = movement.getSpeed()
+	timerDash.wait_time = dashCD
+	timerDashing.wait_time = dashDuration
 	pass
 
 func dash(dirPlayer: Vector2):
-	
+	print("dash")
+	timerDash.start()
+	timerDashing.start()
 	pass
 
 ## TPM SLIDER MOUV MANAGER ##
@@ -78,3 +89,8 @@ func tmp_set_slider() -> void:
 	sliderInertia.value_changed.connect(func(nInertia): 
 		self.movement.inertia = nInertia
 		textInertia.text = str("Inertia = ", nInertia))
+
+
+func _on_dash_cd_timer_timeout() -> void:
+	print("dash is up")
+	pass # Replace with function body.

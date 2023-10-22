@@ -9,6 +9,8 @@ size = Vector2(18.6046, 44.4444)
 position = Vector2(-10, -10)
 scale = Vector2(0.18, 0.18)
 script = ExtResource("1_4rfjw")
+dashCD = 5.0
+dashDuration = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 100
@@ -29,3 +31,11 @@ color = Color(0.388235, 0.988235, 0.92549, 1)
 position = Vector2(3.8147e-06, 0)
 scale = Vector2(2.38889, 1)
 shape = SubResource("RectangleShape2D_nvuin")
+
+[node name="DashCdTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DashCdTimer" to="." method="_on_dash_cd_timer_timeout"]

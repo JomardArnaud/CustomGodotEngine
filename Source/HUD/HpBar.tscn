@@ -22,5 +22,5 @@ offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_j5oim")
-value = 80.0
+value = 100.0
 show_percentage = false

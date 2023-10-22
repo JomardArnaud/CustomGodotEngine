@@ -5,6 +5,7 @@ extends Object
 @export var speed : float : set = setSpeed, get = getSpeed # distance per second
 var dir : Vector2 : set = setDir, get = getDir 
 var velocity : Vector2 : set = setVelocity, get = getVelocity
+var dirLock := false
 
 func reset_velocity() -> void:
 	self.velocity = Vector2(0, 0)
@@ -28,7 +29,8 @@ func getSpeed() -> float:
 	return speed
 
 func setDir(nDir: Vector2) -> MovementManager:
-	dir = nDir
+	if !dirLock:
+		dir = nDir
 	return self
 	
 func getDir() -> Vector2:
@@ -40,3 +42,7 @@ func setVelocity(nVelocity: Vector2) -> MovementManager:
 	
 func getVelocity() -> Vector2:
 	return velocity
+
+func lockDir(nLock: bool) -> MovementManager:
+	dirLock = nLock
+	return self
