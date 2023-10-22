@@ -12,6 +12,7 @@ func _ready() -> void:
 	hp.setMaxHealth(maxHP).setHealth(maxHP)
 	hpBar.value = hp.getHealth()
 	hp.connect("healthChanged", onHealthChanged)
+	hp.connect("healthDropZero", onHealthDropZero)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -20,8 +21,8 @@ func _process(delta: float) -> void:
 func onHealthChanged(nHP: int) -> void:
 	hpBar.value = nHP
 
+func onHealthDropZero() -> void:
+	hp.setHealth(maxHP)
+
 func getHP() -> HealthManager:
 	return self.hp
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	pass

@@ -10,9 +10,9 @@ extends CharacterBody2D
 @onready var weapon: Weapon
 
 func _ready():
-	print("player ready")
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
+	
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
 	weapon.setDistanceEntity(distanceWeapon).fireRate(0.15)
@@ -25,13 +25,31 @@ func _physics_process(delta):
 	self.move_and_slide()
 	weapon.update(self)
 	
-#	mainCamera.position = self.position
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("dash"):
+		dash(movement.getDir())
+	pass
 
 func get_dir():
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
 	self.movement.setDir(Vector2(horizontalDirection, verticalDirection))
 
+### Ability ###
+
+## Dash ##
+
+var dashInfo = {
+	baseSpeed = 0
+}
+
+func setDashInfo() -> void:
+	dashInfo["baseSpeed"] = movement.getSpeed()
+	pass
+
+func dash(dirPlayer: Vector2):
+	
+	pass
 
 ## TPM SLIDER MOUV MANAGER ##
 @export var canvasHud: CanvasLayer

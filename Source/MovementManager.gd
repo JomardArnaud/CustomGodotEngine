@@ -13,28 +13,28 @@ func update_velocity(delta: float):
 	self.velocity = lerp(self.dir * self.speed, self.velocity, pow(self.inertia / 10, delta));
 
 ### all getter | setter ###
-func setInertia(nInertia: float):
+func setInertia(nInertia: float) -> MovementManager:
 	inertia = nInertia
 	return self
 	
 func getInertia() -> float:
 	return inertia
 	
-func setSpeed(nSpeed: float):
+func setSpeed(nSpeed: float) -> MovementManager:
 	speed = nSpeed
 	return self
 	
 func getSpeed() -> float:
 	return speed
 
-func setDir(nDir: Vector2):
+func setDir(nDir: Vector2) -> MovementManager:
 	dir = nDir
 	return self
 	
 func getDir() -> Vector2:
 	return dir
 
-func setVelocity(nVelocity: Vector2):
+func setVelocity(nVelocity: Vector2) -> MovementManager:
 	velocity = nVelocity
 	return self
 	

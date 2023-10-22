@@ -23,7 +23,6 @@ func _ready():
 		ev.physical_keycode = input_to_add[keyEvent]
 		InputMap.add_action(keyEvent)
 		InputMap.action_add_event(keyEvent, ev)
-		print(keyEvent)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(event):

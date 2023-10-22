@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Source/Player/PlayerController.gd" id="1_4rfjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvuin"]
-size = Vector2(13.9535, 33.3333)
+size = Vector2(18.6046, 44.4444)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-10, -10)
@@ -17,14 +17,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.388235, 0.988235, 0.92549, 1)
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(3.8147e-06, 0)
 scale = Vector2(2.38889, 1)
 shape = SubResource("RectangleShape2D_nvuin")

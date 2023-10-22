@@ -16,24 +16,25 @@ func _process(delta: float) -> void:
 	self.global_position += self.movement.getVelocity()
 	pass
 
-func posOrigin(nPos: Vector2):
+func posOrigin(nPos: Vector2) -> Bullet:
 	self.global_position = nPos
 	return self
 
-func dir(nDir: Vector2):
+func dir(nDir: Vector2) -> Bullet:
 	self.movement.setDir(nDir)
 	return self
 
-func speed(nSpeed: float):
+func speed(nSpeed: float) -> Bullet:
 	self.movement.setSpeed(nSpeed)
 	return self
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !(body is Weapon || body is PlayerController):
 		self.queue_free()
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	area.get_parent().hp.takeDamage(dmg)
+	var areaParent := area.get_parent() 
+	if "hp" in areaParent:
+		areaParent.hp.takeDamage(dmg)
+	self.queue_free()
 	pass

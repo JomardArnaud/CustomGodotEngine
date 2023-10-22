@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://rytr7i1c2u5b" path="res://Source/Foes/Scarecrow/Scarecrow.tscn" id="7_kjfel"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(91, -33)
+position = Vector2(93, -30)
 script = ExtResource("1_evtoq")
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
@@ -33,13 +33,13 @@ position = Vector2(-290, -407)
 polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 359, 641, 500, 538, 621, 645, 520, 381, 1053, 405, 728, 174, 569, 312, 502, 244, 434, 254)
 
 [node name="Block" parent="Arena" instance=ExtResource("5_uasw7")]
-polygon = PackedVector2Array(397, 331, 389, 450, 462, 348)
+polygon = PackedVector2Array(365, 301, 291, 301, 365, 322, 412, 323, 389, 450, 430, 349, 469, 379, 464, 302)
 metadata/_edit_group_ = true
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
 z_index = 50
-position = Vector2(178, 30)
-scale = Vector2(0.560005, 0.16)
+position = Vector2(46, 0)
+scale = Vector2(0.259909, 0.36)
 
 [editable path="CanvasDebugHud/RootDebugHud"]
 [editable path="Arena"]

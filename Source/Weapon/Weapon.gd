@@ -21,10 +21,10 @@ func shot(dirWeapon: Vector2) -> void:
 	tmpBullet.posOrigin(self.global_position).dir(dirWeapon).speed(2)
 	pass
 
-func setDistanceEntity(nDistance: float):
+func setDistanceEntity(nDistance: float) -> Weapon:
 	distanceEntity = nDistance
 	return self
 
-func fireRate(nFireRate: float):
+func fireRate(nFireRate: float) -> Weapon:
 	fireTimer.wait_time = nFireRate
 	return self
