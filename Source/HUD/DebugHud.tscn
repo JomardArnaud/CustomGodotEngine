@@ -32,17 +32,11 @@ ticks_on_borders = true
 layout_mode = 2
 text = "Speed = "
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MainContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.0
-tooltip_text = "tthttthth"
-
-[node name="PlayerInertia" type="HSlider" parent="MainContainer/VBoxContainer3/VBoxContainer2"]
+[node name="PlayerInertia" type="HSlider" parent="MainContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 value = 50.0
 
-[node name="InertiaText" type="Label" parent="MainContainer/VBoxContainer3/VBoxContainer2"]
+[node name="InertiaText" type="Label" parent="MainContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 text = "Inertia = 
 "

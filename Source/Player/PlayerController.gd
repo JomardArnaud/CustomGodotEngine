@@ -41,7 +41,8 @@ func get_dir():
 ## Dash ##
 
 var dashInfo = {
-	baseSpeed = 0
+	baseSpeed = 0,
+	powerDash = 250 # the speed which will be added to the player 
 }
 
 @export_category("Abilities")
@@ -57,10 +58,16 @@ func setDashInfo() -> void:
 	pass
 
 func dash(dirPlayer: Vector2):
-	print("dash")
-	timerDash.start()
 	timerDashing.start()
+	movement.lockDir(true)
+	movement.setSpeed(dashInfo["baseSpeed"] + dashInfo["powerDash"])
 	pass
+
+func _on_dashing_timer_timeout() -> void:
+	timerDash.start()
+	movement.lockDir(false)
+	movement.setSpeed(dashInfo["baseSpeed"])
+	pass # Replace with function body.
 
 ## TPM SLIDER MOUV MANAGER ##
 @export var canvasHud: CanvasLayer
@@ -77,6 +84,7 @@ func tmp_set_slider() -> void:
 	sliderSpeed.max_value = 300
 	sliderSpeed.step = 1
 	sliderSpeed.value = speed
+	textSpeed.text = str("Speed = ", speed)
 	sliderSpeed.value_changed.connect(func(value): 
 		self.movement.speed = value
 		textSpeed.text = str("Speed = ", value))
@@ -86,11 +94,7 @@ func tmp_set_slider() -> void:
 	sliderInertia.max_value = 1
 	sliderInertia.step = .025
 	sliderInertia.value = inertia
+	textInertia.text = str("Speed = ", inertia)
 	sliderInertia.value_changed.connect(func(nInertia): 
 		self.movement.inertia = nInertia
 		textInertia.text = str("Inertia = ", nInertia))
-
-
-func _on_dash_cd_timer_timeout() -> void:
-	print("dash is up")
-	pass # Replace with function body.

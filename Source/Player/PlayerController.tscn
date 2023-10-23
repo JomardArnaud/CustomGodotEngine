@@ -9,7 +9,7 @@ size = Vector2(18.6046, 44.4444)
 position = Vector2(-10, -10)
 scale = Vector2(0.18, 0.18)
 script = ExtResource("1_4rfjw")
-dashCD = 5.0
+dashCD = 1.0
 dashDuration = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -38,4 +38,4 @@ one_shot = true
 [node name="DashingTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="timeout" from="DashCdTimer" to="." method="_on_dash_cd_timer_timeout"]
+[connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
