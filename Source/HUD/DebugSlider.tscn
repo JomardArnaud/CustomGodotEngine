@@ -9,8 +9,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerInertia" type="HSlider" parent="."]
+layout_mode = 0
 value = 50.0
 
 [node name="InertiaText" type="Label" parent="."]
+layout_mode = 0
 text = "Inertia = 
 "

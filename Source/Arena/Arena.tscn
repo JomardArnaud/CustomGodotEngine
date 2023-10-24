@@ -3,8 +3,6 @@
 [ext_resource type="Script" path="res://Source/Arena/Arena.gd" id="1_3vekc"]
 
 [node name="Arena" type="Polygon2D"]
-z_index = 2
-z_as_relative = false
 color = Color(0, 0.309804, 0.329412, 1)
 script = ExtResource("1_3vekc")
 metadata/_edit_group_ = true

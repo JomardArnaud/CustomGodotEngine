@@ -26,7 +26,6 @@ tooltip_text = "tthttthth"
 
 [node name="PlayerSpeed" type="HSlider" parent="MainContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
-ticks_on_borders = true
 
 [node name="SpeedText" type="Label" parent="MainContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2

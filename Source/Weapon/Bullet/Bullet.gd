@@ -9,7 +9,7 @@ extends Node2D
 func _ready() -> void:
 	self.movement = MovementManager.new()
 	self.movement.setInertia(0)
-	z_index = 30
+#	z_index = SpriteManager.ZIndexPlayer + SpriteManager.ZOffsetBullet
 	
 func _process(delta: float) -> void:
 	self.movement.update_velocity(delta)
@@ -36,5 +36,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
 		areaParent.hp.takeDamage(dmg)
-	self.queue_free()
+#	if !(areaParent is Bullet):
+#		self.queue_free()
 	pass

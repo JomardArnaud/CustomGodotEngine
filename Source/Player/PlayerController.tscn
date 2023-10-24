@@ -7,13 +7,11 @@ size = Vector2(18.6046, 44.4444)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-10, -10)
-scale = Vector2(0.18, 0.18)
 script = ExtResource("1_4rfjw")
 dashCD = 1.0
-dashDuration = 0.5
+dashDuration = 0.1
 
 [node name="ColorRect" type="ColorRect" parent="."]
-z_index = 100
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

@@ -4,7 +4,7 @@ extends Node2D
 @onready var distanceEntity : float : set = setDistanceEntity
 @onready var bulletScene := preload("res://Source/Weapon/Bullet/Bullet.tscn")
 @onready var fireTimer = $fireTimer
-@onready var rootNode := get_tree().root.get_child(0)
+@onready var tmpNode := get_node("/root/Main/TmpNode")
 
 func update(entity: Node2D) -> void:
 	var mousePos = get_global_mouse_position()
@@ -17,14 +17,18 @@ func update(entity: Node2D) -> void:
 	
 func shot(dirWeapon: Vector2) -> void:
 	var tmpBullet = bulletScene.instantiate()
-	rootNode.add_child(tmpBullet)
-	tmpBullet.posOrigin(self.global_position).dir(dirWeapon).speed(2)
+	tmpNode.add_child(tmpBullet)
+	tmpBullet.posOrigin(self.global_position).dir(dirWeapon).speed(4)
 	pass
 
 func setDistanceEntity(nDistance: float) -> Weapon:
 	distanceEntity = nDistance
 	return self
 
-func fireRate(nFireRate: float) -> Weapon:
+func setFireRate(nFireRate: float) -> Weapon:
 	fireTimer.wait_time = nFireRate
 	return self
+#
+#func setTmpNode(TmpNode: Node) -> Weapon:
+#	tmpNode = TmpNode
+#	return self

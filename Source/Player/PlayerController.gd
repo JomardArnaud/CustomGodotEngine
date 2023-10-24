@@ -1,8 +1,8 @@
 class_name PlayerController
 extends CharacterBody2D
 
-@export var speed = 100
-@export var inertia = .3
+@export var speed = 550
+@export var inertia = .35
 @export var distanceWeapon = 40
 
 @onready var movement : MovementManager
@@ -14,10 +14,10 @@ func _ready():
 	self.movement.setSpeed(speed).setInertia(inertia)
 	weapon = weaponScene.instantiate()
 	add_child(weapon)	
-	weapon.setDistanceEntity(distanceWeapon).fireRate(0.15)
+	weapon.setDistanceEntity(distanceWeapon).setFireRate(0.15)
 	setDashInfo()
-	print(timerDash.time_left)
 	tmp_set_slider()
+#	z_index = SpriteManager.ZIndexPlayer
 	
 func _physics_process(delta):
 	get_dir()
@@ -42,7 +42,9 @@ func get_dir():
 
 var dashInfo = {
 	baseSpeed = 0,
-	powerDash = 250 # the speed which will be added to the player 
+	cd = 0,
+	duration = 0,
+	power = 4.5 # the ratio which will be multiple to the player's speed 
 }
 
 @export_category("Abilities")
@@ -53,14 +55,17 @@ var dashInfo = {
 
 func setDashInfo() -> void:
 	dashInfo["baseSpeed"] = movement.getSpeed()
-	timerDash.wait_time = dashCD
-	timerDashing.wait_time = dashDuration
+	dashInfo["cd"] = dashCD
+	dashInfo["duration"] = dashDuration
+#	dashInfo["power"] = 3
+	timerDash.wait_time = dashInfo["cd"]
+	timerDashing.wait_time = dashInfo["duration"]
 	pass
 
 func dash(dirPlayer: Vector2):
 	timerDashing.start()
 	movement.lockDir(true)
-	movement.setSpeed(dashInfo["baseSpeed"] + dashInfo["powerDash"])
+	movement.setSpeed(dashInfo["baseSpeed"] * dashInfo["power"])
 	pass
 
 func _on_dashing_timer_timeout() -> void:
@@ -80,9 +85,9 @@ func tmp_set_slider() -> void:
 	canvasHud.visible = true
 	sliderSpeed = canvasHud.find_child("PlayerSpeed")
 	textSpeed = canvasHud.find_child("SpeedText")
-	sliderSpeed.min_value = 25
-	sliderSpeed.max_value = 300
-	sliderSpeed.step = 1
+	sliderSpeed.min_value = 0
+	sliderSpeed.max_value = movement.getSpeed() * 10
+	sliderSpeed.step = movement.getSpeed() / 500
 	sliderSpeed.value = speed
 	textSpeed.text = str("Speed = ", speed)
 	sliderSpeed.value_changed.connect(func(value): 

@@ -6,7 +6,7 @@
 size = Vector2(40, 40)
 
 [node name="Bullet" type="Node2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.415, 0.415)
 script = ExtResource("1_n7wqe")
 
 [node name="ColorRect" type="ColorRect" parent="."]

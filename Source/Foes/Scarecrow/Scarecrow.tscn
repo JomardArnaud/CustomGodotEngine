@@ -18,12 +18,10 @@ anchor_bottom = 0.5
 offset_left = -20.0
 offset_top = -46.0
 offset_right = 20.0
-offset_bottom = 46.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(1, 0.416667, 0, 1)
+scale = Vector2(0.998917, 2.29577)
 
 [node name="Area2D" type="Area2D" parent="."]
 
