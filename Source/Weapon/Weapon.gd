@@ -18,7 +18,7 @@ func update(entity: Node2D) -> void:
 func shot(dirWeapon: Vector2) -> void:
 	var tmpBullet = bulletScene.instantiate()
 	tmpNode.add_child(tmpBullet)
-	tmpBullet.posOrigin(self.global_position).dir(dirWeapon).speed(4)
+	tmpBullet.posOrigin(self.global_position).dir(dirWeapon).speed(6)
 	pass
 
 func setDistanceEntity(nDistance: float) -> Weapon:

@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://v2nw0nk5k3gm"]
+[gd_scene load_steps=7 format=3 uid="uid://v2nw0nk5k3gm"]
 
 [ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="1_50kq8"]
-[ext_resource type="Script" path="res://Main.gd" id="1_evtoq"]
 [ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="2_tgfjs"]
 [ext_resource type="PackedScene" uid="uid://cpb41bc8texpg" path="res://Source/Arena/Arena.tscn" id="3_78mhr"]
 [ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="5_2wdmp"]
@@ -10,7 +9,6 @@
 
 [node name="Main" type="Node2D"]
 position = Vector2(93, -30)
-script = ExtResource("1_evtoq")
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
 
@@ -36,7 +34,6 @@ scale = Vector2(0.725909, 1.29248)
 focusEntity = NodePath("../PlayerNode")
 
 [node name="CanvasDebugHud" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="RootDebugHud" parent="CanvasDebugHud" instance=ExtResource("2_tgfjs")]
 
