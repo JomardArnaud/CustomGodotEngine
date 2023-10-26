@@ -21,8 +21,7 @@ polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 3
 polygon = PackedVector2Array(365, 301, 291, 301, 365, 322, 412, 323, 389, 450, 430, 349, 469, 379, 464, 302)
 metadata/_edit_group_ = true
 
-[node name="PlayerNode" parent="." node_paths=PackedStringArray("canvasHud") instance=ExtResource("1_50kq8")]
-canvasHud = NodePath("../CanvasDebugHud")
+[node name="PlayerNode" parent="." instance=ExtResource("1_50kq8")]
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
 position = Vector2(46, 0)

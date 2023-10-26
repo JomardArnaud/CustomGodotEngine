@@ -26,12 +26,3 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
-
-[node name="PlayerInertia" type="HSlider" parent="MainContainer/VBoxContainer/ValueContainer"]
-layout_mode = 2
-value = 50.0
-
-[node name="InertiaText" type="Label" parent="MainContainer/VBoxContainer/ValueContainer"]
-layout_mode = 2
-text = "Inertia = 
-"

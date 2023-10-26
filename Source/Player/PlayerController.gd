@@ -77,39 +77,22 @@ func _on_dashing_timer_timeout() -> void:
 	pass # Replace with function body.
 
 ## TPM SLIDER MOUV MANAGER ##
-@export var canvasHud: CanvasLayer
-#@onready var sliderSpeed: HSlider
-#@onready var textSpeed: Label
-@onready var sliderInertia: HSlider
-@onready var textInertia: Label
 
 func tmp_set_slider() -> void:
-	canvasHud.visible = true
 	debugHud.init()
 	debugHud.addDebugSlider({
 		minValue = movement.getSpeed() / 10,
 		maxValue =  movement.getSpeed() * 10,
 		step = movement.getSpeed() / 500,
-		value = movement.getSpeed()
-	}, func(value):
-		self.movement.setSpeed(value))
-#	sliderSpeed = canvasHud.find_child("PlayerSpeed")
-#	textSpeed = canvasHud.find_child("SpeedText")
-#	sliderSpeed.min_value = 0
-#	sliderSpeed.max_value = movement.getSpeed() * 10
-#	sliderSpeed.step = movement.getSpeed() / 500
-#	sliderSpeed.value = speed
-#	textSpeed.text = str("Speed = ", speed)
-#	sliderSpeed.value_changed.connect(func(value): 
-#		self.movement.speed = value
-#		textSpeed.text = str("Speed = ", value))
-	sliderInertia = canvasHud.find_child("PlayerInertia")
-	textInertia = canvasHud.find_child("InertiaText")
-	sliderInertia.min_value = 0
-	sliderInertia.max_value = 1
-	sliderInertia.step = .025
-	sliderInertia.value = inertia
-	textInertia.text = str("Inertia = ", inertia)
-	sliderInertia.value_changed.connect(func(nInertia): 
-		self.movement.inertia = nInertia
-		textInertia.text = str("Inertia = ", nInertia))
+		value = movement.getSpeed(),
+		text = "Speed = "
+	}, func(nSpeed):
+		self.movement.setSpeed(nSpeed))
+	debugHud.addDebugSlider({
+		minValue = 0,
+		maxValue =  1,
+		step = 0.025,
+		value = inertia,
+		text = "Inertia = "
+	}, func(nInertia):
+		self.movement.setInertia(nInertia))
