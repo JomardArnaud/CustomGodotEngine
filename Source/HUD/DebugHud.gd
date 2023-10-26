@@ -8,8 +8,8 @@ extends Control
 ### respect this path in the Main's tree node ###
 ## => get_node("/root/Main/CanvasDebugHud/RootDebugHud")
 
-@onready var valueContainer : VBoxContainer
- 
+@onready var valueContainer : VBoxContainer 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.visible = OS.is_debug_build()
@@ -19,9 +19,9 @@ func _process(delta: float) -> void:
 	pass
 
 func init() -> void:
-	valueContainer = $MainContainer/VBoxContainer/ValueContainer
+	valueContainer = $MainContainer.find_child("ValueContainer")
 
-func addDebugSlider(sliderValues: Dictionary, valueToConnect: Callable):
+func addDebugValueSlider(sliderValues: Dictionary, valueToConnect: Callable):
 	var nValueSlider := HSlider.new()
 	var nValueLabel := Label.new()
 	nValueSlider.min_value = sliderValues["minValue"]
@@ -34,4 +34,6 @@ func addDebugSlider(sliderValues: Dictionary, valueToConnect: Callable):
 		nValueLabel.text = str(sliderValues["text"], value))
 	valueContainer.add_child(nValueSlider)
 	valueContainer.add_child(nValueLabel)
-	pass
+
+func _on_check_button_pressed() -> void:
+	valueContainer.visible = !valueContainer.visible

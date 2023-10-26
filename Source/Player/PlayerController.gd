@@ -80,7 +80,7 @@ func _on_dashing_timer_timeout() -> void:
 
 func tmp_set_slider() -> void:
 	debugHud.init()
-	debugHud.addDebugSlider({
+	debugHud.addDebugValueSlider({
 		minValue = movement.getSpeed() / 10,
 		maxValue =  movement.getSpeed() * 10,
 		step = movement.getSpeed() / 500,
@@ -88,7 +88,7 @@ func tmp_set_slider() -> void:
 		text = "Speed = "
 	}, func(nSpeed):
 		self.movement.setSpeed(nSpeed))
-	debugHud.addDebugSlider({
+	debugHud.addDebugValueSlider({
 		minValue = 0,
 		maxValue =  1,
 		step = 0.025,
