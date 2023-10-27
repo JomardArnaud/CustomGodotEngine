@@ -30,7 +30,6 @@ func _physics_process(delta):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dash") && timerDash.time_left == 0:
 		dash(movement.getDir())
-	pass
 
 func get_dir():
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
