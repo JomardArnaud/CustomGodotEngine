@@ -3,9 +3,13 @@ extends Node2D
 
 @onready var distanceEntity : float : set = setDistanceEntity
 @onready var bulletScene := preload("res://Source/Weapon/Bullet/Bullet.tscn")
-@onready var fireTimer = $fireTimer
+@onready var fireTimer : Timer
 @onready var tmpNode := get_node("/root/Main/TmpNode")
 
+func init() -> void:
+	fireTimer = $fireTimer
+	pass
+	
 func update(entity: Node2D) -> void:
 	var mousePos = get_global_mouse_position()
 	var dirWeapon = (mousePos - entity.get_global_position()).normalized()

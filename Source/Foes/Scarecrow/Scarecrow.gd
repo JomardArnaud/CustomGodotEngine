@@ -7,7 +7,6 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-#	z_index = SpriteManager.ZIndexFoes
 	hp = HealthManager.new()
 	hp.setMaxHealth(maxHP).setHealth(maxHP)
 	hpBar.value = hp.getHealth()

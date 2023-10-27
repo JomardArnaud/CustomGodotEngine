@@ -1,28 +1,41 @@
 class_name Abilty
 extends Node2D
 
-@onready var info : Dictionary
+@onready var info : Dictionary : get = getInfo
 @onready var condition : Callable
-@onready var action : Callable
-@onready var cd := $Couldown : get = getCd
-@onready var duration := $Duration : get = getDuration
+@onready var actionStart : Callable
+@onready var actionEnd : Callable
+@onready var cd : Timer : get = getCd
+@onready var duration : Timer : get = getDuration
 
-func _input(event: InputEvent) -> void:
+func _process(delta: float) -> void:
 	if condition.call(): 
-		action.call()	
-	pass
+		actionStart.call()
 
+func _on_duration_timeout() -> void:
+	actionEnd.call()
+
+func init() -> void:
+	cd = $Couldown
+	duration = $Duration
+	
 ### setter | getter ###
 func setInfo(nInfo: Dictionary) -> Abilty:
 	info = nInfo
 	return self
 
 func setCondition(nCondition: Callable) -> Abilty:
+	print(nCondition)
 	condition = nCondition
 	return self
 
-func setAction(nAction: Callable) -> Abilty:
-	action = nAction
+func setActionStart(nAction: Callable) -> Abilty:
+	actionStart = nAction
+	actionStart.call()
+	return self
+	
+func setActionEnd(nAction: Callable) -> Abilty:
+	actionEnd = nAction
 	return self
 
 func setCd(nCd: float) -> Abilty:
@@ -32,6 +45,9 @@ func setCd(nCd: float) -> Abilty:
 func setDuration(nDuration: float) -> Abilty:
 	duration.wait_time = nDuration
 	return self
+
+func getInfo() -> Dictionary:
+	return info
 
 func getCd() -> Timer:
 	return cd

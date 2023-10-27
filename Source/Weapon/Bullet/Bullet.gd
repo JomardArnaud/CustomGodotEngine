@@ -9,7 +9,6 @@ extends Node2D
 func _ready() -> void:
 	self.movement = MovementManager.new()
 	self.movement.setInertia(0)
-#	z_index = SpriteManager.ZIndexPlayer + SpriteManager.ZOffsetBullet
 	
 func _process(delta: float) -> void:
 	self.movement.update_velocity(delta)
