@@ -53,12 +53,11 @@ var dashInfo = {
 
 func setDash() -> void:
 	var dash = Abilty.new()
-	dash.init()
+	dash.init(dashCD, dashDuration)
 	dash.setInfo(InfoAbility.createDashInfo(movement.getSpeed(), dashPower))
 	dash.setCondition(InfoAbility.playerDashCondition.bind(dash.getTimerCd()))
 	dash.setActionStart(InfoAbility.dashActionStart.bind(movement, dash))
 	dash.setActionEnd(InfoAbility.dashActionEnd.bind(movement, dash))
-	dash.setCd(dashCD).setDuration(dashDuration)
 	add_child(dash)
 	
 ## TPM SLIDER MOUV MANAGER ##

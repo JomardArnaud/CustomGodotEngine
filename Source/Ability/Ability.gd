@@ -10,22 +10,24 @@ extends Node2D
 
 func _process(_delta: float) -> void:
 	if condition.call():
-		print("coucou")
 		actionStart.call()
 
 func _on_duration_timeout() -> void:
 	actionEnd.call()
 
-func init() -> void:
+func init(timeCd : float, timeDuration : float) -> void:
 	var timerCd := Timer.new()
 	timerCd.one_shot = true
+	timerCd.wait_time = timeCd
 	var timerDuration := Timer.new()
 	timerDuration.one_shot = true
+	timerDuration.wait_time = timeDuration
 	cd = timerCd
 	self.add_child(cd)
 	duration = timerDuration
 	self.add_child(duration)
-	cd.connect("timeout", _on_duration_timeout)
+	print(timeCd, cd.wait_time)
+	duration.connect("timeout", _on_duration_timeout)
 	
 ### setter | getter ###
 func setInfo(nInfo: Dictionary) -> Abilty:

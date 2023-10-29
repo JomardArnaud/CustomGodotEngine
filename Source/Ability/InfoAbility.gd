@@ -34,8 +34,8 @@ static func dashActionStart(entityMovement: MovementManager, dashAbility: Abilty
 	dashAbility.getInfo()["baseSpeed"] = entityMovement.getSpeed()
 	entityMovement.setSpeed(dashAbility.getInfo()["baseSpeed"] * dashAbility.getInfo()["power"])
 	dashAbility.getTimerDuration().start()
+	dashAbility.getTimerCd().start()
 	
 static func dashActionEnd(entityMovement: MovementManager, dashAbility: Abilty) -> void:
 	entityMovement.lockDir(false)
 	entityMovement.setSpeed(dashAbility.getInfo()["baseSpeed"])
-	dashAbility.getTimerCd().start()
