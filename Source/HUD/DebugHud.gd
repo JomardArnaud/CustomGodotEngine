@@ -14,10 +14,6 @@ extends Control
 func _ready() -> void:
 	self.visible = OS.is_debug_build()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func init() -> void:
 	valueContainer = $MainContainer.find_child("ValueContainer")
 

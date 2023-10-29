@@ -13,10 +13,6 @@ func _ready() -> void:
 	hp.connect("healthChanged", onHealthChanged)
 	hp.connect("healthDropZero", onHealthDropZero)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 func onHealthChanged(nHP: int) -> void:
 	hpBar.value = nHP
 

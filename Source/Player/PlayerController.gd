@@ -7,7 +7,6 @@ extends CharacterBody2D
 
 @onready var movement : MovementManager
 @onready var weaponScene := preload("res://Source/Weapon/Weapon.tscn")
-@onready var abilityScene := preload("res://Source/Ability/Ability.tscn")
 @onready var weapon : Weapon
 @onready var debugHud = get_node("/root/Main/CanvasDebugHud/RootDebugHud")
  
@@ -53,12 +52,12 @@ var dashInfo = {
 @onready var timerDashing := $DashingTimer
 
 func setDash() -> void:
-	var dash = abilityScene.instantiate()
+	var dash = Abilty.new()
 	dash.init()
 	dash.setInfo(InfoAbility.createDashInfo(movement.getSpeed(), dashPower))
-	dash.setCondition(func(): InfoAbility.playerDashCondition(dash.getCd()))
-	dash.setActionStart(func(): InfoAbility.dashActionStart(movement, dash))
-	dash.setActionEnd(func(): InfoAbility.dashActionEnd(movement, dash))
+	dash.setCondition(InfoAbility.playerDashCondition.bind(dash.getTimerCd()))
+	dash.setActionStart(InfoAbility.dashActionStart.bind(movement, dash))
+	dash.setActionEnd(InfoAbility.dashActionEnd.bind(movement, dash))
 	dash.setCd(dashCD).setDuration(dashDuration)
 	add_child(dash)
 	

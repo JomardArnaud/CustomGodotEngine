@@ -13,7 +13,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	self.movement.update_velocity(delta)
 	self.global_position += self.movement.getVelocity()
-	pass
 
 func posOrigin(nPos: Vector2) -> Bullet:
 	self.global_position = nPos
@@ -37,4 +36,3 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		areaParent.hp.takeDamage(dmg)
 	if !(areaParent is Bullet):
 		self.queue_free()
-	pass

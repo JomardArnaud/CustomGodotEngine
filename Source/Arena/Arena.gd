@@ -20,7 +20,7 @@ func _ready():
 	if self.visible != false:
 		algo(self.polygon.size())
 	
-func _process(delta):
+func _process(_delta):
 	if Engine.is_editor_hint():
 		if Input.is_action_pressed("refreshEditor") && Input.is_key_pressed(KEY_CTRL):
 			# to avoid crash when the Arena is masked on scene
@@ -28,7 +28,9 @@ func _process(delta):
 				algo(self.polygon.size())
 
 # add all collisionShape (Polygon2d) at the border's Arena
-func algo(nbVertexPoly):
+func algo(nbVertexPoly: int) -> void:
+	if nbVertexPoly < 0:
+		return
 	var firstSweetSpot: Vector2
 	
 	var pointsExtBorder = PackedVector2Array()

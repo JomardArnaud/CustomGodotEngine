@@ -8,7 +8,6 @@ extends Node2D
 
 func init() -> void:
 	fireTimer = $fireTimer
-	pass
 	
 func update(entity: Node2D) -> void:
 	var mousePos = get_global_mouse_position()
@@ -23,7 +22,6 @@ func shot(dirWeapon: Vector2) -> void:
 	var tmpBullet = bulletScene.instantiate()
 	tmpNode.add_child(tmpBullet)
 	tmpBullet.posOrigin(self.global_position).dir(dirWeapon).speed(6)
-	pass
 
 func setDistanceEntity(nDistance: float) -> Weapon:
 	distanceEntity = nDistance
@@ -32,7 +30,3 @@ func setDistanceEntity(nDistance: float) -> Weapon:
 func setFireRate(nFireRate: float) -> Weapon:
 	fireTimer.wait_time = nFireRate
 	return self
-#
-#func setTmpNode(TmpNode: Node) -> Weapon:
-#	tmpNode = TmpNode
-#	return self
