@@ -14,7 +14,7 @@ func _ready():
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
 	weapon = weaponScene.instantiate()
-	weapon.init()
+	weapon.init(weapon.shot)
 	weapon.setDistanceEntity(distanceWeapon).setFireRate(0.15)
 	add_child(weapon)
 	## abilities ##
@@ -55,7 +55,7 @@ func setDash() -> void:
 	var dash = Abilty.new()
 	dash.init(dashCD, dashDuration)
 	dash.setInfo(InfoAbility.createDashInfo(movement.getSpeed(), dashPower))
-	dash.setCondition(InfoAbility.playerDashCondition.bind(dash.getTimerCd()))
+	dash.setCondition(InfoAbility.basicTimerCondition.bind("dash", dash.getTimerCd()))
 	dash.setActionStart(InfoAbility.dashActionStart.bind(movement, dash))
 	dash.setActionEnd(InfoAbility.dashActionEnd.bind(movement, dash))
 	add_child(dash)

@@ -18,11 +18,11 @@ func posOrigin(nPos: Vector2) -> Bullet:
 	self.global_position = nPos
 	return self
 
-func dir(nDir: Vector2) -> Bullet:
+func setDir(nDir: Vector2) -> Bullet:
 	self.movement.setDir(nDir)
 	return self
 
-func speed(nSpeed: float) -> Bullet:
+func setSpeed(nSpeed: float) -> Bullet:
 	self.movement.setSpeed(nSpeed)
 	return self
 

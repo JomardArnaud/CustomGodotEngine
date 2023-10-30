@@ -17,8 +17,6 @@ static var dashInfo = {
 static func createDashInfo(baseSpeed : float, power: float) -> Dictionary:
 	var dest = dashInfo.duplicate()
 	dest["baseSpeed"] = baseSpeed
-#	dest["cd"] = cd
-#	dest["duration"] = duration
 	dest["power"] = power
 	return dest
 
@@ -26,8 +24,8 @@ static func createDashInfo(baseSpeed : float, power: float) -> Dictionary:
 
 ## Dash ##
 
-static func playerDashCondition(timerCd: Timer) -> bool:
-	return Input.is_action_pressed("dash") && timerCd.time_left == 0
+static func basicTimerCondition(nameAction: String, timerCd: Timer) -> bool:
+	return Input.is_action_pressed(nameAction) && timerCd.time_left == 0
 
 static func dashActionStart(entityMovement: MovementManager, dashAbility: Abilty) -> void:
 	entityMovement.lockDir(true)

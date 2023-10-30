@@ -26,7 +26,6 @@ func init(timeCd : float, timeDuration : float) -> void:
 	self.add_child(cd)
 	duration = timerDuration
 	self.add_child(duration)
-	print(timeCd, cd.wait_time)
 	duration.connect("timeout", _on_duration_timeout)
 	
 ### setter | getter ###

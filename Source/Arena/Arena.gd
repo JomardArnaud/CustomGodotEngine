@@ -29,7 +29,7 @@ func _process(_delta):
 
 # add all collisionShape (Polygon2d) at the border's Arena
 func algo(nbVertexPoly: int) -> void:
-	if nbVertexPoly < 0:
+	if nbVertexPoly < 1:
 		return
 	var firstSweetSpot: Vector2
 	
