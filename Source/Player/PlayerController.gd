@@ -14,21 +14,21 @@ func _ready():
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
 	weapon = RangedWeaponScene.instantiate()
-	weapon.init(weapon.shot)
+	weapon.init(self, Callable())
 	weapon.setDistanceEntity(distanceWeapon).setFireRate(0.15)
 	add_child(weapon)
 	## abilities ##
 	setDash()
-	tmp_set_slider()
+	tmpSetSlider() # for test value directly on running time 
 	
 func _physics_process(delta):
-	get_dir()
+	setDir()
 	movement.update_velocity(delta)
 	self.set_velocity(movement.getVelocity())
 	self.move_and_slide()
-	weapon.update(self)
+	weapon.update()
 
-func get_dir():
+func setDir():
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
 	self.movement.setDir(Vector2(horizontalDirection, verticalDirection))
@@ -36,13 +36,6 @@ func get_dir():
 ### Ability ###
 
 ## Dash ##
-
-var dashInfo = {
-	baseSpeed = 0,
-	cd = 0,
-	duration = 0,
-	power = 4.5 # the ratio which will be multiple to the player's speed 
-}
 
 @export_category("Abilities")
 @export var dashCD : float
@@ -62,7 +55,7 @@ func setDash() -> void:
 	
 ## TPM SLIDER MOUV MANAGER ##
 
-func tmp_set_slider() -> void:
+func tmpSetSlider() -> void:
 	debugHud.init()
 	debugHud.addDebugValueSlider({
 		minValue = movement.getSpeed() / 10,

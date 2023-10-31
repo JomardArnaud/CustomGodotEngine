@@ -20,14 +20,14 @@ func init() -> void:
 func addDebugValueSlider(sliderValues: Dictionary, valueToConnect: Callable):
 	var nValueSlider := HSlider.new()
 	var nValueLabel := Label.new()
-	nValueSlider.min_value = sliderValues["minValue"]
-	nValueSlider.max_value = sliderValues["maxValue"]
-	nValueSlider.step = sliderValues["step"]
-	nValueSlider.value = sliderValues["value"]
-	nValueLabel.text = str(sliderValues["text"], sliderValues["value"])
+	nValueSlider.min_value = sliderValues.minValue
+	nValueSlider.max_value = sliderValues.maxValue
+	nValueSlider.step = sliderValues.step
+	nValueSlider.value = sliderValues.value
+	nValueLabel.text = str(sliderValues.text, sliderValues.value)
 	nValueSlider.value_changed.connect(valueToConnect)
 	nValueSlider.value_changed.connect(func(value):
-		nValueLabel.text = str(sliderValues["text"], value))
+		nValueLabel.text = str(sliderValues.text, value))
 	valueContainer.add_child(nValueSlider)
 	valueContainer.add_child(nValueLabel)
 

@@ -37,8 +37,8 @@ func algo(nbVertexPoly: int) -> void:
 	var bufferDict = DictStateEdge.duplicate()
 	var stateVertex = DictStateEdge.duplicate()
 	
-	bufferDict["current"] = self.polygon[nbVertexPoly - 1]
-	bufferDict["next"] = self.polygon[0]
+	bufferDict.current = self.polygon[nbVertexPoly - 1]
+	bufferDict.next = self.polygon[0]
 	
 	## on passe en param la normal ext
 	##on projette et pronlonge, par les deux bouts, le segment formé par les deux sommets
@@ -46,8 +46,8 @@ func algo(nbVertexPoly: int) -> void:
 	# on parse un à un tout les sommet du polygon de l'Arena
 	for vertexId in range(0, nbVertexPoly):
 		# d'abord on chope les deux sommets pour avoir le vecteur coté
-		stateVertex["current"] = self.polygon[vertexId]
-		stateVertex["next"] = self.polygon[(vertexId + 1) * int(vertexId + 1 < nbVertexPoly)]
+		stateVertex.current = self.polygon[vertexId]
+		stateVertex.next = self.polygon[(vertexId + 1) * int(vertexId + 1 < nbVertexPoly)]
 		
 		## on passe en param la normal ext
 		## on projette et pronlonge, par les deux bouts, le segment formé par les deux sommets
@@ -55,16 +55,16 @@ func algo(nbVertexPoly: int) -> void:
 		## on trouve le sweetspot avec la collision des deux prolongement	
 		setSweetSpot(stateVertex, bufferDict)
 		if (vertexId == 0):
-			firstSweetSpot = stateVertex["sweetSpot"]
+			firstSweetSpot = stateVertex.sweetSpot
 		#on ajoute les points pour la bordure extérieure
-		if stateVertex["sweetSpot"] == null:
+		if stateVertex.sweetSpot == null:
 			printerr("Bad Arena's polygon, sweetSpot generation failed")
-		pointsExtBorder.append(stateVertex["sweetSpot"])
+		pointsExtBorder.append(stateVertex.sweetSpot)
 #		# on set les buffer
-		bufferDict["current"] = stateVertex["current"]
-		bufferDict["next"] = stateVertex["next"]
-		bufferDict["edgeProjected"] = stateVertex["edgeProjected"]
-		bufferDict["edgeProlonged"] = stateVertex["edgeProlonged"]
+		bufferDict.current = stateVertex.current
+		bufferDict.next = stateVertex.next
+		bufferDict.edgeProjected = stateVertex.edgeProjected
+		bufferDict.edgeProlonged = stateVertex.edgeProlonged
 	# just adding all the polygon's vertex to finish the first block
 	for vertexId in range(nbVertexPoly - 1, -1, -1):
 		pointsExtBorder.append(self.polygon[vertexId])
@@ -74,34 +74,34 @@ func algo(nbVertexPoly: int) -> void:
 	blockBorder.set_poly(pointsExtBorder)
 	self.add_child(blockBorder)
 	var blockDoor = Block2D.new()
-	blockDoor.set_poly([firstSweetSpot, stateVertex["next"], stateVertex["current"], stateVertex["sweetSpot"]])
+	blockDoor.set_poly([firstSweetSpot, stateVertex.next, stateVertex.current, stateVertex.sweetSpot])
 	self.add_child(blockDoor)
 
 func getNormalExt(state: Dictionary) -> Vector2:
-	state["dirEdge"] = Vector2(state["next"].x - state["current"].x,state["next"].y - state["current"].y).normalized()
+	state.dirEdge = Vector2(state.next.x - state.current.x,state.next.y - state.current.y).normalized()
 		
 	# ensuite chopé la normale du vecteur coté dans les deux sens (pour check où est l'exterieur du polygon) 
-	var normal1 = Vector2(state["dirEdge"].y, -state["dirEdge"].x)
-	var normal2 = Vector2(-state["dirEdge"].y, state["dirEdge"].x)
+	var normal1 = Vector2(state.dirEdge.y, -state.dirEdge.x)
+	var normal2 = Vector2(-state.dirEdge.y, state.dirEdge.x)
 
 	# là on chercher la normale qui va vers l'exterrieur du polygon
 		#on prend le milieu pour éviter que les deux normales collider avec le polygone
-	var middleEdge = (state["current"] + state["next"]) / 2
+	var middleEdge = (state.current + state.next) / 2
 	var normal1Collision = Geometry2D.intersect_polyline_with_polygon([middleEdge, middleEdge + normal1], self.polygon)
 	return(normal2 if normal1Collision.size() > 0 else normal1)
 
 func prolongEdge(state: Dictionary, normalExt: Vector2) -> void:
-	state["edgeProjected"] = Vector4(state["current"].x + normalExt.x * thicknessBorder, state["current"].y + normalExt.y * thicknessBorder,
-		state["next"].x + normalExt.x * thicknessBorder, state["next"].y + normalExt.y * thicknessBorder)
+	state.edgeProjected = Vector4(state.current.x + normalExt.x * thicknessBorder, state.current.y + normalExt.y * thicknessBorder,
+		state.next.x + normalExt.x * thicknessBorder, state.next.y + normalExt.y * thicknessBorder)
 	# on prolonge le coté par les deux bouts direct pour que l'autre bout servent pour le buffer
-	state["edgeProlonged"] = Vector4(state["edgeProjected"].x - state["dirEdge"].x * 100, state["edgeProjected"].y - state["dirEdge"].y * 100,
-		state["edgeProjected"].z + state["dirEdge"].x * 100, state["edgeProjected"].w + state["dirEdge"].y * 100)
+	state.edgeProlonged = Vector4(state.edgeProjected.x - state.dirEdge.x * 100, state.edgeProjected.y - state.dirEdge.y * 100,
+		state.edgeProjected.z + state.dirEdge.x * 100, state.edgeProjected.w + state.dirEdge.y * 100)
 
 func setSweetSpot(currentState: Dictionary, bufferState: Dictionary) -> void:
-	currentState["sweetSpot"] = Geometry2D.segment_intersects_segment(Vector2(currentState["edgeProlonged"].x, currentState["edgeProlonged"].y),
-		Vector2(currentState["edgeProlonged"].z, currentState["edgeProlonged"].w),
-		Vector2(bufferState["edgeProlonged"].x, bufferState["edgeProlonged"].y),
-		Vector2(bufferState["edgeProlonged"].z, bufferState["edgeProlonged"].w))
+	currentState.sweetSpot = Geometry2D.segment_intersects_segment(Vector2(currentState.edgeProlonged.x, currentState.edgeProlonged.y),
+		Vector2(currentState.edgeProlonged.z, currentState.edgeProlonged.w),
+		Vector2(bufferState.edgeProlonged.x, bufferState.edgeProlonged.y),
+		Vector2(bufferState.edgeProlonged.z, bufferState.edgeProlonged.w))
 
 #func checkBorderVertexHimselfCollission(extBorder: PackedVector2Array) -> void:
 #	var maxIdPointBorder = extBorder.size() - 1
