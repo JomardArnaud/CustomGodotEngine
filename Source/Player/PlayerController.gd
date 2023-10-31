@@ -6,14 +6,14 @@ extends CharacterBody2D
 @export var distanceWeapon = 40
 
 @onready var movement : MovementManager
-@onready var weaponScene := preload("res://Source/Weapon/Weapon.tscn")
-@onready var weapon : Weapon
+@onready var RangedWeaponScene := load("res://Source/Weapon/Ranged/RangedWeapon.tscn")
+@onready var weapon : RangedWeapon
 @onready var debugHud = get_node("/root/Main/CanvasDebugHud/RootDebugHud")
  
 func _ready():
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
-	weapon = weaponScene.instantiate()
+	weapon = RangedWeaponScene.instantiate()
 	weapon.init(weapon.shot)
 	weapon.setDistanceEntity(distanceWeapon).setFireRate(0.15)
 	add_child(weapon)

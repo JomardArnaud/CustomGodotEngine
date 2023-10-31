@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1axdf5vdp07x"]
 
-[ext_resource type="Script" path="res://Source/Weapon/Bullet/Bullet.gd" id="1_n7wqe"]
+[ext_resource type="Script" path="res://Source/Weapon/Ranged/Bullet/Bullet.gd" id="1_mqg5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl5dl"]
 size = Vector2(40, 40)
 
 [node name="Bullet" type="Node2D"]
 scale = Vector2(0.415, 0.415)
-script = ExtResource("1_n7wqe")
+script = ExtResource("1_mqg5t")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
