@@ -18,7 +18,6 @@ func update() -> void:
 	dirWeapon = (mousePos - holder.get_global_position()).normalized()
 	self.set_position(dirWeapon * distanceHolder)
 	if Input.is_action_pressed("attack") && timerAttack.time_left == 0:
-		#need to change that be attack for weapon handle both ranged and close with composition
 		attack.call()
 		timerAttack.start()
 
@@ -34,6 +33,5 @@ func getDir() -> Vector2:
 	return dirWeapon
 	
 func setAttack(nAttack: Callable) -> Weapon:
-	print("nAttack = ", nAttack)
 	attack = nAttack
 	return self

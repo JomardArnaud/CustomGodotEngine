@@ -1,4 +1,4 @@
-class_name Abilty
+class_name Ability
 extends Node2D
 
 @onready var info : Dictionary : get = getInfo
@@ -15,41 +15,42 @@ func _process(_delta: float) -> void:
 func _on_duration_timeout() -> void:
 	actionEnd.call()
 
-func init(timeCd : float, timeDuration : float) -> void:
+func init(timeCd : float, timeDuration : float = 0) -> void:
 	var timerCd := Timer.new()
 	timerCd.one_shot = true
 	timerCd.wait_time = timeCd
-	var timerDuration := Timer.new()
-	timerDuration.one_shot = true
-	timerDuration.wait_time = timeDuration
+	if timeDuration != 0:
+		var timerDuration := Timer.new()
+		timerDuration.one_shot = true
+		timerDuration.wait_time = timeDuration
+		duration = timerDuration
+		self.add_child(duration)
+		duration.connect("timeout", _on_duration_timeout)
 	cd = timerCd
 	self.add_child(cd)
-	duration = timerDuration
-	self.add_child(duration)
-	duration.connect("timeout", _on_duration_timeout)
 	
 ### setter | getter ###
-func setInfo(nInfo: Dictionary) -> Abilty:
+func setInfo(nInfo: Dictionary) -> Ability:
 	info = nInfo
 	return self
 
-func setCondition(nCondition: Callable) -> Abilty:
+func setCondition(nCondition: Callable) -> Ability:
 	condition = nCondition
 	return self
 
-func setActionStart(nAction: Callable) -> Abilty:
+func setActionStart(nAction: Callable) -> Ability:
 	actionStart = nAction
 	return self
 	
-func setActionEnd(nAction: Callable) -> Abilty:
+func setActionEnd(nAction: Callable) -> Ability:
 	actionEnd = nAction
 	return self
 
-func setCd(nCd: float) -> Abilty:
+func setCd(nCd: float) -> Ability:
 	cd.wait_time = nCd
 	return self
 
-func setDuration(nDuration: float) -> Abilty:
+func setDuration(nDuration: float) -> Ability:
 	duration.wait_time = nDuration
 	return self
 

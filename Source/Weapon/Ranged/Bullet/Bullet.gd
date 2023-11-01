@@ -9,6 +9,7 @@ extends Node2D
 func _ready() -> void:
 	self.movement = MovementManager.new()
 	self.movement.setInertia(0)
+	add_to_group("bullets")
 	
 func _process(delta: float) -> void:
 	self.movement.update_velocity(delta)
@@ -36,3 +37,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		areaParent.hp.takeDamage(dmg)
 	if !(areaParent is Bullet):
 		self.queue_free()
+
+func destroy() -> void:
+	self.queue_free()

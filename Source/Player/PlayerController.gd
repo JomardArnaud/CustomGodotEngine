@@ -18,7 +18,7 @@ func _ready():
 	weapon.init(self)
 	add_child(weapon)
 	## abilities ##
-	setDash()
+	addAbilities()
 	tmpSetSlider() # for test value directly on running time 
 	
 func _physics_process(delta):
@@ -37,6 +37,20 @@ func setTmpNode(nTmp: Node2D) -> void:
 	tmpNode = nTmp
 ### Ability ###
 
+func addAbilities() -> void:
+	var clean = Ability.new()
+	clean.init(0.5)
+	clean.setCondition(InfoAbility.basicTimerCondition.bind("cleanBullet", clean.getTimerCd()))
+	clean.setActionStart(cleanBullet.bind(clean))
+	add_child(clean)
+	setDash()
+
+## Player ##
+
+func cleanBullet(clean: Ability) -> void:
+	get_tree().call_group("bullets", "destroy")
+	clean.getTimerCd().start()
+
 ## Dash ##
 
 @export_category("Abilities")
@@ -47,7 +61,7 @@ func setTmpNode(nTmp: Node2D) -> void:
 @onready var timerDashing := $DashingTimer
 
 func setDash() -> void:
-	var dash = Abilty.new()
+	var dash = Ability.new()
 	dash.init(dashCD, dashDuration)
 	dash.setInfo(InfoAbility.createDashInfo(movement.getSpeed(), dashPower))
 	dash.setCondition(InfoAbility.basicTimerCondition.bind("dash", dash.getTimerCd()))
@@ -76,8 +90,6 @@ func tmpSetSlider() -> void:
 	}, func(nInertia):
 		self.movement.setInertia(nInertia))
 
-
 func _on_main_ready() -> void:
 	tmpNode = get_tree().get_root().get_node("Main/TmpNode")
-	print("tmp = ", tmpNode)
 	weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon, tmpNode))
