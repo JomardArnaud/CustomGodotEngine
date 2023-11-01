@@ -21,7 +21,7 @@ polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 3
 polygon = PackedVector2Array(365, 301, 291, 301, 365, 322, 401.316, 328.986, 290.67, 381.919, 389, 450, 430, 349, 469, 379, 468.899, 300.938)
 metadata/_edit_group_ = true
 
-[node name="PlayerNode" parent="." instance=ExtResource("1_50kq8")]
+[node name="Player" parent="." instance=ExtResource("1_50kq8")]
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
 position = Vector2(46, 0)
@@ -30,11 +30,13 @@ scale = Vector2(0.725909, 1.29248)
 [node name="TmpNode" type="Node2D" parent="."]
 
 [node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
-focusEntity = NodePath("../PlayerNode")
+focusEntity = NodePath("../Player")
 
 [node name="CanvasDebugHud" type="CanvasLayer" parent="."]
 
 [node name="RootDebugHud" parent="CanvasDebugHud" instance=ExtResource("2_tgfjs")]
+
+[connection signal="ready" from="." to="Player" method="_on_main_ready"]
 
 [editable path="Arena"]
 [editable path="CanvasDebugHud/RootDebugHud"]

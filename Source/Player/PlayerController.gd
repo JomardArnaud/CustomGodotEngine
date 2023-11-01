@@ -9,13 +9,13 @@ extends CharacterBody2D
 @onready var RangedWeaponScene := load("res://Source/Weapon/Ranged/RangedWeapon.tscn")
 @onready var weapon : RangedWeapon
 @onready var debugHud = get_node("/root/Main/CanvasDebugHud/RootDebugHud")
- 
+@onready var tmpNode : Node2D : set = setTmpNode
+
 func _ready():
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
 	weapon = RangedWeaponScene.instantiate()
-	weapon.init(self, Callable())
-	weapon.setDistanceEntity(distanceWeapon).setFireRate(0.15)
+	weapon.init(self)
 	add_child(weapon)
 	## abilities ##
 	setDash()
@@ -28,11 +28,13 @@ func _physics_process(delta):
 	self.move_and_slide()
 	weapon.update()
 
-func setDir():
+func setDir() -> void:
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
 	self.movement.setDir(Vector2(horizontalDirection, verticalDirection))
 
+func setTmpNode(nTmp: Node2D) -> void:
+	tmpNode = nTmp
 ### Ability ###
 
 ## Dash ##
@@ -73,3 +75,9 @@ func tmpSetSlider() -> void:
 		text = "Inertia = "
 	}, func(nInertia):
 		self.movement.setInertia(nInertia))
+
+
+func _on_main_ready() -> void:
+	tmpNode = get_tree().get_root().get_node("Main/TmpNode")
+	print("tmp = ", tmpNode)
+	weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon, tmpNode))

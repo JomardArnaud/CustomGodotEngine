@@ -1,13 +1,12 @@
 class_name RangedWeapon
 extends Weapon
 
+@onready var tmpNode : Node2D : set = setTmpNode, get = getTmpNode
 @onready var bulletScene := load("res://Source/Weapon/Ranged/Bullet/Bullet.tscn")
 @onready var speed : float
 
-func init(nHolder: Node2D, nAttack: Callable = Callable())-> void: #, nAttack: Callable
-	var tmpNode := get_tree().get_root().get_node("TmpNode")
-	super(nHolder, shot.bind(self, tmpNode)) #must change tmpNode at one point ####
-	
+func init(nHolder: Node2D)-> void:
+	super(nHolder)
 
 func update() -> void:
 	super()
@@ -21,15 +20,21 @@ func _physics_process(delta: float) -> void:
 
 static func shot(weapon: RangedWeapon, tmpNode: Node2D) -> void:
 	var tmpBullet = weapon.getCurrentBullet().instantiate()
-	tmpNode.add_child(tmpBullet)
-#	MainScene.tmpNode.add_child(tmpBullet)
-	tmpBullet.posOrigin(weapon.global_position).setDir(weapon.getDir()).setSpeed(4)
+	weapon.getTmpNode().add_child(tmpBullet)
+	tmpBullet.posOrigin(weapon.get_global_position()).setDir(weapon.getDir()).setSpeed(4)
 
 func getSpeed() -> float:
 	return speed
 	
 func setSpeed(nSpeed: float) -> RangedWeapon:
 	speed = nSpeed
+	return self
+
+func getTmpNode() -> Node2D:
+	return tmpNode
+
+func setTmpNode(nTmp: Node2D) -> RangedWeapon:
+	tmpNode = nTmp	
 	return self
 
 func getCurrentBullet() -> Resource:
