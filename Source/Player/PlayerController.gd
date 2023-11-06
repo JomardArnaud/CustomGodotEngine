@@ -8,15 +8,17 @@ extends CharacterBody2D
 @onready var movement : MovementManager
 @onready var RangedWeaponScene := load("res://Source/Weapon/Ranged/RangedWeapon.tscn")
 @onready var weapon : RangedWeapon
+# @onready var meleeWeapon : MeleeWeapon
 @onready var debugHud = get_node("/root/Main/CanvasDebugHud/RootDebugHud")
 @onready var tmpNode : Node2D : set = setTmpNode
 
 func _ready():
 	self.movement = MovementManager.new()
 	self.movement.setSpeed(speed).setInertia(inertia)
-	weapon = RangedWeaponScene.instantiate()
-	weapon.init(self)
-	add_child(weapon)
+	# weapon = RangedWeaponScene.instantiate()
+	# weapon.init(self)
+	weapon = RangedWeapon.create(self, RangedWeaponScene)
+
 	## abilities ##
 	addAbilities()
 	tmpSetSlider() # for test value directly on running time 
