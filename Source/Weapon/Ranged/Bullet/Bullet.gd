@@ -29,14 +29,14 @@ func setSpeed(nSpeed: float) -> Bullet:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !(body is Weapon || body is PlayerController):
-		self.queue_free()
+		destroy()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
 		areaParent.hp.takeDamage(dmg)
 	if !(areaParent is Bullet):
-		self.queue_free()
+		destroy()
 
 func destroy() -> void:
 	self.queue_free()

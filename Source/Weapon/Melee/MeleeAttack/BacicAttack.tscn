@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://khkt576to7gf"]
+
+[ext_resource type="PackedScene" uid="uid://morkbfl1i4w1" path="res://Source/Weapon/Melee/MeleeAttack/BaseAttack.tscn" id="1_gdf57"]
+
+[node name="BacicAttack" type="Node2D"]
+
+[node name="BaseAttack" parent="." instance=ExtResource("1_gdf57")]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(0, 2, -201, -163, -90, -247, 51, -248, 191, -194)
