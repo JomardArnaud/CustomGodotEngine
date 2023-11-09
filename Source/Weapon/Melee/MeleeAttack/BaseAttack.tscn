@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Source/Weapon/Melee/MeleeAttack/BaseAttack.gd" id="1_xg7by"]
 
 [node name="BaseAttack" type="Polygon2D"]
+color = Color(1, 0.172549, 0.0627451, 1)
+polygon = PackedVector2Array(1, -3, 71, -137, 177, -81, 188, 13, 141, 108, 71, 119)
 script = ExtResource("1_xg7by")
 
 [node name="Duration" type="Timer" parent="."]

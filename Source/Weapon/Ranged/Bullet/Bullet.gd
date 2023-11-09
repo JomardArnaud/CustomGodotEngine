@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	self.movement.update_velocity(delta)
 	self.global_position += self.movement.getVelocity()
 
-func posOrigin(nPos: Vector2) -> Bullet:
+func setPosOrigin(nPos: Vector2) -> Bullet:
 	self.global_position = nPos
 	return self
 

@@ -13,6 +13,7 @@ extends Polygon2D
 func _ready():
 	set_poly(self.polygon)
 	timerDurationActif.wait_time = durationActif
+	timerDurationActif.start()
 
 func set_poly(poly: PackedVector2Array)-> void:
 	var body = Area2D.new()
@@ -32,6 +33,10 @@ func getDurationActif() -> Timer:
 func getHitbox() -> Area2D:
 	return hitbox
 
+func setPosOrigin(nPos: Vector2) -> BaseAttack:
+	global_position = nPos
+	return self
+
 func _on_duration_timeout() -> void:
 	destroy()
 
@@ -43,4 +48,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		self.queue_free()
 
 func destroy() -> void:
+	print("bye by")
 	self.queue_free()
