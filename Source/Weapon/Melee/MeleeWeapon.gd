@@ -16,8 +16,7 @@ static func create(nHolder: Node2D, nWeaponScene: Resource) -> MeleeWeapon:
 	nHolder.add_child(meleeWeapon)
 	return meleeWeapon
 
-static func stab(weapon: MeleeWeapon) -> void:
-	print("stab")
+static func hit(weapon: MeleeWeapon) -> void:
 	var tmpAttack = weapon.getCurrentAttack().instantiate()
 	weapon.getHolder().add_child(tmpAttack)
 	tmpAttack.setPosOrigin(weapon.getPos()).set_rotation(weapon.get_rotation())

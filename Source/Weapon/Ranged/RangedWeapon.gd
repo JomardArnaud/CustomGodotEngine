@@ -4,7 +4,7 @@ extends Weapon
 const RAY_LENGTH = 10000
 
 @onready var tmpNode : Node2D : set = setTmpNode, get = getTmpNode
-@onready var bulletScene := load("res://Source/Weapon/Ranged/Bullet/Bullet.tscn")
+@onready var bulletScene := load("res://Source/Weapon/Ranged/Projectil/Projectil.tscn")
 @onready var speed : float
 
 func init(nHolder: Node2D)-> void:

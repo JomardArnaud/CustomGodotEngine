@@ -96,4 +96,4 @@ func tmpSetSlider() -> void:
 func _on_main_ready() -> void:
 	tmpNode = get_tree().get_root().get_node("Main/TmpNode")
 	# weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon))
-	meleeWeapon.setDistanceHolder(distanceWeapon).setAttack(MeleeWeapon.stab.bind(meleeWeapon))
+	meleeWeapon.setDistanceHolder(distanceWeapon).setAttack(MeleeWeapon.hit.bind(meleeWeapon))

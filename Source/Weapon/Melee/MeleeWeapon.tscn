@@ -4,14 +4,3 @@
 
 [node name="MeleeWeapon" type="Node2D"]
 script = ExtResource("1_5sau6")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 232.0
-offset_bottom = 20.0
-grow_vertical = 2
-scale = Vector2(1.00214, 1)
-color = Color(0.627451, 0, 0.52549, 1)

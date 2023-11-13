@@ -3,9 +3,9 @@ extends Polygon2D
 
 # It will be set directly on editor not with the code (Cause of placing the polygon)
 
-@export var dmg := 1.0 : get = getDmg
+@export var dmg := 15.0 : get = getDmg
 # Duration of the attack will have a attack hitbox
-@export var durationActif := 2.5
+@export var durationActif := 0.5
 
 @onready var hitbox : Area2D
 @onready var timerDurationActif : Timer = $Duration
@@ -43,9 +43,10 @@ func _on_duration_timeout() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
+		print("???")
 		areaParent.hp.takeDamage(dmg)
-	if !(areaParent is Bullet):
-		self.queue_free()
+	# if !(areaParent is BaseAttack):
+	# 	self.queue_free()
 
 func destroy() -> void:
 	print("bye by")
