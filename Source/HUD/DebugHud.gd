@@ -30,6 +30,3 @@ func addDebugValueSlider(sliderValues: Dictionary, valueToConnect: Callable):
 		nValueLabel.text = str(sliderValues.text, value))
 	valueContainer.add_child(nValueSlider)
 	valueContainer.add_child(nValueLabel)
-
-func _on_check_button_pressed() -> void:
-	valueContainer.visible = !valueContainer.visible

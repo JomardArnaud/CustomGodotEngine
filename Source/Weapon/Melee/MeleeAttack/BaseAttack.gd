@@ -43,11 +43,7 @@ func _on_duration_timeout() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
-		print("???")
 		areaParent.hp.takeDamage(dmg)
-	# if !(areaParent is BaseAttack):
-	# 	self.queue_free()
 
 func destroy() -> void:
-	print("bye by")
 	self.queue_free()

@@ -26,11 +26,3 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
-
-[node name="Footer" type="VBoxContainer" parent="MainContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="CheckButton" type="CheckButton" parent="MainContainer/VBoxContainer/Footer"]
-layout_mode = 2
-
-[connection signal="pressed" from="MainContainer/VBoxContainer/Footer/CheckButton" to="." method="_on_check_button_pressed"]
