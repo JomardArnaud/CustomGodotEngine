@@ -6,12 +6,8 @@ const RAY_LENGTH = 10000
 @onready var tmpNode : Node2D : set = setTmpNode, get = getTmpNode
 @onready var bulletScene := load("res://Source/Weapon/Ranged/Projectil/Projectil.tscn")
 @onready var speed : float
+@onready var dmgManager : Damage
 
-func init(nHolder: Node2D)-> void:
-	super(nHolder)
-
-func update() -> void:
-	super()
 
 # func _physics_process(delta: float) -> void:
 # 	var space_state = get_world_2d().direct_space_state
@@ -22,6 +18,12 @@ func update() -> void:
 # 	if result:
 # 		CustomUtils.addDebugLine(get_tree().get_root().get_child(0), Vector4(global_position.x, global_position.y, 
 # 		result.position.x, result.position.y), Color(200, 75, 50), 1)
+
+func init(nHolder: Node2D)-> void:
+	super(nHolder)
+
+func update() -> void:
+	super()
 
 static func create(nHolder: Node2D, nWeaponScene: Resource) -> RangedWeapon:
 	var nRangedWeapon = nWeaponScene.instantiate()
@@ -47,7 +49,6 @@ func getTmpNode() -> Node2D:
 func setTmpNode(nTmp: Node2D) -> RangedWeapon:
 	tmpNode = nTmp	
 	return self
-
 
 # Temporary, need to add a bullet gestion system
 func getCurrentBullet() -> Resource:

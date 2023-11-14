@@ -8,10 +8,10 @@ var velocity : Vector2 : set = setVelocity, get = getVelocity
 var dirLock := false
 
 func reset_velocity() -> void:
-	self.velocity = Vector2(0, 0)
+	velocity = Vector2(0, 0)
 
 func update_velocity(delta: float):
-	self.velocity = lerp(self.dir * self.speed, self.velocity, pow(self.inertia / 10, delta));
+	velocity = lerp(dir * speed, velocity, pow(inertia / 10, delta));
 
 ### all getter | setter ###
 func setInertia(nInertia: float) -> MovementManager:

@@ -7,24 +7,24 @@ extends Node2D
 @onready var dmg : int = 5
 
 func _ready() -> void:
-	self.movement = MovementManager.new()
-	self.movement.setInertia(0)
+	movement = MovementManager.new()
+	movement.setInertia(0)
 	add_to_group("bullets")
 	
 func _process(delta: float) -> void:
-	self.movement.update_velocity(delta)
-	self.global_position += self.movement.getVelocity()
+	movement.update_velocity(delta)
+	global_position += movement.getVelocity()
 
 func setPosOrigin(nPos: Vector2) -> Bullet:
-	self.global_position = nPos
+	global_position = nPos
 	return self
 
 func setDir(nDir: Vector2) -> Bullet:
-	self.movement.setDir(nDir)
+	movement.setDir(nDir)
 	return self
 
 func setSpeed(nSpeed: float) -> Bullet:
-	self.movement.setSpeed(nSpeed)
+	movement.setSpeed(nSpeed)
 	return self
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -34,9 +34,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
-		areaParent.hp.takeDamage(dmg)
+		Damage.addDmg(areaParent, 5)
 	if !(areaParent is Bullet):
 		destroy()
 
 func destroy() -> void:
-	self.queue_free()
+	queue_free()

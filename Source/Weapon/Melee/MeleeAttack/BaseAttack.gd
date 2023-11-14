@@ -11,7 +11,7 @@ extends Polygon2D
 @onready var timerDurationActif : Timer = $Duration
 
 func _ready():
-	set_poly(self.polygon)
+	set_poly(polygon)
 	timerDurationActif.wait_time = durationActif
 	timerDurationActif.start()
 
@@ -20,7 +20,7 @@ func set_poly(poly: PackedVector2Array)-> void:
 	var collision_shape = CollisionPolygon2D.new()
 	collision_shape.polygon = poly
 	body.add_child(collision_shape)
-	self.add_child(body)
+	add_child(body)
 	hitbox = body
 	hitbox.area_entered.connect(_on_area_2d_area_entered)
 
@@ -43,7 +43,7 @@ func _on_duration_timeout() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
-		areaParent.hp.takeDamage(dmg)
+		Damage.addDmg(areaParent, dmg)
 
 func destroy() -> void:
-	self.queue_free()
+	queue_free()

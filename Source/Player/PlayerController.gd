@@ -1,7 +1,7 @@
 class_name PlayerController
 extends CharacterBody2D
 
-@export var speed = 550
+@export var speedPlayer = 550
 @export var inertia = .35
 @export var distanceWeapon = 40
 
@@ -14,8 +14,8 @@ extends CharacterBody2D
 @onready var tmpNode : Node2D : set = setTmpNode
 
 func _ready():
-	self.movement = MovementManager.new()
-	self.movement.setSpeed(speed).setInertia(inertia)
+	movement = MovementManager.new()
+	movement.setSpeed(speedPlayer).setInertia(inertia)
 	# weapon = RangedWeapon.create(self, RangedWeaponScene)
 	meleeWeapon = MeleeWeapon.create(self, MeleeWeaponScene)
 	## abilities ##
@@ -25,15 +25,15 @@ func _ready():
 func _physics_process(delta):
 	setDir()
 	movement.update_velocity(delta)
-	self.set_velocity(movement.getVelocity())
-	self.move_and_slide()
+	set_velocity(movement.getVelocity())
+	move_and_slide()
 	meleeWeapon.update()
 	# weapon.update()
 
 func setDir() -> void:
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
-	self.movement.setDir(Vector2(horizontalDirection, verticalDirection))
+	movement.setDir(Vector2(horizontalDirection, verticalDirection))
 
 func setTmpNode(nTmp: Node2D) -> void:
 	tmpNode = nTmp
@@ -83,7 +83,7 @@ func tmpSetSlider() -> void:
 		value = movement.getSpeed(),
 		text = "Speed = "
 	}, func(nSpeed):
-		self.movement.setSpeed(nSpeed))
+		movement.setSpeed(nSpeed))
 	debugHud.addDebugValueSlider({
 		minValue = 0,
 		maxValue =  1,
@@ -91,7 +91,7 @@ func tmpSetSlider() -> void:
 		value = inertia,
 		text = "Inertia = "
 	}, func(nInertia):
-		self.movement.setInertia(nInertia))
+		movement.setInertia(nInertia))
 
 func _on_main_ready() -> void:
 	tmpNode = get_tree().get_root().get_node("Main/TmpNode")

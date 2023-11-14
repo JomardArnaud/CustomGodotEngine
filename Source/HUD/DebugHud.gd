@@ -12,7 +12,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.visible = OS.is_debug_build()
+	visible = OS.is_debug_build()
 
 func init() -> void:
 	valueContainer = $MainContainer.find_child("ValueContainer")

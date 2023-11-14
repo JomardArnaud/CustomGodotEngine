@@ -16,7 +16,7 @@ func init(nHolder: Node2D) -> void:
 func update() -> void:
 	var mousePos = get_global_mouse_position()
 	dirWeapon = (mousePos - holder.get_global_position()).normalized()
-	self.set_position(dirWeapon * distanceHolder)
+	set_position(dirWeapon * distanceHolder)
 	if Input.is_action_pressed("meleeAttack") && timerAttack.time_left == 0:
 		attack.call()
 		timerAttack.start()

@@ -17,15 +17,15 @@ func _ready():
 	if !Engine.is_editor_hint():
 		pass
 	# to avoid crash when the Arena is masked on scene
-	if self.visible != false:
-		algo(self.polygon.size())
+	if visible != false:
+		algo(polygon.size())
 	
 func _process(_delta):
 	if Engine.is_editor_hint():
 		if Input.is_action_pressed("refreshEditor") && Input.is_key_pressed(KEY_CTRL):
 			# to avoid crash when the Arena is masked on scene
-			if self.visible != false:
-				algo(self.polygon.size())
+			if visible != false:
+				algo(polygon.size())
 
 # add all collisionShape (Polygon2d) at the border's Arena
 func algo(nbVertexPoly: int) -> void:
@@ -37,8 +37,8 @@ func algo(nbVertexPoly: int) -> void:
 	var bufferDict = DictStateEdge.duplicate()
 	var stateVertex = DictStateEdge.duplicate()
 	
-	bufferDict.current = self.polygon[nbVertexPoly - 1]
-	bufferDict.next = self.polygon[0]
+	bufferDict.current = polygon[nbVertexPoly - 1]
+	bufferDict.next = polygon[0]
 	
 	## on passe en param la normal ext
 	##on projette et pronlonge, par les deux bouts, le segment formé par les deux sommets
@@ -46,8 +46,8 @@ func algo(nbVertexPoly: int) -> void:
 	# on parse un à un tout les sommet du polygon de l'Arena
 	for vertexId in range(0, nbVertexPoly):
 		# d'abord on chope les deux sommets pour avoir le vecteur coté
-		stateVertex.current = self.polygon[vertexId]
-		stateVertex.next = self.polygon[(vertexId + 1) * int(vertexId + 1 < nbVertexPoly)]
+		stateVertex.current = polygon[vertexId]
+		stateVertex.next = polygon[(vertexId + 1) * int(vertexId + 1 < nbVertexPoly)]
 		
 		## on passe en param la normal ext
 		## on projette et pronlonge, par les deux bouts, le segment formé par les deux sommets
@@ -67,15 +67,15 @@ func algo(nbVertexPoly: int) -> void:
 		bufferDict.edgeProlonged = stateVertex.edgeProlonged
 	# just adding all the polygon's vertex to finish the first block
 	for vertexId in range(nbVertexPoly - 1, -1, -1):
-		pointsExtBorder.append(self.polygon[vertexId])
+		pointsExtBorder.append(polygon[vertexId])
 	# check if the border's pollygon collide on himself
 #	checkBorderVertexHimselfCollission(pointsExtBorder)
 	var blockBorder = Block2D.new()
 	blockBorder.set_poly(pointsExtBorder)
-	self.add_child(blockBorder)
+	add_child(blockBorder)
 	var blockDoor = Block2D.new()
 	blockDoor.set_poly([firstSweetSpot, stateVertex.next, stateVertex.current, stateVertex.sweetSpot])
-	self.add_child(blockDoor)
+	add_child(blockDoor)
 
 func getNormalExt(state: Dictionary) -> Vector2:
 	state.dirEdge = Vector2(state.next.x - state.current.x,state.next.y - state.current.y).normalized()
@@ -87,7 +87,7 @@ func getNormalExt(state: Dictionary) -> Vector2:
 	# là on chercher la normale qui va vers l'exterrieur du polygon
 		#on prend le milieu pour éviter que les deux normales collider avec le polygone
 	var middleEdge = (state.current + state.next) / 2
-	var normal1Collision = Geometry2D.intersect_polyline_with_polygon([middleEdge, middleEdge + normal1], self.polygon)
+	var normal1Collision = Geometry2D.intersect_polyline_with_polygon([middleEdge, middleEdge + normal1], polygon)
 	return(normal2 if normal1Collision.size() > 0 else normal1)
 
 func prolongEdge(state: Dictionary, normalExt: Vector2) -> void:

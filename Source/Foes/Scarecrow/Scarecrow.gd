@@ -20,4 +20,4 @@ func onHealthDropZero() -> void:
 	hp.setHealth(maxHP)
 
 func getHP() -> HealthManager:
-	return self.hp
+	return hp

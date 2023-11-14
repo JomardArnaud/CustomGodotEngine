@@ -24,10 +24,10 @@ func init(timeCd : float, timeDuration : float = 0) -> void:
 		timerDuration.one_shot = true
 		timerDuration.wait_time = timeDuration
 		duration = timerDuration
-		self.add_child(duration)
+		add_child(duration)
 		duration.connect("timeout", _on_duration_timeout)
 	cd = timerCd
-	self.add_child(cd)
+	add_child(cd)
 	
 ### setter | getter ###
 func setInfo(nInfo: Dictionary) -> Ability:
