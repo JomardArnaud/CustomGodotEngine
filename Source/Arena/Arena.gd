@@ -70,11 +70,13 @@ func algo(nbVertexPoly: int) -> void:
 		pointsExtBorder.append(polygon[vertexId])
 	# check if the border's pollygon collide on himself
 #	checkBorderVertexHimselfCollission(pointsExtBorder)
+	print("Arena block")
 	var blockBorder = Block2D.new()
-	blockBorder.set_poly(pointsExtBorder)
+	blockBorder.setAreaFromPolygon(pointsExtBorder)
 	add_child(blockBorder)
+	print("Arena door")
 	var blockDoor = Block2D.new()
-	blockDoor.set_poly([firstSweetSpot, stateVertex.next, stateVertex.current, stateVertex.sweetSpot])
+	blockDoor.setAreaFromPolygon([firstSweetSpot, stateVertex.next, stateVertex.current, stateVertex.sweetSpot])
 	add_child(blockDoor)
 
 func getNormalExt(state: Dictionary) -> Vector2:

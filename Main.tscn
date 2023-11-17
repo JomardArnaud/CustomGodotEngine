@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://rytr7i1c2u5b" path="res://Source/Foes/Scarecrow/Scarecrow.tscn" id="7_kjfel"]
 
 [node name="Main" type="Node2D"]
-position = Vector2(86, -48)
+position = Vector2(-876, -640)
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
 
@@ -32,11 +32,10 @@ scale = Vector2(0.725909, 1.29248)
 [node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
 focusEntity = NodePath("../Player")
 
-[node name="CanvasDebugHud" type="CanvasLayer" parent="."]
-
-[node name="RootDebugHud" parent="CanvasDebugHud" instance=ExtResource("2_tgfjs")]
+[node name="DebugHud" parent="." instance=ExtResource("2_tgfjs")]
 
 [connection signal="ready" from="." to="Player" method="_on_main_ready"]
 
 [editable path="Arena"]
-[editable path="CanvasDebugHud/RootDebugHud"]
+[editable path="Arena/Block"]
+[editable path="DebugHud"]

@@ -10,8 +10,8 @@ func _ready() -> void:
 	hp = HealthManager.new()
 	hp.setMaxHealth(maxHP).setHealth(maxHP)
 	hpBar.value = hp.getHealth()
-	hp.connect("healthChanged", onHealthChanged)
-	hp.connect("healthDropZero", onHealthDropZero)
+	hp.healthChanged.connect(onHealthChanged)
+	hp.healthDropZero.connect(onHealthDropZero)
 	
 func onHealthChanged(nHP: int) -> void:
 	hpBar.value = nHP

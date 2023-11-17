@@ -1,21 +1,21 @@
 class_name DebugHud
-extends Control
+extends CanvasLayer
 
 ### TODO ###
 # faire un hide/show button
 # pourvoir le déplacer
 
 ### respect this path in the Main's tree node ###
-## => get_node("/root/Main/CanvasDebugHud/RootDebugHud")
+## => get_node("/root/Main/DebugHud/ValuesPanel")
 
-@onready var valueContainer : VBoxContainer 
+@onready var valuesContainer : Control 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = OS.is_debug_build()
 
 func init() -> void:
-	valueContainer = $MainContainer.find_child("ValueContainer")
+	valuesContainer = find_child("ValuesContainer")
 
 func addDebugValueSlider(sliderValues: Dictionary, valueToConnect: Callable):
 	var nValueSlider := HSlider.new()
@@ -28,5 +28,5 @@ func addDebugValueSlider(sliderValues: Dictionary, valueToConnect: Callable):
 	nValueSlider.value_changed.connect(valueToConnect)
 	nValueSlider.value_changed.connect(func(value):
 		nValueLabel.text = str(sliderValues.text, value))
-	valueContainer.add_child(nValueSlider)
-	valueContainer.add_child(nValueLabel)
+	valuesContainer.add_child(nValueSlider)
+	valuesContainer.add_child(nValueLabel)

@@ -10,7 +10,7 @@ extends CharacterBody2D
 @onready var weapon : RangedWeapon
 @onready var MeleeWeaponScene := load("res://Source/Weapon/Melee/MeleeWeapon.tscn")
 @onready var meleeWeapon : MeleeWeapon
-@onready var debugHud = get_node("/root/Main/CanvasDebugHud/RootDebugHud")
+@onready var debugHud : Node
 @onready var tmpNode : Node2D : set = setTmpNode
 
 func _ready():
@@ -20,7 +20,6 @@ func _ready():
 	meleeWeapon = MeleeWeapon.create(self, MeleeWeaponScene)
 	## abilities ##
 	addAbilities()
-	tmpSetSlider() # for test value directly on running time 
 	
 func _physics_process(delta):
 	setDir()
@@ -95,5 +94,8 @@ func tmpSetSlider() -> void:
 
 func _on_main_ready() -> void:
 	tmpNode = get_tree().get_root().get_node("Main/TmpNode")
+	debugHud = get_node("/root/Main/DebugHud/")
+	print(debugHud)
+	tmpSetSlider() # for test value directly on running time 
 	# weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon))
 	meleeWeapon.setDistanceHolder(distanceWeapon).setAttack(MeleeWeapon.hit.bind(meleeWeapon))

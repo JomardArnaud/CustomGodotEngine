@@ -1,5 +1,5 @@
 class_name BaseAttack
-extends Polygon2D
+extends APolygon2D
 
 # It will be set directly on editor not with the code (Cause of placing the polygon)
 
@@ -7,22 +7,13 @@ extends Polygon2D
 # Duration of the attack will have a attack hitbox
 @export var durationActif := 0.5
 
-@onready var hitbox : Area2D
 @onready var timerDurationActif : Timer = $Duration
 
 func _ready():
-	set_poly(polygon)
+	setAreaFromPolygon()
+	hitbox.area_entered.connect(_on_area_2d_area_entered)
 	timerDurationActif.wait_time = durationActif
 	timerDurationActif.start()
-
-func set_poly(poly: PackedVector2Array)-> void:
-	var body = Area2D.new()
-	var collision_shape = CollisionPolygon2D.new()
-	collision_shape.polygon = poly
-	body.add_child(collision_shape)
-	add_child(body)
-	hitbox = body
-	hitbox.area_entered.connect(_on_area_2d_area_entered)
 
 func getDmg() -> float:
 	return dmg
