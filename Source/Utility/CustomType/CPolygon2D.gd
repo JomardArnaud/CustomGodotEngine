@@ -2,7 +2,7 @@
 class_name CPolygon2D
 extends Polygon2D
 
-func setAreaFromPolygon(poly: PackedVector2Array = []) -> void:
+func setBodyFromPolygon(poly: PackedVector2Array = []) -> void:
 	var body = StaticBody2D.new()
 	var collision_shape = CollisionPolygon2D.new()
 	if poly.size() != 0:

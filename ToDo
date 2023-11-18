@@ -1,6 +1,11 @@
+Make the dash go in direction of the mouse like Bettlerite to see which approche is the best | and put speed fix not a addition of force
 Make a darkblue/lightblue sort of chessboard like for the background arena
+Rework weapon attachment system
 Make a area detector and scripted moment
 Make a savepoint in form of light
 Work on light !
 Work on texture !
 Instore coding norm (for getter/setter, case for naming things, etc) -> refacto and uniformise the code 
+Make all attack and projectil configurable (being able to add a new weapon just by adding a line in a excel)
+Make generic function, like shotProjectil 
+Get a "polygon creator" just for setting up vertex for attack (FOR EASY MODDING) 

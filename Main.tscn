@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://v2nw0nk5k3gm"]
+[gd_scene load_steps=8 format=3 uid="uid://v2nw0nk5k3gm"]
 
 [ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="1_50kq8"]
 [ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="2_tgfjs"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="5_2wdmp"]
 [ext_resource type="PackedScene" uid="uid://cfjq7mdcvooxw" path="res://Source/Block/Block.tscn" id="5_uasw7"]
 [ext_resource type="PackedScene" uid="uid://rytr7i1c2u5b" path="res://Source/Foes/Scarecrow/Scarecrow.tscn" id="7_kjfel"]
+[ext_resource type="Script" path="res://Trap.gd" id="7_uj6xl"]
 
 [node name="Main" type="Node2D"]
-position = Vector2(-876, -640)
+position = Vector2(-1015, -800)
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
 
@@ -21,7 +22,13 @@ polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 3
 polygon = PackedVector2Array(365, 301, 291, 301, 365, 322, 401.316, 328.986, 290.67, 381.919, 389, 450, 430, 349, 469, 379, 468.899, 300.938)
 metadata/_edit_group_ = true
 
+[node name="Trap" type="Polygon2D" parent="."]
+color = Color(0, 0.988235, 0.490196, 1)
+polygon = PackedVector2Array(1403, 704, 1238, 710, 1641, -31, 1727, 93)
+script = ExtResource("7_uj6xl")
+
 [node name="Player" parent="." instance=ExtResource("1_50kq8")]
+position = Vector2(1091, 107)
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
 position = Vector2(46, 0)

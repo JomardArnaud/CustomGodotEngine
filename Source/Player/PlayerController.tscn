@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cndhrpvfkd8hw"]
+[gd_scene load_steps=4 format=3 uid="uid://cndhrpvfkd8hw"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerController.gd" id="1_4rfjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvuin"]
 size = Vector2(18.6046, 44.4444)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hc7k"]
+size = Vector2(38, 38)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-10, -10)
@@ -25,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.388235, 0.988235, 0.92549, 1)
 
-[node name="hitbox" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(3.8147e-06, 0)
 scale = Vector2(2.38889, 1)
 shape = SubResource("RectangleShape2D_nvuin")
@@ -35,5 +38,10 @@ one_shot = true
 
 [node name="DashingTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_5hc7k")
 
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
