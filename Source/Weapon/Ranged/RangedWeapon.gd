@@ -4,10 +4,9 @@ extends Weapon
 const RAY_LENGTH = 10000
 
 @onready var tmpNode : Node2D : set = setTmpNode, get = getTmpNode
-@onready var bulletScene := load("res://Source/Weapon/Ranged/Projectil/Projectil.tscn")
+@onready var bulletScene : PackedScene
 @onready var speed : float
 @onready var dmgManager : Damage
-
 
 # func _physics_process(delta: float) -> void:
 # 	var space_state = get_world_2d().direct_space_state
@@ -27,6 +26,7 @@ func update() -> void:
 
 static func create(nHolder: Node2D, nWeaponScene: Resource) -> RangedWeapon:
 	var nRangedWeapon = nWeaponScene.instantiate()
+	nRangedWeapon.setBulletScene()
 	nRangedWeapon.init(nHolder)
 	nHolder.add_child(nRangedWeapon)
 	return nRangedWeapon
@@ -35,6 +35,11 @@ static func shot(weapon: RangedWeapon) -> void:
 	var tmpBullet = weapon.getCurrentBullet().instantiate()
 	weapon.getTmpNode().add_child(tmpBullet)
 	tmpBullet.setPosOrigin(weapon.get_global_position()).setDir(weapon.getDir()).setSpeed(4)
+
+### TMP WEAPON V2 ###
+func setBulletScene() -> RangedWeapon:
+	bulletScene = load("res://Source/Weapon/Ranged/Projectil/Projectil.tscn")
+	return self
 
 func getSpeed() -> float:
 	return speed

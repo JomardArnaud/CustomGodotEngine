@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Trap.gd" id="7_uj6xl"]
 
 [node name="Main" type="Node2D"]
-position = Vector2(-1015, -800)
+position = Vector2(274, 408)
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
 
@@ -29,6 +29,8 @@ script = ExtResource("7_uj6xl")
 
 [node name="Player" parent="." instance=ExtResource("1_50kq8")]
 position = Vector2(1091, 107)
+dashDuration = 0.15
+dashPower = 3000.0
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
 position = Vector2(46, 0)

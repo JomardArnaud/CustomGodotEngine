@@ -9,7 +9,7 @@ extends Object
 
 static var dashInfo = {
 	baseSpeed = 0, # buffer of the base speed's entity
-	power = 4.5 # the ratio which will be multiple to the entity's speed 
+	power = 1200 # speed of the entity during dash 
 }
 
 static func createDashInfo(baseSpeed : float, power: float) -> Dictionary:
@@ -25,10 +25,12 @@ static func createDashInfo(baseSpeed : float, power: float) -> Dictionary:
 static func basicTimerCondition(nameAction: String, timerCd: Timer) -> bool:
 	return Input.is_action_pressed(nameAction) && timerCd.time_left == 0
 
-static func dashActionStart(entityMovement: MovementManager, dashAbility: Ability) -> void:
+static func dashActionStart(entity: Node, dashAbility: Ability) -> void:
+	var mouse = entity.get_global_mouse_position()
+	var entityMovement = entity.get("movement")
+	entityMovement.setDir((mouse - entity.get_global_position()).normalized())
 	entityMovement.lockDir(true)
-	dashAbility.getInfo().baseSpeed = entityMovement.getSpeed()
-	entityMovement.setSpeed(dashAbility.getInfo().baseSpeed * dashAbility.getInfo().power)
+	entityMovement.setSpeed(dashAbility.getInfo().power)
 	dashAbility.getTimerDuration().start()
 	dashAbility.getTimerCd().start()
 	

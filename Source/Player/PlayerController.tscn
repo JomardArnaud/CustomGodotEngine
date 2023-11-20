@@ -9,7 +9,6 @@ size = Vector2(18.6046, 44.4444)
 size = Vector2(38, 38)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(-10, -10)
 script = ExtResource("1_4rfjw")
 dashCD = 1.0
 dashDuration = 0.1

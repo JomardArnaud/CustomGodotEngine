@@ -16,8 +16,8 @@ extends CharacterBody2D
 func _ready():
 	movement = MovementManager.new()
 	movement.setSpeed(speedPlayer).setInertia(inertia)
-	# weapon = RangedWeapon.create(self, RangedWeaponScene)
-	meleeWeapon = MeleeWeapon.create(self, MeleeWeaponScene)
+	weapon = RangedWeapon.create(self, RangedWeaponScene)
+	# meleeWeapon = MeleeWeapon.create(self, MeleeWeaponScene)
 	## abilities ##
 	addAbilities()
 	
@@ -26,8 +26,8 @@ func _physics_process(delta):
 	movement.update_velocity(delta)
 	set_velocity(movement.getVelocity())
 	move_and_slide()
-	meleeWeapon.update()
-	# weapon.update()
+	# meleeWeapon.update()
+	weapon.update()
 
 func setDir() -> void:
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
@@ -58,7 +58,7 @@ func cleanBullet(clean: Ability) -> void:
 @export_category("Abilities")
 @export var dashCD : float
 @export var dashDuration : float
-@export var dashPower : float = 4.5
+@export var dashPower : float = 800
 @onready var timerDash := $DashCdTimer
 @onready var timerDashing := $DashingTimer
 
@@ -67,7 +67,7 @@ func setDash() -> void:
 	dash.init(dashCD, dashDuration)
 	dash.setInfo(InfoAbility.createDashInfo(movement.getSpeed(), dashPower))
 	dash.setCondition(InfoAbility.basicTimerCondition.bind("dash", dash.getTimerCd()))
-	dash.setActionStart(InfoAbility.dashActionStart.bind(movement, dash))
+	dash.setActionStart(InfoAbility.dashActionStart.bind(self, dash))
 	dash.setActionEnd(InfoAbility.dashActionEnd.bind(movement, dash))
 	add_child(dash)
 	
@@ -96,5 +96,5 @@ func _on_main_ready() -> void:
 	tmpNode = get_tree().get_root().get_node("Main/TmpNode")
 	debugHud = get_node("/root/Main/DebugHud/")
 	tmpSetSlider() # for test value directly on running time 
-	# weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon))
-	meleeWeapon.setDistanceHolder(distanceWeapon).setAttack(MeleeWeapon.hit.bind(meleeWeapon))
+	weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon))
+	# meleeWeapon.setDistanceHolder(distanceWeapon).setAttack(MeleeWeapon.hit.bind(meleeWeapon))

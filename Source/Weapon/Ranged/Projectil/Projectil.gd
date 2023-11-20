@@ -35,7 +35,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	var areaParent := area.get_parent() 
 	if "hp" in areaParent:
 		Damage.addDmg(areaParent, 5)
-	if !(areaParent is Bullet):
 		destroy()
 
 func destroy() -> void:
