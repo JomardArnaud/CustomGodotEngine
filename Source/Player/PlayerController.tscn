@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cndhrpvfkd8hw"]
+[gd_scene load_steps=5 format=3 uid="uid://cndhrpvfkd8hw"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerController.gd" id="1_4rfjw"]
+[ext_resource type="PackedScene" uid="uid://bmb5doe1vo5q5" path="res://Source/Weapon/Ranged/RW_Smg.tscn" id="2_bflqb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvuin"]
 size = Vector2(18.6046, 44.4444)
@@ -42,5 +43,7 @@ one_shot = true
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_5hc7k")
+
+[node name="Smg" parent="." instance=ExtResource("2_bflqb")]
 
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]

@@ -5,19 +5,14 @@ extends CharacterBody2D
 @export var inertia = .35
 @export var distanceWeapon = 40
 
+@onready var mainWeapon := $Smg
 @onready var movement : MovementManager
-@onready var RangedWeaponScene := load("res://Source/Weapon/Ranged/RangedWeapon.tscn")
-@onready var weapon : RangedWeapon
-@onready var MeleeWeaponScene := load("res://Source/Weapon/Melee/MeleeWeapon.tscn")
-@onready var meleeWeapon : MeleeWeapon
 @onready var debugHud : Node
 @onready var tmpNode : Node2D : set = setTmpNode
 
 func _ready():
 	movement = MovementManager.new()
 	movement.setSpeed(speedPlayer).setInertia(inertia)
-	weapon = RangedWeapon.create(self, RangedWeaponScene)
-	# meleeWeapon = MeleeWeapon.create(self, MeleeWeaponScene)
 	## abilities ##
 	addAbilities()
 	
@@ -26,8 +21,9 @@ func _physics_process(delta):
 	movement.update_velocity(delta)
 	set_velocity(movement.getVelocity())
 	move_and_slide()
-	# meleeWeapon.update()
-	weapon.update()
+	#to prevent anti-ghosting
+	if (Input.is_action_pressed("attack") && mainWeapon.weaponIsUp()):
+		mainWeapon.attack()
 
 func setDir() -> void:
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
@@ -93,8 +89,5 @@ func tmpSetSlider() -> void:
 		movement.setInertia(nInertia))
 
 func _on_main_ready() -> void:
-	tmpNode = get_tree().get_root().get_node("Main/TmpNode")
 	debugHud = get_node("/root/Main/DebugHud/")
 	tmpSetSlider() # for test value directly on running time 
-	weapon.setDistanceHolder(distanceWeapon).setFireRate(0.15).setTmpNode(tmpNode).setAttack(RangedWeapon.shot.bind(weapon))
-	# meleeWeapon.setDistanceHolder(distanceWeapon).setAttack(MeleeWeapon.hit.bind(meleeWeapon))

@@ -1,13 +1,17 @@
 class_name RangedWeapon
 extends Weapon
 
-const RAY_LENGTH = 10000
+@export var info : RangedWeaponInfo
 
-@onready var tmpNode : Node2D : set = setTmpNode, get = getTmpNode
-@onready var bulletScene : PackedScene
-@onready var speed : float
-@onready var dmgManager : Damage
+@onready var attactArray := ["basicShot"]
 
+func _ready() -> void:
+	super()
+	timerAttack.wait_time = info.fireRate
+	distanceHolder = info.distanceHolder
+	attackFunc = Callable(self, attactArray[info.attackMode])
+
+# const RAY_LENGTH = 10000
 # func _physics_process(delta: float) -> void:
 # 	var space_state = get_world_2d().direct_space_state
 # 	var query = PhysicsRayQueryParameters2D.create(holder.get_global_position(), global_position + dirWeapon * RAY_LENGTH)
@@ -18,43 +22,8 @@ const RAY_LENGTH = 10000
 # 		CustomUtils.addDebugLine(get_tree().get_root().get_child(0), Vector4(global_position.x, global_position.y, 
 # 		result.position.x, result.position.y), Color(200, 75, 50), 1)
 
-func init(nHolder: Node2D)-> void:
-	super(nHolder)
-
-func update() -> void:
-	super()
-
-static func create(nHolder: Node2D, nWeaponScene: Resource) -> RangedWeapon:
-	var nRangedWeapon = nWeaponScene.instantiate()
-	nRangedWeapon.setBulletScene()
-	nRangedWeapon.init(nHolder)
-	nHolder.add_child(nRangedWeapon)
-	return nRangedWeapon
-
-static func shot(weapon: RangedWeapon) -> void:
-	var tmpBullet = weapon.getCurrentBullet().instantiate()
-	weapon.getTmpNode().add_child(tmpBullet)
-	tmpBullet.setPosOrigin(weapon.get_global_position()).setDir(weapon.getDir()).setSpeed(4)
-
-### TMP WEAPON V2 ###
-func setBulletScene() -> RangedWeapon:
-	bulletScene = load("res://Source/Weapon/Ranged/Projectil/Projectil.tscn")
-	return self
-
-func getSpeed() -> float:
-	return speed
-	
-func setSpeed(nSpeed: float) -> RangedWeapon:
-	speed = nSpeed
-	return self
-
-func getTmpNode() -> Node2D:
-	return tmpNode
-
-func setTmpNode(nTmp: Node2D) -> RangedWeapon:
-	tmpNode = nTmp	
-	return self
-
-# Temporary, need to add a bullet gestion system
-func getCurrentBullet() -> Resource:
-	return bulletScene
+# just shot one projectil at the time
+func basicShot() -> void:
+	var tmpBullet = info.projScene.instantiate()
+	tmpNode.add_child(tmpBullet)
+	tmpBullet.setPosOrigin(get_global_position()).setDir(dirWeapon).setSpeed(info.speed)
