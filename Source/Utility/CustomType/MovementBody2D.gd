@@ -1,0 +1,61 @@
+class_name MovementBody2D
+extends CharacterBody2D
+
+@export var inertia : float : set = setInertia, get = getInertia
+@export var speed : float : set = setSpeed, get = getSpeed # distance per second
+
+@onready var dir : Vector2 : set = setDir, get = getDir 
+@onready var energy : Vector2 : set = setEnergy, get = getEnergy
+@onready var dirLock := false
+
+func resetEnergy() -> void:
+	energy = Vector2(0, 0)
+
+func _physics_process(delta: float) -> void:
+	updateDir()
+	updateEnergy(delta)
+	set_velocity(energy)
+	move_and_slide()
+
+func updateDir() -> void:
+	pass
+
+func updateEnergy(delta: float):
+	if !dirLock :
+		energy = lerp(dir * speed, energy, pow(inertia / 10, delta));
+	else :
+		energy = dir * speed
+
+func lockDir(nLock: bool) -> MovementBody2D:
+	dirLock = nLock
+	return self	
+
+### all getter | setter ###
+func setInertia(nInertia: float) -> MovementBody2D:
+	inertia = nInertia
+	return self
+	
+func getInertia() -> float:
+	return inertia
+	
+func setSpeed(nSpeed: float) -> MovementBody2D:
+	speed = nSpeed
+	return self
+	
+func getSpeed() -> float:
+	return speed
+
+func setDir(nDir: Vector2) -> MovementBody2D:
+	if !dirLock:
+		dir = nDir
+	return self
+	
+func getDir() -> Vector2:
+	return dir
+
+func setEnergy(nEnergy: Vector2) -> MovementBody2D:
+	energy = nEnergy
+	return self
+	
+func getEnergy() -> Vector2:
+	return energy

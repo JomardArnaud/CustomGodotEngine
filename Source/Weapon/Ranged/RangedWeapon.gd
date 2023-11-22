@@ -26,4 +26,4 @@ func _ready() -> void:
 func basicShot() -> void:
 	var tmpBullet = info.projScene.instantiate()
 	tmpNode.add_child(tmpBullet)
-	tmpBullet.setPosOrigin(get_global_position()).setDir(dirWeapon).setSpeed(info.speed)
+	tmpBullet.setPosOrigin(get_global_position()).setDir(dirWeapon).setSpeed(info.speed).setDmg(info.dmg)

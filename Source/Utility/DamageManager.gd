@@ -20,10 +20,10 @@ static func addDmg(nTarget: Node2D, nDmg: float, _nDurationTick: float = 0, _nDu
         #     #create and add a timer, also connect the signal maybe add tick do dmg overtime for a v2
         #     pass
     else :
-        nDamage.applyDomage()
+        nDamage.applyDamage()
         nDamage.destroy()
         
-func applyDomage() -> void:
+func applyDamage() -> void:
     #here check stat which influ the dmg output
 	# it is checked before that target has a HealthManager
     target.hp.takeDamage(dmg)

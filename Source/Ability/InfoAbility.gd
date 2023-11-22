@@ -25,15 +25,14 @@ static func createDashInfo(baseSpeed : float, power: float) -> Dictionary:
 static func basicTimerCondition(nameAction: String, timerCd: Timer) -> bool:
 	return Input.is_action_pressed(nameAction) && timerCd.time_left == 0
 
-static func dashActionStart(entity: Node, dashAbility: Ability) -> void:
+static func dashActionStart(entity: MovementBody2D, dashAbility: Ability) -> void:
 	var mouse = entity.get_global_mouse_position()
-	var entityMovement = entity.get("movement")
-	entityMovement.setDir((mouse - entity.get_global_position()).normalized())
-	entityMovement.lockDir(true)
-	entityMovement.setSpeed(dashAbility.getInfo().power)
+	entity.setDir((mouse - entity.get_global_position()).normalized())
+	entity.lockDir(true)
+	entity.setSpeed(dashAbility.getInfo().power)
 	dashAbility.getTimerDuration().start()
 	dashAbility.getTimerCd().start()
 	
-static func dashActionEnd(entityMovement: MovementManager, dashAbility: Ability) -> void:
-	entityMovement.lockDir(false)
-	entityMovement.setSpeed(dashAbility.getInfo().baseSpeed)
+static func dashActionEnd(entity: MovementBody2D, dashAbility: Ability) -> void:
+	entity.lockDir(false)
+	entity.setSpeed(dashAbility.getInfo().baseSpeed)
