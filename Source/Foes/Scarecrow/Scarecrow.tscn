@@ -1,13 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://rytr7i1c2u5b"]
+[gd_scene load_steps=6 format=3 uid="uid://rytr7i1c2u5b"]
 
 [ext_resource type="Script" path="res://Source/Foes/Scarecrow/Scarecrow.gd" id="1_364aq"]
-[ext_resource type="PackedScene" uid="uid://k2c4at21rf8d" path="res://Source/HUD/HpBar.tscn" id="2_w27rr"]
+[ext_resource type="PackedScene" uid="uid://k2c4at21rf8d" path="res://Source/Utility/Health.tscn" id="2_w27rr"]
+[ext_resource type="Script" path="res://Source/Utility/HealthInfo.gd" id="3_507sd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb4l1"]
 size = Vector2(40, 92)
 
+[sub_resource type="Resource" id="Resource_5ojxv"]
+script = ExtResource("3_507sd")
+visibleHpBar = true
+health = 100
+maxHealth = 100
+
 [node name="Scarecrow" type="Node2D"]
 script = ExtResource("1_364aq")
+maxHP = null
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -28,7 +36,8 @@ scale = Vector2(0.998917, 2.29577)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_vb4l1")
 
-[node name="HpBarRoot" parent="." instance=ExtResource("2_w27rr")]
+[node name="Health" parent="." instance=ExtResource("2_w27rr")]
 offset_top = -57.0
 offset_bottom = -57.0
 scale = Vector2(0.075, 0.075)
+info = SubResource("Resource_5ojxv")

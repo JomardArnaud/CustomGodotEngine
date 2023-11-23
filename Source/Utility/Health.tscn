@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://k2c4at21rf8d"]
+[gd_scene load_steps=3 format=3 uid="uid://k2c4at21rf8d"]
 
-[ext_resource type="Theme" uid="uid://1cwvyoyv30rn" path="res://Source/Theme/hpBarTheme.tres" id="1_j5oim"]
+[ext_resource type="Script" path="res://Source/Utility/HealthManager.gd" id="1_c7jam"]
+[ext_resource type="Theme" uid="uid://1cwvyoyv30rn" path="res://Source/Theme/hpBarTheme.tres" id="2_xoa7s"]
 
-[node name="HpBarRoot" type="Control"]
+[node name="Health" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 0
+script = ExtResource("1_c7jam")
 
 [node name="HpBar" type="ProgressBar" parent="."]
 layout_mode = 1
@@ -21,6 +23,6 @@ offset_right = 444.0
 offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_j5oim")
+theme = ExtResource("2_xoa7s")
 value = 100.0
 show_percentage = false
