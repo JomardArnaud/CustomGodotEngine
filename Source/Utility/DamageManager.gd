@@ -11,37 +11,37 @@ var target : Node2D : set = setTarget, get = getTarget
 # var timerDuration : Timer
 
 static func addDmg(nTarget: Node2D, nDmg: float, _nDurationTick: float = 0, _nDuration: float = 0) -> void:
-    var nDamage := Damage.new()
-    
-    nDamage.setTarget(nTarget).setDmg(nDmg)
-    if _nDuration != 0:
-        pass
-        # nTarget.add_child(nDamage)
-        #     #create and add a timer, also connect the signal maybe add tick do dmg overtime for a v2
-        #     pass
-    else :
-        nDamage.applyDamage()
-        nDamage.destroy()
-        
+	var nDamage := Damage.new()
+	
+	nDamage.setTarget(nTarget).setDmg(nDmg)
+	if _nDuration != 0:
+		pass
+		# nTarget.add_child(nDamage)
+		#     #create and add a timer, also connect the signal maybe add tick do dmg overtime for a v2
+		#     pass
+	else :
+		nDamage.applyDamage()
+		nDamage.destroy()
+		
 func applyDamage() -> void:
-    #here check stat which influ the dmg output
+	#here check stat which influ the dmg output
 	# it is checked before that target has a HealthManager
-    target.hp.takeDamage(dmg)
-    pass
+	target.get_node("./Health").info.takeDamage(dmg)
+	pass
 
 func getDmg() -> float:
-    return dmg
+	return dmg
 
 func getTarget() -> Node2D:
-    return target
+	return target
 
 func setDmg(nDmg: float) -> Damage:
-    dmg = nDmg
-    return self
+	dmg = nDmg
+	return self
 
 func setTarget(nTarget: Node2D) -> Damage:
-    target = nTarget
-    return self
+	target = nTarget
+	return self
 
 func destroy() -> void:
-    queue_free()
+	queue_free()

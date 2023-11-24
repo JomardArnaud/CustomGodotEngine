@@ -15,7 +15,6 @@ maxHealth = 100
 
 [node name="Scarecrow" type="Node2D"]
 script = ExtResource("1_364aq")
-maxHP = null
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8

@@ -8,7 +8,7 @@
 script = ExtResource("3_731te")
 projScene = ExtResource("2_10cbr")
 attackMode = 0
-dmg = 40.0
+dmg = 40.1
 speed = 500.0
 fireRate = 0.15
 currentNbProj = 0

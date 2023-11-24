@@ -27,7 +27,7 @@ dashDuration = 0.15
 dashPower = 3000.0
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
-position = Vector2(46, 0)
+position = Vector2(897, 4)
 scale = Vector2(0.725909, 1.29248)
 
 [node name="TmpNode" type="Node2D" parent="."]

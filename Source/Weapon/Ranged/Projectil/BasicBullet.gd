@@ -7,7 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	add_to_group("bullets")
-	
+
 func _physics_process(delta: float) -> void:
 	global_position += dir * speed * delta
 
@@ -16,8 +16,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		destroy()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	var areaParent := area.get_parent() 
-	if "hp" in areaParent:
+	var areaParent := area.get_parent()
+	if areaParent.has_node("./Health"):
 		Damage.addDmg(areaParent, dmg)
 		destroy()
 
@@ -48,4 +48,4 @@ func setDmg(nDmg: float) -> Bullet:
 func setPosOrigin(nPos: Vector2) -> Bullet:
 	global_position = nPos
 	return self
-	
+

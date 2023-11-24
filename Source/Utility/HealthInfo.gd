@@ -2,34 +2,34 @@ class_name HealthInfo
 extends Resource
 
 @export var visibleHpBar := true
-@export var health : int : set = setHealth, get = getHealth
-@export var maxHealth : int : set = setMaxHealth, get = getMaxHealth
+@export var health : float : set = setHealth, get = getHealth
+@export var maxHealth : float : set = setMaxHealth, get = getMaxHealth
 
 signal healthChanged
 signal healthDropZero
 
-func heal(nHeal: int) -> void:
-	health = clampi(health + nHeal, health, maxHealth)
+func heal(nHeal: float) -> void:
+	health = clampf(health + nHeal, health, maxHealth)
 	emit_signal("healthChanged", health)
 
-func takeDamage(damage: int) -> void:
-	health = clampi(health - damage, 0, health)
+func takeDamage(damage: float) -> void:
+	health = clampf(health - damage, 0, health)
 	emit_signal("healthChanged", health)
 	if health == 0:
 		emit_signal("healthDropZero")
 
-func setHealth(nHealth: int) -> HealthInfo:
-	health = clampi(nHealth, 0, maxHealth)
+func setHealth(nHealth: float) -> HealthInfo:
+	health = clampf(nHealth, 0, maxHealth)
 	if health == 0:
 		emit_signal("healthDropZero")
 	return self
 	
-func getHealth() -> int:
+func getHealth() -> float:
 	return health
 
-func setMaxHealth(nMaxHealth: int) -> HealthInfo:
+func setMaxHealth(nMaxHealth: float) -> HealthInfo:
 	maxHealth = nMaxHealth
 	return self
 	
-func getMaxHealth() -> int:
+func getMaxHealth() -> float:
 	return maxHealth
