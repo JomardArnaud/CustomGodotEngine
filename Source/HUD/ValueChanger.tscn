@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://pyi0b2214ogb"]
+
+[ext_resource type="Script" path="res://Source/HUD/ValueChanger.gd" id="1_yg6hs"]
+[ext_resource type="Texture2D" uid="uid://cpl7w7vlkjsju" path="res://Source/Assets/minus_button.png" id="2_12wko"]
+[ext_resource type="Script" path="res://Source/HUD/NumLineEdit.gd" id="3_5po0k"]
+[ext_resource type="Texture2D" uid="uid://b6ci638hg0lry" path="res://Source/Assets/plus_button.png" id="4_fvum1"]
+
+[node name="ValueChanger" type="HBoxContainer"]
+script = ExtResource("1_yg6hs")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Tmp label ="
+
+[node name="MinusButton" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("2_12wko")
+stretch_mode = 3
+
+[node name="NumLineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+script = ExtResource("3_5po0k")
+
+[node name="PlusButton" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("4_fvum1")
+texture_pressed = ExtResource("4_fvum1")
+texture_hover = ExtResource("4_fvum1")
+texture_disabled = ExtResource("4_fvum1")
+texture_focused = ExtResource("4_fvum1")
+stretch_mode = 3
+
+[connection signal="pressed" from="MinusButton" to="." method="_on_minus_button_pressed"]
+[connection signal="pressed" from="PlusButton" to="." method="_on_plus_button_pressed"]

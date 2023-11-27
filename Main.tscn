@@ -37,8 +37,6 @@ focusEntity = NodePath("../Player")
 
 [node name="DebugHud" parent="." instance=ExtResource("2_tgfjs")]
 
-[connection signal="ready" from="." to="Player" method="_on_main_ready"]
-
 [editable path="Arena"]
 [editable path="Arena/Block"]
 [editable path="DebugHud"]

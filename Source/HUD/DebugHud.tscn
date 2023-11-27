@@ -1,25 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq8h4k3cdha2r"]
+[gd_scene load_steps=3 format=3 uid="uid://bq8h4k3cdha2r"]
 
 [ext_resource type="Script" path="res://Source/HUD/DebugHud.gd" id="1_fnev4"]
+[ext_resource type="PackedScene" uid="uid://pyi0b2214ogb" path="res://Source/HUD/ValueChanger.tscn" id="2_vy5k4"]
 
 [node name="DebugHud" type="CanvasLayer"]
 script = ExtResource("1_fnev4")
 
-[node name="ValuesPanel" type="PanelContainer" parent="."]
-offset_left = 63.0
-offset_top = 57.0
-offset_right = 103.0
-offset_bottom = 97.0
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1079.0
+focus_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ValuesPanel"]
+[node name="MainContainer" type="VBoxContainer" parent="."]
+offset_left = 45.0
+offset_top = 32.0
+offset_right = 337.0
+offset_bottom = 323.0
+
+[node name="CheckButton" type="CheckButton" parent="MainContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="ValuesPanel" type="PanelContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/ValuesPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ValuesContainer" type="VBoxContainer" parent="ValuesPanel/MarginContainer"]
+[node name="ValuesContainer" type="VBoxContainer" parent="MainContainer/ValuesPanel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
+
+[node name="ValueChanger" parent="MainContainer/ValuesPanel/MarginContainer/ValuesContainer" instance=ExtResource("2_vy5k4")]
+layout_mode = 2
+labelValue = "Speed Dash"
+
+[connection signal="toggled" from="MainContainer/CheckButton" to="." method="_on_check_button_toggled"]

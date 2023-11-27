@@ -7,11 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb4l1"]
 size = Vector2(40, 92)
 
-[sub_resource type="Resource" id="Resource_5ojxv"]
+[sub_resource type="Resource" id="Resource_6a4e7"]
 script = ExtResource("3_507sd")
 visibleHpBar = true
-health = 100
-maxHealth = 100
+health = 50.0
+maxHealth = 100.0
 
 [node name="Scarecrow" type="Node2D"]
 script = ExtResource("1_364aq")
@@ -30,13 +30,19 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.998917, 2.29577)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_vb4l1")
 
 [node name="Health" parent="." instance=ExtResource("2_w27rr")]
 offset_top = -57.0
 offset_bottom = -57.0
 scale = Vector2(0.075, 0.075)
-info = SubResource("Resource_5ojxv")
+info = SubResource("Resource_6a4e7")
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.26
+one_shot = true
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

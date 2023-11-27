@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="HealthInfo" load_steps=2 format=3 uid="uid://dd6vyt6d3bidb"]
+
+[ext_resource type="Script" path="res://Source/Utility/HealthInfo.gd" id="1_5yd4g"]
+
+[resource]
+script = ExtResource("1_5yd4g")

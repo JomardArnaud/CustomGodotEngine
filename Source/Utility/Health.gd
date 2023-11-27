@@ -2,12 +2,14 @@ class_name Health
 extends Control
 
 @export var info : HealthInfo
+
 @onready var hpBar := $HpBar
 
 func _ready() -> void:
+	print(info.health)
 	self.visible = info.visibleHpBar
+	hpBar.value = info.health
 	var parent = get_parent()
-	#fiare a même chose avec weapon et mette la condition d'attack dans le perso
 	info.healthChanged.connect(onHealthChanged)
 	if (parent.has_method("onHealthChanged")):
 		info.healthChanged.connect(parent.onHealthChanged.bind())

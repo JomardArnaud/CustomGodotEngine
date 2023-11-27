@@ -2,8 +2,6 @@ class_name PlayerController
 extends MovementBody2D
 
 @onready var mainWeapon := $Smg
-@onready var debugHud : Node
-@onready var tmpNode : Node2D : set = setTmpNode
 
 func _ready():
 	## abilities ##
@@ -17,9 +15,6 @@ func updateDir() -> void:
 	var horizontalDirection = int(Input.is_action_pressed("moveLeft")) * -1 + int(Input.is_action_pressed("moveRight"))
 	var verticalDirection = int(Input.is_action_pressed("moveUp")) * -1 + int(Input.is_action_pressed("moveDown"))
 	setDir(Vector2(horizontalDirection, verticalDirection))
-
-func setTmpNode(nTmp: Node2D) -> void:
-	tmpNode = nTmp
 
 ### Ability ###
 
@@ -54,28 +49,3 @@ func setDash() -> void:
 	dash.setActionStart(InfoAbility.dashActionStart.bind(self, dash))
 	dash.setActionEnd(InfoAbility.dashActionEnd.bind(self, dash))
 	add_child(dash)
-	
-## TPM SLIDER MOUV MANAGER ##
-
-func tmpSetSlider() -> void:
-	debugHud.init()
-	debugHud.addDebugValueSlider({
-		minValue = getSpeed() / 10,
-		maxValue =  getSpeed() * 10,
-		step = getSpeed() / 500,
-		value = getSpeed(),
-		text = "Speed = "
-	}, func(nSpeed):
-		setSpeed(nSpeed))
-	debugHud.addDebugValueSlider({
-		minValue = 0,
-		maxValue =  1,
-		step = 0.025,
-		value = inertia,
-		text = "Inertia = "
-	}, func(nInertia):
-		setInertia(nInertia))
-
-func _on_main_ready() -> void:
-	debugHud = get_node("/root/Main/DebugHud/")
-	tmpSetSlider() # for test value directly on running time 
