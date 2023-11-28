@@ -24,8 +24,6 @@ metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_50kq8")]
 position = Vector2(1091, 107)
-dashDuration = 0.15
-dashPower = 3000.0
 
 [node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
 position = Vector2(897, 4)
@@ -43,12 +41,6 @@ layout_mode = 2
 entityToChange = NodePath("../../../../../../Player")
 proprietyToChange = "Speed"
 buttonValue = 25.0
-
-[node name="ValueChanger2" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="1" node_paths=PackedStringArray("entityToChange") instance=ExtResource("7_r71ya")]
-layout_mode = 2
-entityToChange = NodePath("../../../../../../Player")
-proprietyToChange = "Inertia"
-buttonValue = 0.05
 
 [editable path="Arena"]
 [editable path="Arena/Block"]

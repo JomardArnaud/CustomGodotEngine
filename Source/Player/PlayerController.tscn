@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cndhrpvfkd8hw"]
+[gd_scene load_steps=8 format=3 uid="uid://cndhrpvfkd8hw"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerController.gd" id="1_4rfjw"]
 [ext_resource type="PackedScene" uid="uid://bmb5doe1vo5q5" path="res://Source/Weapon/Ranged/RW_Smg.tscn" id="2_bflqb"]
+[ext_resource type="PackedScene" uid="uid://bakmq3clesspj" path="res://Source/Ability/ADash.tscn" id="3_ww8nm"]
+[ext_resource type="Script" path="res://Source/Ability/DashInfo.gd" id="4_ceews"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvuin"]
 size = Vector2(18.6046, 44.4444)
@@ -9,10 +11,14 @@ size = Vector2(18.6046, 44.4444)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5hc7k"]
 size = Vector2(38, 38)
 
+[sub_resource type="Resource" id="Resource_v7yna"]
+script = ExtResource("4_ceews")
+power = 1750
+cd = 0.5
+duration = 0.2
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4rfjw")
-dashCD = 1.0
-dashDuration = 0.1
 inertia = 0.35
 speed = 550.0
 
@@ -47,5 +53,8 @@ one_shot = true
 shape = SubResource("RectangleShape2D_5hc7k")
 
 [node name="Smg" parent="." instance=ExtResource("2_bflqb")]
+
+[node name="ADash" parent="." instance=ExtResource("3_ww8nm")]
+info = SubResource("Resource_v7yna")
 
 [connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]

@@ -6,7 +6,6 @@ extends Control
 @onready var hpBar := $HpBar
 
 func _ready() -> void:
-	print(info.health)
 	self.visible = info.visibleHpBar
 	hpBar.value = info.health
 	var parent = get_parent()

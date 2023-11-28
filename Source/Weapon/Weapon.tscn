@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw8nn5pf35prn"]
+[gd_scene load_steps=2 format=3 uid="uid://s85tfs5pfx1p"]
 
 [sub_resource type="GDScript" id="GDScript_3pk2w"]
 script/source = "class_name Weapon
