@@ -1,24 +1,37 @@
 extends HBoxContainer
 
-#faudra voir pour le faire de manière automatisée
-@export var entityToChange : Node2D
-
-@export var labelValue : String
-@export var valueToChange : String
+@export var entityToChange := Node2D
+#put this with a capital letter first
+@export var proprietyToChange : String
 @export var buttonValue : float
 
 @onready var label := $Label
 @onready var numLine := $NumLineEdit
-@onready var minusButton := $MinusButton
-@onready var plusButton := $PlusButton
+@onready var setProprity : Callable
+@onready var getProprity : Callable
+@onready var addProprity : Callable
+
 
 func _ready() -> void:
-	label.text = labelValue
-	# put the value of the entity in the numLine
-	pass
+	if entityToChange != null:
+		label.text = proprietyToChange + " = "
+		setProprity = Callable(entityToChange, "set" + proprietyToChange)
+		getProprity = Callable(entityToChange, "get" + proprietyToChange)
+		addProprity = Callable(entityToChange, "add" + proprietyToChange)
+		numLine.text = str(getProprity.call())
+	
+	else:
+		push_error("no entity was found !")
 
 func _on_minus_button_pressed() -> void:
-	pass
+	addProprity.call(-buttonValue)
+	numLine.text = str(getProprity.call())
 
 func _on_plus_button_pressed() -> void:
-	pass
+	addProprity.call(buttonValue)
+	numLine.text = str(getProprity.call())
+
+func _on_num_line_edit_text_submitted(nText: String) -> void:
+	# well not the best option but it will works for what i need to test now, need to think about the arg thought
+	setProprity.call(float(nText))
+	

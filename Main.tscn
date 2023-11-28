@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://v2nw0nk5k3gm"]
+[gd_scene load_steps=8 format=3 uid="uid://v2nw0nk5k3gm"]
 
 [ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="1_50kq8"]
 [ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="2_tgfjs"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="5_2wdmp"]
 [ext_resource type="PackedScene" uid="uid://cfjq7mdcvooxw" path="res://Source/Block/Block.tscn" id="5_uasw7"]
 [ext_resource type="PackedScene" uid="uid://rytr7i1c2u5b" path="res://Source/Foes/Scarecrow/Scarecrow.tscn" id="7_kjfel"]
+[ext_resource type="PackedScene" uid="uid://pyi0b2214ogb" path="res://Source/HUD/ValueChanger.tscn" id="7_r71ya"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(274, 408)
@@ -36,6 +37,18 @@ scale = Vector2(0.725909, 1.29248)
 focusEntity = NodePath("../Player")
 
 [node name="DebugHud" parent="." instance=ExtResource("2_tgfjs")]
+
+[node name="ValueChanger" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="0" node_paths=PackedStringArray("entityToChange") instance=ExtResource("7_r71ya")]
+layout_mode = 2
+entityToChange = NodePath("../../../../../../Player")
+proprietyToChange = "Speed"
+buttonValue = 25.0
+
+[node name="ValueChanger2" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="1" node_paths=PackedStringArray("entityToChange") instance=ExtResource("7_r71ya")]
+layout_mode = 2
+entityToChange = NodePath("../../../../../../Player")
+proprietyToChange = "Inertia"
+buttonValue = 0.05
 
 [editable path="Arena"]
 [editable path="Arena/Block"]

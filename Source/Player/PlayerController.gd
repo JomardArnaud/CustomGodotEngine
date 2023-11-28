@@ -44,7 +44,7 @@ func cleanBullet(clean: Ability) -> void:
 func setDash() -> void:
 	var dash = Ability.new()
 	dash.init(dashCD, dashDuration)
-	dash.setInfo(InfoAbility.createDashInfo(getSpeed(), dashPower))
+	dash.setInfo(InfoAbility.createDashInfo(dashPower))
 	dash.setCondition(InfoAbility.basicTimerCondition.bind("dash", dash.getTimerCd()))
 	dash.setActionStart(InfoAbility.dashActionStart.bind(self, dash))
 	dash.setActionEnd(InfoAbility.dashActionEnd.bind(self, dash))

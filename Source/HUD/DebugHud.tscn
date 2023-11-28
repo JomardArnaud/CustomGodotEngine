@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq8h4k3cdha2r"]
+[gd_scene load_steps=2 format=3 uid="uid://bq8h4k3cdha2r"]
 
 [ext_resource type="Script" path="res://Source/HUD/DebugHud.gd" id="1_fnev4"]
-[ext_resource type="PackedScene" uid="uid://pyi0b2214ogb" path="res://Source/HUD/ValueChanger.tscn" id="2_vy5k4"]
 
 [node name="DebugHud" type="CanvasLayer"]
 script = ExtResource("1_fnev4")
@@ -38,9 +37,5 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
-
-[node name="ValueChanger" parent="MainContainer/ValuesPanel/MarginContainer/ValuesContainer" instance=ExtResource("2_vy5k4")]
-layout_mode = 2
-labelValue = "Speed Dash"
 
 [connection signal="toggled" from="MainContainer/CheckButton" to="." method="_on_check_button_toggled"]

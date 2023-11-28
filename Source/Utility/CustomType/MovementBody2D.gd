@@ -34,16 +34,26 @@ func lockDir(nLock: bool) -> MovementBody2D:
 func setInertia(nInertia: float) -> MovementBody2D:
 	inertia = nInertia
 	return self
-	
+
 func getInertia() -> float:
 	return inertia
 	
+func addInertia(aInertia: float) -> MovementBody2D:
+	inertia = clampf(inertia + aInertia, 0, 1)
+	return self
+
 func setSpeed(nSpeed: float) -> MovementBody2D:
 	speed = nSpeed
 	return self
 	
 func getSpeed() -> float:
 	return speed
+
+func addSpeed(aSpeed: float) -> MovementBody2D:
+	speed += aSpeed
+	if speed < 0:
+		speed = 0
+	return self
 
 func setDir(nDir: Vector2) -> MovementBody2D:
 	if !dirLock:

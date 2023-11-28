@@ -12,9 +12,8 @@ static var dashInfo = {
 	power = 1200 # speed of the entity during dash 
 }
 
-static func createDashInfo(baseSpeed : float, power: float) -> Dictionary:
+static func createDashInfo(power: float) -> Dictionary:
 	var dest = dashInfo.duplicate()
-	dest.baseSpeed = baseSpeed
 	dest.power = power
 	return dest
 
@@ -29,6 +28,7 @@ static func dashActionStart(entity: MovementBody2D, dashAbility: Ability) -> voi
 	var mouse = entity.get_global_mouse_position()
 	entity.setDir((mouse - entity.get_global_position()).normalized())
 	entity.lockDir(true)
+	dashAbility.getInfo().baseSpeed = entity.getSpeed()
 	entity.setSpeed(dashAbility.getInfo().power)
 	dashAbility.getTimerDuration().start()
 	dashAbility.getTimerCd().start()
