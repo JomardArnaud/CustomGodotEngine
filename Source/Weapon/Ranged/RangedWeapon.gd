@@ -1,6 +1,12 @@
 class_name RangedWeapon
 extends Weapon
 
+signal rangedAttack()
+signal endRangedAttacking()
+signal startReloading()
+signal endReloading()
+signal emptyMagazine()
+
 @export var info : RangedWeaponInfo
 
 @onready var attactArray := ["basicShot"]
@@ -9,6 +15,8 @@ func _ready() -> void:
 	super()
 	timerAttack.wait_time = info.fireRate
 	distanceHolder = info.distanceHolder
+	holder.add_user_signal("rangedAttack")
+	holder.connect("rangedAttack", attack)
 	attackFunc = Callable(self, attactArray[info.attackMode])
 
 # const RAY_LENGTH = 10000

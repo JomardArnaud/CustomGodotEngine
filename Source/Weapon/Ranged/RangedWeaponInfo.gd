@@ -5,11 +5,6 @@ enum AttackMode {
 	basicShot
 }
 
-signal isReloading()
-signal stopReloading()
-signal projEmit()
-signal emptyMagazine()
-
 # projectil's scene
 @export var projScene : PackedScene
 # func which will be call to instance the projScene

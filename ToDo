@@ -1,7 +1,5 @@
-Make the dash go in direction of the mouse like Bettlerite to see which approche is the best | and put speed fix not a addition of force
-Make MovementBody2D a node to add it from editor ???
+Rework input system to match the signal composition system
 Make a darkblue/lightblue sort of chessboard like for the background arena
-Rework weapon attachment system
 Make a area detector and scripted moment
 Make a savepoint in form of light
 Work on light !

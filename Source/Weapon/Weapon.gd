@@ -18,10 +18,11 @@ func _process(_delta: float) -> void:
 	dirWeapon = (mousePos - holder.get_global_position()).normalized()
 	set_position(dirWeapon * distanceHolder)
 
-#will be call when holder decide and define by inheritance
+#will be call when holder decide (by using signal) and define by inheritance
 func attack() -> void:
-	attackFunc.call()
-	timerAttack.start()
+	if (timerAttack.time_left == 0):
+		attackFunc.call()
+		timerAttack.start()
 
 func getDir() -> Vector2:
 	return dirWeapon

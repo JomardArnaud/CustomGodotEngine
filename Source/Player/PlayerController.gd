@@ -1,11 +1,9 @@
 class_name PlayerController
 extends MovementBody2D
 
-@onready var mainWeapon := $Smg
-
 func _process(_delta: float) -> void:
-	if (Input.is_action_pressed("attack") && mainWeapon.weaponIsUp()):
-		mainWeapon.attack()
+	if (Input.is_action_pressed("rangedAttack")):
+		emit_signal("rangedAttack")
 	if (Input.is_action_pressed("dash")):
 		emit_signal("dash")
 
