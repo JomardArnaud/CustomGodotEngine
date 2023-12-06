@@ -1,47 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://v2nw0nk5k3gm"]
+[gd_scene load_steps=2 format=3 uid="uid://v2nw0nk5k3gm"]
 
-[ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="1_50kq8"]
-[ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="2_tgfjs"]
-[ext_resource type="PackedScene" uid="uid://cpb41bc8texpg" path="res://Source/Arena/Arena.tscn" id="3_78mhr"]
-[ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="5_2wdmp"]
-[ext_resource type="PackedScene" uid="uid://cfjq7mdcvooxw" path="res://Source/Block/Block.tscn" id="5_uasw7"]
-[ext_resource type="PackedScene" uid="uid://rytr7i1c2u5b" path="res://Source/Foes/Scarecrow/Scarecrow.tscn" id="7_kjfel"]
-[ext_resource type="PackedScene" uid="uid://pyi0b2214ogb" path="res://Source/HUD/ValueChanger.tscn" id="7_r71ya"]
+[ext_resource type="Script" path="res://Main.gd" id="1_3e334"]
 
 [node name="Main" type="Node2D"]
-position = Vector2(274, 408)
+process_mode = 3
+position = Vector2(72, 66)
+scale = Vector2(3.2267, 34.1461)
+script = ExtResource("1_3e334")
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
 
-[node name="Arena" parent="." instance=ExtResource("3_78mhr")]
-position = Vector2(-1300, -1248)
-scale = Vector2(3.344, 4.74184)
-polygon = PackedVector2Array(392, 147, 346, 283, 263, 260, 212, 605, 330, 431, 359, 641, 500, 538, 621, 645, 520, 381, 1053, 405, 728, 174, 569, 312, 502, 244, 434, 254)
-
-[node name="Block" parent="Arena" instance=ExtResource("5_uasw7")]
-polygon = PackedVector2Array(365, 301, 291, 301, 365, 322, 401.316, 328.986, 290.67, 381.919, 389, 450, 430, 349, 469, 379, 468.899, 300.938)
-metadata/_edit_group_ = true
-
-[node name="Player" parent="." instance=ExtResource("1_50kq8")]
-position = Vector2(1091, 107)
-
-[node name="Scarecrow" parent="." instance=ExtResource("7_kjfel")]
-position = Vector2(897, 4)
-scale = Vector2(0.725909, 1.29248)
-
 [node name="TmpNode" type="Node2D" parent="."]
+process_mode = 1
 
-[node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("5_2wdmp")]
-focusEntity = NodePath("../Player")
-
-[node name="DebugHud" parent="." instance=ExtResource("2_tgfjs")]
-
-[node name="ValueChanger" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="0" node_paths=PackedStringArray("entityToChange") instance=ExtResource("7_r71ya")]
-layout_mode = 2
-entityToChange = NodePath("../../../../../../Player")
-proprietyToChange = "Speed"
-buttonValue = 25.0
-
-[editable path="Arena"]
-[editable path="Arena/Block"]
-[editable path="DebugHud"]
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

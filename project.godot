@@ -17,9 +17,8 @@ config/features=PackedStringArray("4.1", "GL Compatibility")
 
 [autoload]
 
-InputManager="*res://Singleton/InputManager.gd"
+InputManager="res://Singleton/InputManager.gd"
 CustomUtils="*res://Global/CustomUtils.gd"
-SceneManager="*res://Global/SceneManager.gd"
 
 [display]
 

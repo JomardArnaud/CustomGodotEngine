@@ -11,3 +11,12 @@ func _ready() -> void:
 
 func _on_check_button_toggled(button_pressed: bool) -> void:
 	mainPanel.visible = button_pressed
+
+func _on_control_focus_exited() -> void:
+	print("coucou")
+	get_tree().paused = true
+
+
+func _on_control_focus_entered() -> void:
+	print("goodbye")
+	get_tree().paused = false

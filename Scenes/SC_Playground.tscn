@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbvbdnfgg44vv"]
+
+[ext_resource type="Script" path="res://Source/Scene.gd" id="1_3nnr6"]
+[ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="2_gsi10"]
+[ext_resource type="PackedScene" uid="uid://cpb41bc8texpg" path="res://Source/Arena/Arena.tscn" id="3_y8h7h"]
+[ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="4_nac5l"]
+
+[node name="Scene" type="Node"]
+script = ExtResource("1_3nnr6")
+
+[node name="Arena" parent="." instance=ExtResource("3_y8h7h")]
+polygon = PackedVector2Array(555, -305, -1177, -513, -1701, 939, 471, 1099, 731, 539, -493, 599, 459, 295, 2183, 131, 2455, -337, 1251, -721)
+
+[node name="Player" parent="." instance=ExtResource("2_gsi10")]
+speed = 700.0
+
+[node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("4_nac5l")]
+focusEntity = NodePath("../Player")

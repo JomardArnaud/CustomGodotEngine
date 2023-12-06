@@ -41,12 +41,6 @@ position = Vector2(3.8147e-06, 0)
 scale = Vector2(2.38889, 1)
 shape = SubResource("RectangleShape2D_nvuin")
 
-[node name="DashCdTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="DashingTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
@@ -56,5 +50,3 @@ shape = SubResource("RectangleShape2D_5hc7k")
 
 [node name="ADash" parent="." instance=ExtResource("3_ww8nm")]
 info = SubResource("Resource_v7yna")
-
-[connection signal="timeout" from="DashingTimer" to="." method="_on_dashing_timer_timeout"]
