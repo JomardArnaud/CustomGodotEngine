@@ -6,6 +6,7 @@ extends Node2D
 @onready var dmg : float : set = setDmg, get = getDmg
 
 func _ready() -> void:
+	set_as_top_level(true)
 	add_to_group("bullets")
 
 func _physics_process(delta: float) -> void:

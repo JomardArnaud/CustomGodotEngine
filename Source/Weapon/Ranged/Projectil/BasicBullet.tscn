@@ -21,7 +21,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 0.137255, 1)
+color = Color(1, 0.513726, 0.137255, 1)
 
 [node name="Area2D" type="Area2D" parent="."]
 

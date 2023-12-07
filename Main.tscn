@@ -9,10 +9,3 @@ scale = Vector2(3.2267, 34.1461)
 script = ExtResource("1_3e334")
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
-
-[node name="TmpNode" type="Node2D" parent="."]
-process_mode = 1
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0

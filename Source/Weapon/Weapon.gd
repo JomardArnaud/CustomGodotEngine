@@ -8,7 +8,6 @@ extends Node2D
 @onready var dirWeapon: Vector2 : get = getDir
 @onready var timerAttack := %TimerAttack
 @onready var attackFunc : Callable
-@onready var tmpNode := get_tree().get_root().get_node("Main/TmpNode")
 
 func _ready() -> void:
 	holder = get_parent()

@@ -33,5 +33,5 @@ func _ready() -> void:
 # just shot one projectil at the time
 func basicShot() -> void:
 	var tmpBullet = info.projScene.instantiate()
-	tmpNode.add_child(tmpBullet)
+	add_child(tmpBullet)
 	tmpBullet.setPosOrigin(get_global_position()).setDir(dirWeapon).setSpeed(info.speed).setDmg(info.dmg)
