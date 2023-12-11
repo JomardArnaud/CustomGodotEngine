@@ -4,6 +4,7 @@
 
 [node name="SC _MainMenu" type="Node"]
 script = ExtResource("1_5hxj2")
+idNextScene = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

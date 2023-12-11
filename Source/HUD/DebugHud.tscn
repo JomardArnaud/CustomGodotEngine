@@ -13,10 +13,10 @@ offset_bottom = 1079.0
 focus_mode = 2
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
-offset_left = 47.0
-offset_top = 32.0
-offset_right = 339.0
-offset_bottom = 323.0
+offset_left = 822.0
+offset_top = 462.0
+offset_right = 1114.0
+offset_bottom = 753.0
 
 [node name="CheckButton" type="CheckButton" parent="MainContainer"]
 layout_mode = 2
@@ -37,6 +37,10 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1913.0
+offset_bottom = 1089.0
 
 [connection signal="focus_entered" from="Control" to="." method="_on_control_focus_entered"]
 [connection signal="focus_exited" from="Control" to="." method="_on_control_focus_exited"]

@@ -19,3 +19,4 @@ speed = 700.0
 focusEntity = NodePath("../Player")
 
 [node name="DebugHud" parent="." instance=ExtResource("5_mtphg")]
+visible = false

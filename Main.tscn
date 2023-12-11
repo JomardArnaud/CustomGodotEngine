@@ -7,5 +7,6 @@ process_mode = 3
 position = Vector2(72, 66)
 scale = Vector2(3.2267, 34.1461)
 script = ExtResource("1_3e334")
+sceneAtLaunch = 1
 metadata/_edit_horizontal_guides_ = [-284.0, -285.0, 26.0]
 metadata/_edit_group_ = true
