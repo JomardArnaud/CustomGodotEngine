@@ -33,3 +33,34 @@ func _on_duration_timeout() -> void:
 	holder.lockDir(false)
 	holder.resetEnergy()
 	holder.setSpeed(info.baseSpeedHolder)
+
+### TPM TEST PURPOSE ###
+func getPower() -> float:
+	return info.power
+
+func setPower(nPower: float) -> void:
+	info.power = nPower
+
+func addPower(nPower: float) -> void:
+	info.power += nPower
+
+func getCd() -> float:
+	return info.cd
+	
+func setCd(nCd: float) -> void:
+	info.cd = nCd
+	cdTimer.wait_time = info.cd
+
+func addCd(nCd: float) -> void:
+	info.cd += nCd
+	
+func getDuration() -> float:
+	return info.duration
+		
+func setDuration(nDuration: float) -> void:
+	info.duration = nDuration
+	durationTimer.wait_time = info.duration
+
+func addDuration(nDuration: float) -> void:
+	info.duration += nDuration
+	

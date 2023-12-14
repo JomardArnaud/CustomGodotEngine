@@ -33,5 +33,6 @@ texture_focused = ExtResource("4_fvum1")
 stretch_mode = 3
 
 [connection signal="pressed" from="MinusButton" to="." method="_on_minus_button_pressed"]
+[connection signal="focus_exited" from="NumLineEdit" to="." method="_on_num_line_edit_focus_exited"]
 [connection signal="text_submitted" from="NumLineEdit" to="." method="_on_num_line_edit_text_submitted"]
 [connection signal="pressed" from="PlusButton" to="." method="_on_plus_button_pressed"]

@@ -33,4 +33,3 @@ func _on_plus_button_pressed() -> void:
 func _on_num_line_edit_text_submitted(nText: String) -> void:
 	# well not the best option but it will works for what i need to test now, need to think about the arg thought
 	setProprity.call(float(nText))
-	

@@ -1,10 +1,10 @@
 class_name PlayerController
 extends MovementBody2D
 
-func _process(_delta: float) -> void:
-	if (Input.is_action_pressed("rangedAttack")):
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("rangedAttack")):
 		emit_signal("rangedAttack")
-	if (Input.is_action_pressed("dash")):
+	if (event.is_action("dash")):
 		emit_signal("dash")
 
 func updateDir() -> void:
