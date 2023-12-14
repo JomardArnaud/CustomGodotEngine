@@ -6,17 +6,10 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	visible = OS.is_debug_build()
+	visible = false
 	mainPanel = find_child("ValuesContainer")
 
-func _on_check_button_toggled(button_pressed: bool) -> void:
-	mainPanel.visible = button_pressed
-
-func _on_control_focus_exited() -> void:
-	print("coucou")
-	get_tree().paused = true
-
-
-func _on_control_focus_entered() -> void:
-	print("goodbye")
-	get_tree().paused = false
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		visible = !visible
+		get_tree().paused = visible

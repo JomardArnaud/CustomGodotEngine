@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq8h4k3cdha2r"]
+[gd_scene load_steps=4 format=3 uid="uid://bq8h4k3cdha2r"]
 
 [ext_resource type="Script" path="res://Source/HUD/DebugHud.gd" id="1_fnev4"]
+[ext_resource type="PackedScene" uid="uid://pyi0b2214ogb" path="res://Source/HUD/ValueChanger.tscn" id="2_tgt3p"]
+
+[sub_resource type="Theme" id="Theme_5b2ks"]
+Panel/styles/panel = null
 
 [node name="DebugHud" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_fnev4")
 
 [node name="Control" type="Control" parent="."]
@@ -17,10 +22,6 @@ offset_left = 822.0
 offset_top = 462.0
 offset_right = 1114.0
 offset_bottom = 753.0
-
-[node name="CheckButton" type="CheckButton" parent="MainContainer"]
-layout_mode = 2
-button_pressed = true
 
 [node name="ValuesPanel" type="PanelContainer" parent="MainContainer"]
 layout_mode = 2
@@ -38,10 +39,13 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 1913.0
-offset_bottom = 1089.0
+[node name="ValueChanger" parent="MainContainer/ValuesPanel/MarginContainer/ValuesContainer" instance=ExtResource("2_tgt3p")]
+layout_mode = 2
 
-[connection signal="focus_entered" from="Control" to="." method="_on_control_focus_entered"]
-[connection signal="focus_exited" from="Control" to="." method="_on_control_focus_exited"]
-[connection signal="toggled" from="MainContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.478431)
+offset_left = -327.0
+offset_top = -251.0
+offset_right = 2317.0
+offset_bottom = 1228.0
+theme = SubResource("Theme_5b2ks")

@@ -19,14 +19,13 @@ func _ready():
 	# to avoid crash when the Arena is masked on scene
 	if visible != false:
 		algo(polygon.size())
-	
-func _process(_delta):
-	if Engine.is_editor_hint():
-		if Input.is_action_pressed("refreshEditor") && Input.is_key_pressed(KEY_CTRL):
-			# to avoid crash when the Arena is masked on scene
-			if visible != false:
-				algo(polygon.size())
 
+func _input(event: InputEvent) -> void:
+	if event.is_action("refreshEditor"):
+		# to avoid crash when the Arena is masked on scene
+		if visible != false:
+			algo(polygon.size())
+		
 # add all collisionShape (Polygon2d) at the border's Arena
 func algo(nbVertexPoly: int) -> void:
 	if nbVertexPoly < 1:

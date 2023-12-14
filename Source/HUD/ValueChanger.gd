@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-@export var entityToChange := Node2D
+@export var entityToChange : Node2D
 #put this with a capital letter first
 @export var proprietyToChange : String
 @export var buttonValue : float
@@ -19,7 +19,6 @@ func _ready() -> void:
 		getProprity = Callable(entityToChange, "get" + proprietyToChange)
 		addProprity = Callable(entityToChange, "add" + proprietyToChange)
 		numLine.text = str(getProprity.call())
-	
 	else:
 		push_error("no entity was found !")
 
