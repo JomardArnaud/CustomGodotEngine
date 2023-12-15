@@ -8,6 +8,7 @@ extends Node2D
 @onready var dirWeapon: Vector2 : get = getDir
 @onready var timerAttack := %TimerAttack
 @onready var attackFunc : Callable
+@onready var onAttack := false
 
 func _ready() -> void:
 	holder = get_parent()
@@ -16,6 +17,8 @@ func _process(_delta: float) -> void:
 	var mousePos = get_global_mouse_position()
 	dirWeapon = (mousePos - holder.get_global_position()).normalized()
 	set_position(dirWeapon * distanceHolder)
+	if (onAttack):
+		attack()
 
 #will be call when holder decide (by using signal) and define by inheritance
 func attack() -> void:
@@ -39,6 +42,9 @@ func setDistanceHolder(nDistance: float) -> Weapon:
 func setFireRate(nFireRate: float) -> Weapon:
 	timerAttack.wait_time = nFireRate
 	return self
+
+func setOnAttack(attacking: bool) -> void:
+	onAttack = attacking
 
 func weaponIsUp() -> bool:
 	return timerAttack.time_left == 0

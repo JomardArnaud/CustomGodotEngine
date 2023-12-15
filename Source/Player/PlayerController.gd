@@ -3,7 +3,9 @@ extends MovementBody2D
 
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("rangedAttack")):
-		emit_signal("rangedAttack")
+		emit_signal("rangedAttack", true)
+	if (event.is_action_released("rangedAttack")):
+		emit_signal("rangedAttack", false)
 	if (event.is_action("dash")):
 		emit_signal("dash")
 

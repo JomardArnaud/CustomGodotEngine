@@ -1,8 +1,6 @@
 class_name RangedWeapon
 extends Weapon
 
-signal rangedAttack()
-signal endRangedAttacking()
 signal startReloading()
 signal endReloading()
 signal emptyMagazine()
@@ -16,7 +14,7 @@ func _ready() -> void:
 	timerAttack.wait_time = info.fireRate
 	distanceHolder = info.distanceHolder
 	holder.add_user_signal("rangedAttack")
-	holder.connect("rangedAttack", attack)
+	holder.connect("rangedAttack", setOnAttack)
 	attackFunc = Callable(self, attactArray[info.attackMode])
 
 # const RAY_LENGTH = 10000
