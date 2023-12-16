@@ -8,6 +8,12 @@ signal dashing
 @onready var cdTimer := $Cd
 @onready var durationTimer := $Duration
 
+#tmp ??? this implementation yes ahah
+@onready var inertiaReset := true:
+	set(nReset):
+		inertiaReset = nReset
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	holder = get_parent()
@@ -31,7 +37,8 @@ func onDashing() -> void:
 
 func _on_duration_timeout() -> void:
 	holder.lockDir(false)
-	holder.resetEnergy()
+	if inertiaReset:
+		holder.resetEnergy()
 	holder.setSpeed(info.baseSpeedHolder)
 
 ### TPM TEST PURPOSE ###

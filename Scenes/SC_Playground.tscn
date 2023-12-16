@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbvbdnfgg44vv"]
+[gd_scene load_steps=8 format=3 uid="uid://dbvbdnfgg44vv"]
 
 [ext_resource type="Script" path="res://Scenes/SC_Playground.gd" id="1_xfcbx"]
 [ext_resource type="PackedScene" uid="uid://cndhrpvfkd8hw" path="res://Source/Player/PlayerController.tscn" id="2_gsi10"]
@@ -6,23 +6,26 @@
 [ext_resource type="PackedScene" uid="uid://cinlw8kwv0p2" path="res://Source/Camera/Camera.tscn" id="4_nac5l"]
 [ext_resource type="PackedScene" uid="uid://bq8h4k3cdha2r" path="res://Source/HUD/DebugHud.tscn" id="5_mtphg"]
 [ext_resource type="PackedScene" uid="uid://pyi0b2214ogb" path="res://Source/HUD/ValueChanger.tscn" id="6_haj8b"]
+[ext_resource type="PackedScene" uid="uid://cwapibopd08qu" path="res://Source/HUD/BoolChanger.tscn" id="7_7s124"]
 
 [node name="Playground" type="Node"]
-process_mode = 1
+process_mode = 3
 script = ExtResource("1_xfcbx")
 
-[node name="Arena" parent="." instance=ExtResource("3_y8h7h")]
+[node name="PausableItem" type="Node" parent="."]
+process_mode = 1
+
+[node name="Arena" parent="PausableItem" instance=ExtResource("3_y8h7h")]
 polygon = PackedVector2Array(555, -305, -1177, -513, -1701, 939, 471, 1099, 731, 539, -493, 599, 459, 295, 2183, 131, 2455, -337, 1251, -721)
 
-[node name="Player" parent="." instance=ExtResource("2_gsi10")]
+[node name="Player" parent="PausableItem" instance=ExtResource("2_gsi10")]
 speed = 700.0
 
-[node name="Camera" parent="." node_paths=PackedStringArray("focusEntity") instance=ExtResource("4_nac5l")]
+[node name="Camera" parent="PausableItem" node_paths=PackedStringArray("focusEntity") instance=ExtResource("4_nac5l")]
 focusEntity = NodePath("../Player")
 
 [node name="DebugHud" parent="." instance=ExtResource("5_mtphg")]
 unique_name_in_owner = true
-visible = false
 
 [node name="Player" type="Label" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="0"]
 layout_mode = 2
@@ -30,13 +33,13 @@ text = "Player :"
 
 [node name="Speed" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="1" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
 layout_mode = 2
-entityToChange = NodePath("../../../../../../Player")
+entityToChange = NodePath("../../../../../../PausableItem/Player")
 proprietyToChange = "Speed"
 buttonValue = 25.0
 
 [node name="Inertia" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="2" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
 layout_mode = 2
-entityToChange = NodePath("../../../../../../Player")
+entityToChange = NodePath("../../../../../../PausableItem/Player")
 proprietyToChange = "Inertia"
 buttonValue = 0.015
 
@@ -44,23 +47,29 @@ buttonValue = 0.015
 layout_mode = 2
 text = "Dash  :"
 
-[node name="Dash power" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="4" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
+[node name="Dash cd" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="4" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
 layout_mode = 2
-entityToChange = NodePath("../../../../../../Player/ADash")
-proprietyToChange = "Power"
-buttonValue = 50.0
-
-[node name="Dash cd" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="5" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
-layout_mode = 2
-entityToChange = NodePath("../../../../../../Player/ADash")
+entityToChange = NodePath("../../../../../../PausableItem/Player/ADash")
 proprietyToChange = "Cd"
 buttonValue = 0.25
 
-[node name="Dash duration" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="6" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
+[node name="Dash duration" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="5" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
 layout_mode = 2
-entityToChange = NodePath("../../../../../../Player/ADash")
+entityToChange = NodePath("../../../../../../PausableItem/Player/ADash")
 proprietyToChange = "Duration"
 buttonValue = 0.025
 
-[editable path="Player"]
+[node name="Dash power" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="6" node_paths=PackedStringArray("entityToChange") instance=ExtResource("6_haj8b")]
+layout_mode = 2
+entityToChange = NodePath("../../../../../../PausableItem/Player/ADash")
+proprietyToChange = "Power"
+buttonValue = 50.0
+
+[node name="Inertia dash" parent="DebugHud/MainContainer/ValuesPanel/MarginContainer/ValuesContainer" index="7" node_paths=PackedStringArray("entityToChange") instance=ExtResource("7_7s124")]
+layout_mode = 2
+entityToChange = NodePath("../../../../../../PausableItem/Player/ADash")
+proprietyToChange = "inertiaReset"
+infoText = "Reset the energy of player after dash "
+
+[editable path="PausableItem/Player"]
 [editable path="DebugHud"]

@@ -1,12 +1,12 @@
-extends HBoxContainer
+extends MarginContainer
 
 @export var entityToChange : Node2D
 #put this with a capital letter first
 @export var proprietyToChange : String
 @export var buttonValue : float
 
-@onready var label := $Label
-@onready var numLine := $NumLineEdit
+@onready var label := $ValueContainer/Label
+@onready var numLine := $ValueContainer/NumLineEdit
 @onready var setProprity : Callable
 @onready var getProprity : Callable
 @onready var addProprity : Callable

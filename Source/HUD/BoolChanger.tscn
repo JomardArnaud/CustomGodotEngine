@@ -2,12 +2,20 @@
 
 [ext_resource type="Script" path="res://Source/HUD/BoolChanger.gd" id="1_37eqk"]
 
-[node name="Inertia dash" type="HBoxContainer"]
+[node name="Inertia dash" type="MarginContainer"]
+offset_right = 440.0
+offset_bottom = 29.0
+theme_override_constants/margin_left = 50
 script = ExtResource("1_37eqk")
 
-[node name="Label" type="Label" parent="."]
+[node name="ValueContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-text = "Reset inertia after dash"
 
-[node name="CheckButton" type="CheckButton" parent="."]
+[node name="Label" type="Label" parent="ValueContainer"]
 layout_mode = 2
+text = "Tmp"
+
+[node name="CheckButton" type="CheckButton" parent="ValueContainer"]
+layout_mode = 2
+
+[connection signal="toggled" from="ValueContainer/CheckButton" to="." method="_on_check_button_toggled"]

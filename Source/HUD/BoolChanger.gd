@@ -1,9 +1,17 @@
-extends HBoxContainer
+extends MarginContainer
 
 @export var entityToChange : Node2D
-#put this with a capital letter first
 @export var proprietyToChange : String
+#info which will be display by the Label
+@export var infoText : String
 
-# Called when the node enters the scene tree for the first time.
+@onready var label := $ValueContainer/Label
+
 func _ready() -> void:
-	pass # Replace with function body.
+	if entityToChange != null:
+		label.text = infoText + ""
+	else:
+		push_error("no entity was found !")
+
+func _on_check_button_toggled(button_pressed:bool) -> void:
+	entityToChange.set(proprietyToChange, button_pressed)

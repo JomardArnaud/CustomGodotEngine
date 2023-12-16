@@ -5,25 +5,32 @@
 [ext_resource type="Script" path="res://Source/HUD/NumLineEdit.gd" id="3_5po0k"]
 [ext_resource type="Texture2D" uid="uid://b6ci638hg0lry" path="res://Source/Assets/plus_button.png" id="4_fvum1"]
 
-[node name="ValueChanger" type="HBoxContainer"]
+[node name="Margin" type="MarginContainer"]
+offset_right = 426.0
+offset_bottom = 31.0
+theme_override_constants/margin_left = 50
 script = ExtResource("1_yg6hs")
 
-[node name="Label" type="Label" parent="."]
+[node name="ValueContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ValueContainer"]
 layout_mode = 2
 text = "Tmp label ="
 
-[node name="MinusButton" type="TextureButton" parent="."]
+[node name="MinusButton" type="TextureButton" parent="ValueContainer"]
 layout_mode = 2
 texture_normal = ExtResource("2_12wko")
 stretch_mode = 3
 
-[node name="NumLineEdit" type="LineEdit" parent="."]
+[node name="NumLineEdit" type="LineEdit" parent="ValueContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 script = ExtResource("3_5po0k")
 
-[node name="PlusButton" type="TextureButton" parent="."]
+[node name="PlusButton" type="TextureButton" parent="ValueContainer"]
 layout_mode = 2
 texture_normal = ExtResource("4_fvum1")
 texture_pressed = ExtResource("4_fvum1")
@@ -32,7 +39,6 @@ texture_disabled = ExtResource("4_fvum1")
 texture_focused = ExtResource("4_fvum1")
 stretch_mode = 3
 
-[connection signal="pressed" from="MinusButton" to="." method="_on_minus_button_pressed"]
-[connection signal="focus_exited" from="NumLineEdit" to="." method="_on_num_line_edit_focus_exited"]
-[connection signal="text_submitted" from="NumLineEdit" to="." method="_on_num_line_edit_text_submitted"]
-[connection signal="pressed" from="PlusButton" to="." method="_on_plus_button_pressed"]
+[connection signal="pressed" from="ValueContainer/MinusButton" to="." method="_on_minus_button_pressed"]
+[connection signal="text_submitted" from="ValueContainer/NumLineEdit" to="." method="_on_num_line_edit_text_submitted"]
+[connection signal="pressed" from="ValueContainer/PlusButton" to="." method="_on_plus_button_pressed"]
