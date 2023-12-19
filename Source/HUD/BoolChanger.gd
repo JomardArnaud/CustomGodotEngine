@@ -6,10 +6,12 @@ extends MarginContainer
 @export var infoText : String
 
 @onready var label := $ValueContainer/Label
+@onready var button := $ValueContainer/CheckButton
 
 func _ready() -> void:
 	if entityToChange != null:
 		label.text = infoText + ""
+		button.button_pressed = entityToChange.get(proprietyToChange)
 	else:
 		push_error("no entity was found !")
 
