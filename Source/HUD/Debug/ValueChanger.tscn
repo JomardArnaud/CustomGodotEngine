@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://pyi0b2214ogb"]
 
-[ext_resource type="Script" path="res://Source/HUD/ValueChanger.gd" id="1_yg6hs"]
+[ext_resource type="Script" path="res://Source/HUD/Debug/ValueChanger.gd" id="1_yg6hs"]
 [ext_resource type="Texture2D" uid="uid://cpl7w7vlkjsju" path="res://Source/Assets/minus_button.png" id="2_12wko"]
-[ext_resource type="Script" path="res://Source/HUD/NumLineEdit.gd" id="3_5po0k"]
+[ext_resource type="Script" path="res://Source/HUD/Debug/NumLineEdit.gd" id="3_5po0k"]
 [ext_resource type="Texture2D" uid="uid://b6ci638hg0lry" path="res://Source/Assets/plus_button.png" id="4_fvum1"]
 
 [node name="Margin" type="MarginContainer"]

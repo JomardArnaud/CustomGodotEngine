@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwapibopd08qu"]
 
-[ext_resource type="Script" path="res://Source/HUD/BoolChanger.gd" id="1_37eqk"]
+[ext_resource type="Script" path="res://Source/HUD/Debug/BoolChanger.gd" id="1_37eqk"]
 
 [node name="Inertia dash" type="MarginContainer"]
 offset_right = 440.0
