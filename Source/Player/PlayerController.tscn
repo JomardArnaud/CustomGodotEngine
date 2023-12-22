@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cndhrpvfkd8hw"]
 
 [ext_resource type="Script" path="res://Source/Player/PlayerController.gd" id="1_4rfjw"]
-[ext_resource type="PackedScene" uid="uid://bmb5doe1vo5q5" path="res://Source/Weapon/Ranged/RW_Smg.tscn" id="2_bflqb"]
 [ext_resource type="PackedScene" uid="uid://bakmq3clesspj" path="res://Source/Ability/ADash.tscn" id="3_ww8nm"]
 [ext_resource type="Script" path="res://Source/Ability/DashInfo.gd" id="4_ceews"]
+[ext_resource type="PackedScene" uid="uid://78l0bp6arhxb" path="res://Source/Weapon/WeaponManager.tscn" id="4_vk3wf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvuin"]
 size = Vector2(18.6046, 44.4444)
@@ -46,7 +46,7 @@ shape = SubResource("RectangleShape2D_nvuin")
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_5hc7k")
 
-[node name="Smg" parent="." instance=ExtResource("2_bflqb")]
-
 [node name="ADash" parent="." instance=ExtResource("3_ww8nm")]
 info = SubResource("Resource_v7yna")
+
+[node name="WeaponManager" parent="." instance=ExtResource("4_vk3wf")]

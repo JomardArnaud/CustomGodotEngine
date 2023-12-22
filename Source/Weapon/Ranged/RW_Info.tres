@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://Source/Weapon/Ranged/RangedWeaponInfo.gd" id="1_47hch"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_47hch")
+attackMode = 0
 dmg = 0.0
 speed = 0.0
 fireRate = 0.0
