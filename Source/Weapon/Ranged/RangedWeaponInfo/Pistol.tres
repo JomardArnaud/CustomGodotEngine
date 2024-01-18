@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RangedWeaponInfo" load_steps=3 format=3 uid="uid://bqhugll738qr6"]
+
+[ext_resource type="PackedScene" uid="uid://d1axdf5vdp07x" path="res://Source/Weapon/Ranged/Projectil/BasicBullet.tscn" id="1_7fidf"]
+[ext_resource type="Script" path="res://Source/Weapon/Ranged/RangedWeaponInfo.gd" id="1_racmt"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_racmt")
+projScene = ExtResource("1_7fidf")
+attackMode = 0
+dmg = 8.0
+speedBullet = 1450.0
+fireRate = 0.85
+currentNbProj = 0
+magazineSize = 0
+reloadTime = 0.0
+distanceHolder = 50.0

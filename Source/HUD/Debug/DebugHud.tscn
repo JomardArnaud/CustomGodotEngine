@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq8h4k3cdha2r"]
+[gd_scene load_steps=3 format=3 uid="uid://bq8h4k3cdha2r"]
+
+[ext_resource type="Script" path="res://Source/HUD/Debug/DebugHud.gd" id="1_rk7q8"]
 
 [sub_resource type="Theme" id="Theme_5b2ks"]
 Panel/styles/panel = null
 
 [node name="DebugHud" type="CanvasLayer"]
-process_mode = 2
+script = ExtResource("1_rk7q8")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -14,6 +16,7 @@ offset_bottom = 1079.0
 focus_mode = 2
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.478431)
 offset_left = -327.0
 offset_top = -251.0
@@ -22,10 +25,10 @@ offset_bottom = 1228.0
 theme = SubResource("Theme_5b2ks")
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
-offset_left = 822.0
-offset_top = 462.0
-offset_right = 1114.0
-offset_bottom = 753.0
+offset_left = 1532.0
+offset_top = 41.0
+offset_right = 1824.0
+offset_bottom = 332.0
 
 [node name="ValuesPanel" type="PanelContainer" parent="MainContainer"]
 layout_mode = 2
@@ -42,3 +45,12 @@ layout_mode = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 tooltip_text = "tthttthth"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+offset_left = 1864.0
+offset_top = 10.0
+offset_right = 1908.0
+offset_bottom = 34.0
+button_pressed = true
+
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

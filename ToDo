@@ -1,6 +1,7 @@
 ?? Make Scene class which herite from the first Scene for specific use, like for auto gestion of the pause or for a menu scene
 ?? Yes for auto pause gestion heritance is good option but also do some object/scene for composition, like for spriteManager or any assets
 Make a better Signal management
+Make a POV 2D style, with like a solely a cone of vision from before and the rest in dark
 Make a darkblue/lightblue sort of chessboard like for the background arena
 Make a Input Manager !
 Make a area detector and scripted moment

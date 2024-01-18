@@ -8,7 +8,6 @@ signal dashing
 @onready var cdTimer := $Cd
 @onready var durationTimer := $Duration
 
-#tmp ??? this implementation yes ahah
 @onready var inertiaReset := true:
 	set(nReset):
 		inertiaReset = nReset

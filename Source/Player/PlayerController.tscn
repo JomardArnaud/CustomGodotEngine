@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Source/Player/PlayerController.gd" id="1_4rfjw"]
 [ext_resource type="PackedScene" uid="uid://bakmq3clesspj" path="res://Source/Ability/ADash.tscn" id="3_ww8nm"]
 [ext_resource type="Script" path="res://Source/Ability/DashInfo.gd" id="4_ceews"]
-[ext_resource type="PackedScene" uid="uid://78l0bp6arhxb" path="res://Source/Weapon/WeaponManager.tscn" id="4_vk3wf"]
+[ext_resource type="PackedScene" uid="uid://djbmdcmcaen3" path="res://Source/Weapon/Ranged/RangedWeapon.tscn" id="4_yj6vi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvuin"]
 size = Vector2(18.6046, 44.4444)
@@ -49,4 +49,6 @@ shape = SubResource("RectangleShape2D_5hc7k")
 [node name="ADash" parent="." instance=ExtResource("3_ww8nm")]
 info = SubResource("Resource_v7yna")
 
-[node name="WeaponManager" parent="." instance=ExtResource("4_vk3wf")]
+[node name="RangedWeapon" parent="." instance=ExtResource("4_yj6vi")]
+nameWeapon = "Pistol"
+distanceHolder = 50.0
